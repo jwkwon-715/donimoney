@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<head>
+  <title>메인 페이지</title>
+</head>
+<body>
+  <h1>메인 화면</h1>
+
+  <% if (isAuthenticated) { %>
+    <p>👋 <strong><%= user.user_id %></strong>님, 환영합니다!</p>
+    <a href="/users/logout">로그아웃</a>
+  <% } else { %>
+    <p>🔒 로그인하지 않은 사용자입니다.</p>
+    <a href="/users/login">로그인</a>
+    <a href="/users/signup">회원가입</a>
+  <% } %>
+</body>
 </html>
