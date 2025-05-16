@@ -4,9 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>회원가입</title>
+  <!-- ✅ 아임포트 스크립트 추가 -->
+  <script src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 </head>
 <body>
   <h1>회원가입</h1>
+
+  <% if (error && error.length > 0) { %>
+    <p style="color: red;"><%= error[0] %></p>
+  <% } %>
+  <% if (note && note.length > 0) { %>
+    <p style="color: orange;"><%= note[0] %></p>
+  <% } %>
+
+  <!-- ✅ 인증 버튼만 추가 -->
+  <button type="button" onclick="startVerification()">📱 본인 인증하기</button>
+  <br><br>
+
   <form action="/users/signup" method="POST">
     <label for="user_id">아이디:</label>
     <input type="text" id="user_id" name="user_id" required><br><br>
@@ -26,9 +40,43 @@
     <label for="birthdate">생년월일:</label>
     <input type="date" id="birthdate" name="birthdate"><br><br>
 
+    <!-- 여기서 verified는 서버에서 세션으로 삽입됨 -->
+    <% if (verified) { %>
+      <input type="hidden" name="verified" value="true">
+    <% } %>
+
     <button type="submit">회원가입</button>
   </form>
   <br>
   <a href="/users/login">로그인</a>
+
+  <!— ✅ 인증 스크립트는 맨 아래에 —>
+  <script>
+    function startVerification() {
+      const IMP = window.IMP;
+      IMP.init("imp76861458"); // ← 너의 아임포트 imp 코드로 바꿔야 함!
+
+      IMP.certification({
+        pg: "inicis",
+        merchant_uid: "mid_" + new Date().getTime()
+      }, function (rsp) {
+        if (rsp.success) {
+          fetch("/verify", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ imp_uid: rsp.imp_uid })
+          })
+          .then(res => {
+            if (res.ok) {
+              alert("✅ 인증 완료! 회원가입을 계속 진행하세요.");
+              location.reload();
+            }
+          });
+        } else {
+          alert("❌ 인증 실패: " + rsp.error_msg);
+        }
+      });
+    }
+  </script>
 </body>
 </html>

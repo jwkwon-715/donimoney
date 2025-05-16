@@ -8,9 +8,17 @@
 <body>
   <h1>로그인</h1>
 
-  <% if (query.success) { %>
-    <p style="color: green;">🎉 회원가입이 완료되었습니다! 로그인해주세요.</p>
-  <% } %>
+  <% if (success && success.length > 0) { %>
+  <p style="color: green;">🎉 <%= success[0] %></p>
+<% } %>
+
+<% if (note && note.length > 0) { %>
+  <p style="color: orange;">📌 <%= note[0] %></p>
+<% } %>
+
+<% if (error && error.length > 0) { %>
+  <p style="color: red;">❌ <%= error[0] %></p>
+<% } %>
 
   <form action="/users/login" method="POST">
     <label for="email">이메일:</label>

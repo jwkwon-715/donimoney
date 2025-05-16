@@ -1,16 +1,18 @@
+require('dotenv').config();
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const session = require('express-session');
+const flash = require('connect-flash');
 const passport = require('passport');
 const passportConfig = require('./config/passport');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-const gameRouter = require('./routes/game');
-const characterRouter = require('./routes/character');
+var gameRouter = require('./routes/game');
+var characterRouter = require('./routes/character');
 
 var app = express();
 const db = require('./models'); // index.js가 있는 models 폴더
@@ -26,12 +28,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// 🔑 세션과 passport 설정은 라우터보다 먼저!
+// 세션과 passport 설정은 라우터보다 먼저!
 app.use(session({
   secret: 'yourSecretKey',
   resave: false,
   saveUninitialized: false
 }));
+app.use(flash()); // 이 줄 추가!!
 app.use(passport.initialize());
 app.use(passport.session());
 passportConfig(passport);  // passport 설정 적용
@@ -83,4 +86,5 @@ app.listen(3000, '0.0.0.0', () => {
 });
 
 module.exports = app;
+
 
