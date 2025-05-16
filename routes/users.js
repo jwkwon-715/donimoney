@@ -22,4 +22,15 @@ router.get('/logout', (req, res, next) => {
   });
 });
 
+// 아이디/비밀번호 찾기 페이지
+router.get('/find', (req, res) => {
+  res.render('findAccount');
+});
+
+router.post('/find', async (req, res) => {
+  const { email } = req.body;
+  // 나중에 아이디/비밀번호 찾기 기능 구현 예정
+  res.send(`<p>${email} 으로 아이디/비밀번호 찾기 처리가 진행됩니다. (기능 구현 중)</p><a href="/users/login">로그인으로 돌아가기</a>`);
+});
+
 module.exports = router;

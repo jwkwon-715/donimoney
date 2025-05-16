@@ -9,6 +9,8 @@ const passportConfig = require('./config/passport');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const gameRouter = require('./routes/game');
+const characterRouter = require('./routes/character');
 
 var app = express();
 const db = require('./models'); // index.js가 있는 models 폴더
@@ -49,6 +51,8 @@ app.use((req, res, next) => {
 // 🔽 라우터는 passport 설정 이후에 등록해야 함!
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/game', gameRouter);
+app.use('/character', characterRouter);
 
 // 404 에러 처리
 app.use(function(req, res, next) {
