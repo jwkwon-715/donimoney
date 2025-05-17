@@ -62,7 +62,7 @@
             <label for="phone">전화번호</label>
             <input type="text" class="input-field phone-input" id="phone" name="phone">
           </div>
-          <button type="button" class="verify-btn" onclick="startVerification()">📱 본인 인증</button>
+          <!-- <button type="button" class="verify-btn" onclick="startVerification()">📱 본인 인증</button>-->
         </div>
         
         <label for="email">이메일</label>
@@ -70,12 +70,15 @@
         
         <label for="birthdate">생년월일</label>
         <input type="date" class="input-field" id="birthdate" name="birthdate">
+
+        <!-- 만 14세 이상 체크박스 추가 -->
+        <div style="text-align:left; margin: 10px 0 0 2px;">
+          <label style="font-weight:normal; font-size:15px;">
+            <input type="checkbox" id="over14" name="over14" value="yes" style="width:18px;height:18px;vertical-align:middle;margin-right:6px;">
+            만 14세 이상입니다. (필수)
+          </label>
+        </div>
       </div>
-      
-      <% if (verified) { %>
-        <input type="hidden" name="verified" value="true">
-      <% } %>
-      
       <button type="submit" class="signup-btn">회원가입</button>
     </form>
     
@@ -85,31 +88,15 @@
   </div>
 
   <script>
-    function startVerification() {
-      const IMP = window.IMP;
-      IMP.init("imp76861458"); // ← 너의 아임포트 imp 코드로 바꿔야 함!
-
-      IMP.certification({
-        pg: "inicis",
-        merchant_uid: "mid_" + new Date().getTime()
-      }, function (rsp) {
-        if (rsp.success) {
-          fetch("/verify", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ imp_uid: rsp.imp_uid })
-          })
-          .then(res => {
-            if (res.ok) {
-              alert("✅ 인증 완료! 회원가입을 계속 진행하세요.");
-              location.reload();
-            }
-          });
-        } else {
-          alert("❌ 인증 실패: " + rsp.error_msg);
-        }
-      });
-    }
+    // 체크박스 미체크 시 회원가입 방지 (가장 간단하게)
+    document.querySelector('form').addEventListener('submit', function(e) {
+      const checkbox = document.getElementById('over14');
+      if (!checkbox.checked) {
+        alert('만 14세 이상임을 반드시 체크해주세요!');
+        e.preventDefault();
+        checkbox.focus();
+      }
+    });
   </script>
 </body>
 </html>
