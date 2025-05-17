@@ -1,0 +1,200 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(to bottom, #6a8d92, #4a6d72);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.forest-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background-image: url('/images/배경.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.tree {
+  position: absolute;
+  width: 80px;
+  height: 120px;
+  background-color: #2d6a39;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  display: none; /* 배경 이미지가 있으므로 나무는 숨김 */
+}
+
+.ground {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 30%;
+  background-color: transparent; /* 배경 이미지가 있으므로 투명하게 처리 */
+  z-index: 1;
+}
+
+.cloud {
+  position: absolute;
+  background-color: rgba(200, 200, 200, 0.6);
+  border-radius: 50%;
+  display: none; /* 배경 이미지가 있으므로 구름은 숨김 */
+}
+
+.home-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  z-index: 10;
+  background-color: transparent; /* 배경색 제거 */
+}
+
+.home-icon {
+  width: 40px; /* 아이콘 크기 증가 */
+  height: 40px;
+  filter: drop-shadow(0px 2px 3px rgba(0, 0, 0, 0.3)); /* 가시성을 위한 그림자 추가 */
+}
+
+.close-btn {
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  color: white;
+  text-decoration: none;
+  z-index: 10;
+}
+
+.close-btn {
+  top: 20px;
+  right: 20px;
+  background-color: #e57373;
+}
+
+.login-container {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: 400px;
+  background-color: white;
+  border-radius: 20px;
+  padding: 30px 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.character {
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 120px;
+}
+
+/* 토끼 CSS 구현 제거하고 이미지로 대체 */
+.rabbit-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.logo {
+  margin: 20px 0;
+  font-size: 36px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.logo span {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 10px;
+  color: white;
+}
+
+.logo span:nth-child(1) { background-color: #f8d25c; }
+.logo span:nth-child(2) { background-color: #86c166; }
+.logo span:nth-child(3) { background-color: #f4a742; }
+.logo span:nth-child(4) { background-color: #5b9bd5; }
+
+.message {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.success {
+  color: green;
+  background-color: rgba(0, 255, 0, 0.1);
+}
+
+.note {
+  color: orange;
+  background-color: rgba(255, 165, 0, 0.1);
+}
+
+.error {
+  color: red;
+  background-color: rgba(255, 0, 0, 0.1);
+}
+
+.input-group {
+  margin: 20px 0;
+}
+
+.input-field {
+  width: 100%;
+  padding: 15px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 16px;
+  outline: none;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 15px;
+  background-color: #a0b4c8;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  margin: 20px 0;
+}
+
+.login-options {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #666;
+}
+
+.login-options a {
+  color: #666;
+  text-decoration: none;
+  margin: 0 5px;
+}
