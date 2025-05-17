@@ -1,0 +1,34 @@
+<h1>랜덤 모드 커리큘럼 고르기</h1>
+
+<form id="curriculumList" method="post" action="/game/school/quiz/select">
+  <input type="hidden" name="type" value="random">
+
+  <% curriculumList.forEach(curriculum => { %>
+    <div>
+      <label>
+        <input type="checkbox" name="curriculumList" value="<%= curriculum.curriculum_id %>">
+        <%= curriculum.curriculum_title %>
+      </label>
+    </div>
+  <% }) %>
+
+  <button type="submit">랜덤 문제 풀기</button>
+</form>
+
+<p id="error-message" style="color: red;"></p>
+
+<script>
+  document.getElementById('curriculumList').addEventListener('submit', function(e) {
+    const checked = document.querySelectorAll('input[name="curriculumList"]:checked');
+    if (checked.length < 3 || checked.length > 5) {
+      e.preventDefault();
+      document.getElementById('error-message').textContent = '3개 이상 5개 이하로 선택 가능';
+    }
+  });
+</script>
+
+<hr>
+사용자 프로그레스 현황 참고. 체크할 때 tatalProg 사용하시면 됩니다
+<%=storyProg%>
+<%=learningProg%>
+<%=totalProg%>

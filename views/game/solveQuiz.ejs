@@ -1,0 +1,15 @@
+<div id="quiz-container"></div>
+<div id="solution-box"></div>
+
+<button id="check-answer-btn">정답 확인</button>
+<button id="next-btn" style="display:none;">다음 문제</button>
+
+<script>
+    const quizzes = JSON.parse('<%- JSON.stringify(quizzes) %>');
+</script>  
+
+<script src="/javascripts/quizSolve.js"></script>
+
+<hr>
+<h2>quizzes 구조 참고</h2>
+<pre><%= JSON.stringify(quizzes, null, 2) %></pre>

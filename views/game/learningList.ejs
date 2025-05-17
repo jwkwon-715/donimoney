@@ -1,0 +1,7 @@
+<h1>학습 파트 고르기</h1>
+
+<% learningList.forEach(learning => { %>
+    <form method="get" action="/game/school/learning/content/<%= learning.learning_id %>">
+        <button type="submit"><%= learning.learning_id %></button>
+    </form>
+<% }) %>
