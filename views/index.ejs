@@ -16,7 +16,9 @@
       </div>
       <div class="nav-links">
         <% if (isAuthenticated) { %>
-          <span class="welcome-text">👋 <strong><%= user.user_id %></strong>님, 환영합니다!</span>
+          <a href="/mypage" class="welcome-text-link">
+            👋 <strong><%= user.user_id %></strong>님, 환영합니다!
+          </a>
           <a href="/users/logout" class="nav-link">로그아웃</a>
         <% } else { %>
           <a href="/users/login" class="nav-link">로그인</a>

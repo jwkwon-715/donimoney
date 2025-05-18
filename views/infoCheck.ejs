@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>비밀번호 확인</title>
+  <link rel="stylesheet" href="/stylesheets/myPage.css">
+</head>
+<body>
+  <div class="forest-bg"></div>
+  <a href="/" class="home-btn">
+    <img src="/images/home.svg" alt="홈" class="home-icon">
+  </a>
+  <a href="javascript:history.back()" class="close-btn">✖</a>
+  <div class="info-check-container">
+    <h2>비밀번호 확인</h2>
+    <form class="info-check-form" action="/mypage/check-password" method="POST">
+      <input type="hidden" name="nextUrl" value="<%= nextUrl %>">
+      <label for="password">비밀번호를 입력하세요</label>
+      <input type="password" id="password" name="password" required>
+      <% if (error) { %>
+        <div class="error-msg"><%= error %></div>
+      <% } %>
+      <button type="submit">확인</button>
+    </form>
+  </div>
+</body>
+</html>

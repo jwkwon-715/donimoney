@@ -13,6 +13,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var gameRouter = require('./routes/game');
 var characterRouter = require('./routes/character');
+const myPageRouter = require('./routes/myPage');
 
 var app = express();
 const db = require('./models'); // index.js가 있는 models 폴더
@@ -56,6 +57,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/game', gameRouter);
 app.use('/character', characterRouter);
+app.use('/mypage', myPageRouter);
 
 // 404 에러 처리
 app.use(function(req, res, next) {

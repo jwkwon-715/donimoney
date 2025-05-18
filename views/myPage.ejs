@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>마이페이지</title>
+  <link rel="stylesheet" href="/stylesheets/myPage.css">
+</head>
+<body>
+  <div class="forest-bg"></div>
+  
+  <a href="/" class="home-btn">
+    <img src="/images/home.svg" alt="홈" class="home-icon">
+  </a>
+  <a href="javascript:history.back()" class="close-btn">✖</a>
+  
+  <div class="mypage-container">
+    <h2><%= user.user_id %>님의 마이페이지</h2>
+    <ul class="mypage-menu">
+        <li onclick="location.href='/mypage/info-check'">
+            <span class="icon">🔒</span>
+            내 정보 확인
+        </li>
+        <li onclick="location.href='/mypage/change-account-check'">
+            <span class="icon">🔑</span>
+            아이디/비밀번호 변경
+        </li>
+        <li onclick="location.href='/mypage/character'">
+            <span class="icon">🧑‍🎤</span>
+            내 캐릭터 보기
+        </li>
+    </ul>
+  </div>
+</body>
+</html>
