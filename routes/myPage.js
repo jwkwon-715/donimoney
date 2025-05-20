@@ -24,6 +24,6 @@ router.post('/check-password', isAuthenticated, myPageController.checkPassword);
 router.get('/info', isAuthenticated, myPageController.renderInfo);
 
 // 내 캐릭터 보기 (진행도 계산)
-//router.get('/character', isAuthenticated, myPageController.renderCharacter);
+router.get('/character', isAuthenticated, myPageController.renderCharacter);
 
 module.exports = router;

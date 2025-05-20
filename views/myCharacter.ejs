@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>마이페이지</title>
+  <link rel="stylesheet" href="/stylesheets/myCharacter.css">
+</head>
+<body>
+  <div class="forest-bg"></div>
+  <a href="/" class="home-btn">
+    <img src="/images/home.svg" alt="홈" class="home-icon">
+  </a>
+  <a href="javascript:history.back()" class="close-btn">✖</a>
+  
+  <div class="mypage-main">
+    <!-- 왼쪽: 캐릭터와 돈 -->
+    <div class="character-area">
+      <div class="money-badge">
+        <img src="/images/coin.png" alt="코인" class="coin-icon">
+        <span><%= character.money || 0 %></span>
+      </div>
+      <div class="character-img-wrap">
+        <img src="/images/todragon_normal.png" alt="캐릭터" class="character-img">
+      </div>
+      <div class="character-nickname"><%= character.nickname %></div>
+    </div>
+    <!-- 오른쪽: 학습/퀴즈/스토리 진행도 박스 -->
+    <div class="learning-area">
+      <div class="learning-notebook">
+        <div class="notebook-tabs">
+          <div class="tab-yellow"></div>
+          <div class="tab-pink"></div>
+          <div class="tab-blue"></div>
+        </div>
+        <div class="notebook-inner">
+          <div class="notebook-title">
+            <span class="character-name"><%= character.nickname %></span> 나의 학습
+          </div>
+          <div class="progress-box-list">
+            <div class="progress-box learning-box">
+              <div class="progress-label">학습</div>
+              <div class="progress-content">
+                <span class="progress-total"><%= totalLearning %>개 중</span>
+                <span class="progress-done"><%= passedLearningCount %></span>개 완료
+                <span class="progress-percent"><%= percentLearning %>%</span>
+              </div>
+            </div>
+            <div class="progress-box quiz-box">
+              <div class="progress-label">퀴즈</div>
+              <div class="progress-content">
+                <span class="progress-total"><%= totalQuiz %>개 중</span>
+                <span class="progress-done"><%= passedQuiz %></span>개 완료
+                <span class="progress-percent"><%= percentQuiz %>%</span>
+              </div>
+            </div>
+            <div class="progress-box story-box">
+              <div class="progress-label">스토리</div>
+              <div class="progress-content">
+                <span class="progress-total"><%= totalStory %>개 중</span>
+                <span class="progress-done"><%= passedStoryCount %></span>개 완료
+                <span class="progress-percent"><%= percentStory %>%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

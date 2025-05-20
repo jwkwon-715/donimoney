@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
-const { LearningProgress, QuizProgress, StoryProgress } = require('../models');
+const { Learning, LearningProgress, QuizProgress, StoryProgress, Stories, UserCharacters } = require('../models');
+const { Sequelize } = require('sequelize');
 
 // 마이페이지 메인
 exports.renderMain = (req, res) => {
@@ -37,42 +38,67 @@ exports.renderInfo = (req, res) => {
   res.render('info', { user: req.user });
 };
 
-/* 내 캐릭터 보기 (진행도 계산)
+// 마이캐릭터 페이지 (진도율: 전체 10개 중 true가 하나라도 있으면 완료)
 exports.renderCharacter = async (req, res) => {
   try {
-    const user_character_id = req.user.user_character_id;
+    const userCharacterId = req.user.user_character_id;
+    const character = await UserCharacters.findByPk(userCharacterId);
 
-    // 학습모드 진행도
-    const learningTotal = await LearningProgress.count({ where: { user_character_id } });
-    const learningPassed = await LearningProgress.count({ where: { user_character_id, learning_pass: true } });
-    const learningPassPercent = learningTotal > 0 
-      ? Math.round(learningPassed / learningTotal * 100) 
-      : 0;
+    // 학습 진도율 (위에서 이미 구현한 방식)
+    const totalLearning = await Learning.count();
+    const passedLearning = await LearningProgress.findAll({
+      attributes: [[Sequelize.col('learning_id'), 'learning_id']],
+      where: { user_character_id: userCharacterId, learning_pass: true },
+      group: ['learning_id']
+    });
+    const passedLearningCount = passedLearning.length;
+    const percentLearning = totalLearning > 0 ? Math.round((passedLearningCount / totalLearning) * 100) : 0;
 
-    // 스토리모드 진행도
-    const storyTotal = await StoryProgress.count({ where: { user_character_id } });
-    const storyPassed = await StoryProgress.count({ where: { user_character_id, story_pass: true } });
-    const storyPassPercent = storyTotal > 0 
-      ? Math.round(storyPassed / storyTotal * 100) 
-      : 0;
+    // 퀴즈 진도율 (quiz_id가 없다면 curriculum_id 기준, quiz_id가 있다면 quiz_id 기준)
+    // quiz_id가 있다면 아래처럼 사용하세요:
+    /*
+    const totalQuiz = await Quiz.count();
+    const passedQuiz = await QuizProgress.findAll({
+      attributes: [[Sequelize.col('quiz_id'), 'quiz_id']],
+      where: { user_character_id: userCharacterId, quiz_pass: true },
+      group: ['quiz_id']
+    });
+    const passedQuizCount = passedQuiz.length;
+    const percentQuiz = totalQuiz > 0 ? Math.round((passedQuizCount / totalQuiz) * 100) : 0;
+    */
 
-    // 퀴즈모드 진행도
-    const quizTotal = await QuizProgress.count({ where: { user_character_id } });
-    const quizPassed = await QuizProgress.count({ where: { user_character_id, quiz_pass: true } });
-    const quizPassPercent = quizTotal > 0 
-      ? Math.round(quizPassed / quizTotal * 100) 
-      : 0;
+    // quiz_id가 없고, quiz_progress row 개수로만 할 경우:
+    const totalQuiz = await QuizProgress.count({ where: { user_character_id: userCharacterId } });
+    const passedQuiz = await QuizProgress.count({ where: { user_character_id: userCharacterId, quiz_pass: true } });
+    const percentQuiz = totalQuiz > 0 ? Math.round((passedQuiz / totalQuiz) * 100) : 0;
+
+    // 스토리 진도율 (story_id 기준)
+    const totalStory = await Stories.count();
+    const passedStory = await StoryProgress.findAll({
+      attributes: [[Sequelize.col('story_id'), 'story_id']],
+      where: { user_character_id: userCharacterId, story_pass: true },
+      group: ['story_id']
+    });
+    const passedStoryCount = passedStory.length;
+    const percentStory = totalStory > 0 ? Math.round((passedStoryCount / totalStory) * 100) : 0;
 
     res.render('myCharacter', {
-      user: req.user,
-      learning_progress: { learning_pass: learningPassPercent },
-      story_progress: { story_pass: storyPassPercent },
-      quiz_progress: { quiz_pass: quizPassPercent }
+      character,
+      // 학습
+      totalLearning,
+      passedLearningCount,
+      percentLearning,
+      // 퀴즈
+      totalQuiz,
+      passedQuiz,
+      percentQuiz,
+      // 스토리
+      totalStory,
+      passedStoryCount,
+      percentStory
     });
-
   } catch (error) {
     console.error(error);
     res.status(500).send('서버 오류');
   }
 };
-*/
