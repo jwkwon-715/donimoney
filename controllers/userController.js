@@ -5,12 +5,29 @@ const axios = require('axios');
 const { Users, Token } = require('../models');
 const sendEmail = require('../public/javascripts/sendEmail');
 
-// 회원가입 처리
 exports.signup = async (req, res) => {
   const { user_id, password, password2, phone, email, birthdate } = req.body;
 
   if (password !== password2) {
     req.flash('error', '❌ 비밀번호가 일치하지 않습니다.');
+    return res.redirect('/users/signup');
+  }
+
+  // 생년월일 필수 체크
+  if (!birthdate) {
+    req.flash('error', '생년월일을 입력해 주세요.');
+    return res.redirect('/users/signup');
+  }
+
+  // 만 14세 미만 체크
+  const today = new Date();
+  const birth = new Date(birthdate);
+  let age = today.getFullYear() - birth.getFullYear();
+  const m = today.getMonth() - birth.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) age--;
+
+  if (age < 14) {
+    req.flash('error', '📌 만 14세 미만은 부모님 인증이 필요합니다.');
     return res.redirect('/users/signup');
   }
 
@@ -35,24 +52,6 @@ exports.signup = async (req, res) => {
       }
     }
 
-    // 나이 계산
-    const today = new Date();
-    const birth = new Date(birthdate);
-    let age = today.getFullYear() - birth.getFullYear();
-    const m = today.getMonth() - birth.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) age--;
-
-    // 인증 확인 부분 주석 처리
-    /*
-    if (age < 14 && req.session.verified !== true) {
-      req.flash('error', '📌 만 14세 미만은 보호자 인증이 필요합니다.');
-      return res.redirect('/users/signup');
-    } else if (age >= 14 && req.session.verified !== true) {
-      req.flash('error', '📌 본인 인증이 필요합니다.');
-      return res.redirect('/users/signup');
-    }
-    */
-
     const hashedPassword = await bcrypt.hash(password, 10);
 
     await Users.create({
@@ -64,7 +63,6 @@ exports.signup = async (req, res) => {
     });
 
     req.flash('success', '🎉 회원가입이 완료되었습니다!');
-    // req.session.verified = false; // 인증 관련 제거
     res.redirect('/users/login');
 
   } catch (error) {
@@ -73,6 +71,7 @@ exports.signup = async (req, res) => {
     res.redirect('/users/signup');
   }
 };
+
 
 // 로그인 처리
 exports.login = (req, res, next) => {

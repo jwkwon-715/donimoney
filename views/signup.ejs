@@ -80,7 +80,7 @@
     document.querySelector('form').addEventListener('submit', function(e) {
       const checkbox = document.getElementById('over14');
       if (!checkbox.checked) {
-        alert('만 14세 미만은 보호자 동의가 필요합니다!');
+        alert('필수항목에 동의하여 주십시오.');
         e.preventDefault();
         checkbox.focus();
       }
