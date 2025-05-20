@@ -26,69 +26,57 @@
   </a>
   <a href="javascript:history.back()" class="close-btn">✖</a>
   
-  <div class="signup-container">
-    <div class="character">
-      <img src="/images/토끼_놀람.png" alt="토끼" class="rabbit-img">
-    </div>
-    
-    <div class="logo">
-      <span>도</span>
-      <span>니</span>
-      <span>머</span>
-      <span>니</span>
-    </div>
-    
-    <% if (error && error.length > 0) { %>
-      <p class="message error"> <%= error[0] %></p>
-    <% } %>
-
-    <% if (note && note.length > 0) { %>
-      <p class="message note"> <%= note[0] %></p>
-    <% } %>
-
-    <form action="/users/signup" method="POST">
-      <div class="input-group">
-        <label for="user_id">아이디</label>
-        <input type="text" class="input-field" id="user_id" name="user_id" required>
-        
-        <label for="password">비밀번호</label>
-        <input type="password" class="input-field" id="password" name="password" required>
-        
-        <label for="password2">비밀번호 확인</label>
-        <input type="password" class="input-field" id="password2" name="password2" required>
-        
-        <div class="phone-group">
-          <div class="phone-input-container">
-            <label for="phone">전화번호</label>
-            <input type="text" class="input-field phone-input" id="phone" name="phone">
-          </div>
-          <!-- <button type="button" class="verify-btn" onclick="startVerification()">📱 본인 인증</button>-->
-        </div>
-        
-        <label for="email">이메일</label>
-        <input type="email" class="input-field" id="email" name="email" required>
-        
-        <label for="birthdate">생년월일</label>
-        <input type="date" class="input-field" id="birthdate" name="birthdate">
-
-        <!-- 만 14세 이상 체크박스 추가 -->
-        <div style="text-align:left; margin: 10px 0 0 2px;">
-          <label style="font-weight:normal; font-size:15px;">
-            <input type="checkbox" id="over14" name="over14" value="yes" style="width:18px;height:18px;vertical-align:middle;margin-right:6px;">
-            만 14세 이상입니다. (필수)
-          </label>
-        </div>
+  <div class="signup-center">
+    <div class="signup-container">
+      <div class="logo-img-wrap">
+        <img src="/images/todragon_transparent.png" alt="도니머니 로고" class="logo-img">
       </div>
-      <button type="submit" class="signup-btn">회원가입</button>
-    </form>
-    
-    <div class="login-options">
-      <a href="/users/login">로그인</a>
+      <% if (error && error.length > 0) { %>
+        <p class="message error"> <%= error[0] %></p>
+      <% } %>
+      <% if (note && note.length > 0) { %>
+        <p class="message note"> <%= note[0] %></p>
+      <% } %>
+      <form action="/users/signup" method="POST">
+        <div class="input-group">
+          <label for="user_id">아이디</label>
+          <input type="text" class="input-field" id="user_id" name="user_id" required>
+          
+          <label for="password">비밀번호</label>
+          <input type="password" class="input-field" id="password" name="password" required>
+          
+          <label for="password2">비밀번호 확인</label>
+          <input type="password" class="input-field" id="password2" name="password2" required>
+          
+          <div class="phone-group">
+            <div class="phone-input-container">
+              <label for="phone">전화번호</label>
+              <input type="text" class="input-field phone-input" id="phone" name="phone">
+            </div>
+            <!-- <button type="button" class="verify-btn" onclick="startVerification()">📱 본인 인증</button>-->
+          </div>
+          
+          <label for="email">이메일</label>
+          <input type="email" class="input-field" id="email" name="email" required>
+          
+          <label for="birthdate">생년월일</label>
+          <input type="date" class="input-field" id="birthdate" name="birthdate">
+
+          <div style="text-align:left; margin: 10px 0 0 2px;">
+            <label style="font-weight:normal; font-size:15px;">
+              <input type="checkbox" id="over14" name="over14" value="yes" style="width:18px;height:18px;vertical-align:middle;margin-right:6px;">
+              만 14세 이상입니다. (필수)
+            </label>
+          </div>
+        </div>
+        <button type="submit" class="signup-btn">회원가입</button>
+      </form>
+      <div class="login-options">
+        <a href="/users/login">로그인</a>
+      </div>
     </div>
   </div>
-
   <script>
-    // 체크박스 미체크 시 회원가입 방지 (가장 간단하게)
     document.querySelector('form').addEventListener('submit', function(e) {
       const checkbox = document.getElementById('over14');
       if (!checkbox.checked) {

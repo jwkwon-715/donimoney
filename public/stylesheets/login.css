@@ -6,49 +6,21 @@
 }
 
 body {
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   background: linear-gradient(to bottom, #6a8d92, #4a6d72);
-  display: flex;
-  justify-content: center;
-  align-items: center;
   overflow: hidden;
   position: relative;
 }
 
 .forest-bg {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   z-index: 0;
   background-image: url('/images/배경.png');
   background-size: cover;
   background-position: center;
-}
-
-.tree {
-  position: absolute;
-  width: 80px;
-  height: 120px;
-  background-color: #2d6a39;
-  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-  display: none; /* 배경 이미지가 있으므로 나무는 숨김 */
-}
-
-.ground {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 30%;
-  background-color: transparent; /* 배경 이미지가 있으므로 투명하게 처리 */
-  z-index: 1;
-}
-
-.cloud {
-  position: absolute;
-  background-color: rgba(200, 200, 200, 0.6);
-  border-radius: 50%;
-  display: none; /* 배경 이미지가 있으므로 구름은 숨김 */
 }
 
 .home-btn {
@@ -60,17 +32,19 @@ body {
   align-items: center;
   text-decoration: none;
   z-index: 10;
-  background-color: transparent; /* 배경색 제거 */
+  background-color: transparent;
 }
 
 .home-icon {
-  width: 40px; /* 아이콘 크기 증가 */
+  width: 40px;
   height: 40px;
-  filter: drop-shadow(0px 2px 3px rgba(0, 0, 0, 0.3)); /* 가시성을 위한 그림자 추가 */
+  filter: drop-shadow(0px 2px 3px rgba(0, 0, 0, 0.3));
 }
 
 .close-btn {
   position: fixed;
+  top: 20px;
+  right: 20px;
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -81,64 +55,49 @@ body {
   color: white;
   text-decoration: none;
   z-index: 10;
+  background-color: #e57373;
 }
 
-.close-btn {
-  top: 20px;
-  right: 20px;
-  background-color: #e57373;
+.login-center {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .login-container {
   position: relative;
   z-index: 5;
-  width: 100%;
-  max-width: 400px;
+  width: 340px;
   background-color: white;
   border-radius: 20px;
-  padding: 30px 20px;
+  padding: 40px 24px 30px 24px; /* 80px → 100px (위 패딩 늘려서 겹침 더 많게) */
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   text-align: center;
+  margin-top: 60px;
 }
 
-.character {
+.logo-img-wrap {
   position: absolute;
-  top: -80px;
   left: 50%;
+  top: -30px;           /* -60px → -30px (더 아래로) */
   transform: translateX(-50%);
-  width: 120px;
-  height: 120px;
-}
-
-/* 토끼 CSS 구현 제거하고 이미지로 대체 */
-.rabbit-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.logo {
-  margin: 20px 0;
-  font-size: 36px;
-  font-weight: bold;
+  z-index: 10;
+  width: 170px;         /* 120px → 170px (더 크게) */
+  height: 110px;        /* 80px → 110px (더 크게) */
+  pointer-events: none;
   display: flex;
   justify-content: center;
-  gap: 5px;
+  align-items: flex-end;
 }
 
-.logo span {
-  display: inline-block;
-  width: 50px;
-  height: 50px;
-  line-height: 50px;
-  border-radius: 10px;
-  color: white;
+.logo-img {
+  width: 200px;         /* 120px → 170px (더 크게) */
+  height: auto;
+  display: block;
+  filter: drop-shadow(0px 2px 8px rgba(0,0,0,0.10));
 }
-
-.logo span:nth-child(1) { background-color: #f8d25c; }
-.logo span:nth-child(2) { background-color: #86c166; }
-.logo span:nth-child(3) { background-color: #f4a742; }
-.logo span:nth-child(4) { background-color: #5b9bd5; }
 
 .message {
   margin: 10px 0;
@@ -188,7 +147,7 @@ body {
 }
 
 .login-options {
-  margin-top: 20px;
+  margin-top: 10px;
   font-size: 14px;
   color: #666;
 }
@@ -197,4 +156,15 @@ body {
   color: #666;
   text-decoration: none;
   margin: 0 5px;
+}
+
+@media (max-width: 500px) {
+  .login-container {
+    width: 98vw;
+    padding: 80px 6vw 30px 6vw;
+  }
+  .logo-img-wrap, .logo-img {
+    width: 80px;
+    height: auto;
+  }
 }
