@@ -6,14 +6,14 @@ module.exports = (passport) => {
   passport.use(
     new LocalStrategy(
       {
-        usernameField: 'email', // 이메일로 로그인
+        usernameField: 'user_id', // 이메일로 로그인
         passwordField: 'password',
       },
-      async (email, password, done) => {
+      async (user_id, password, done) => {
         try {
-          const user = await Users.findOne({ where: { email } });
+          const user = await Users.findOne({ where: { user_id } });
           if (!user) {
-            return done(null, false, { message: '존재하지 않는 이메일입니다.' });
+            return done(null, false, { message: '존재하지 않는 아이디입니다.' });
           }
 
           const isMatch = await bcrypt.compare(password, user.password);
