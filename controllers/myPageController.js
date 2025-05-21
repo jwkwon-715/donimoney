@@ -38,13 +38,21 @@ exports.renderInfo = (req, res) => {
   res.render('info', { user: req.user });
 };
 
-// 마이캐릭터 페이지 (진도율: 전체 10개 중 true가 하나라도 있으면 완료)
+// 마이캐릭터 페이지
 exports.renderCharacter = async (req, res) => {
   try {
     const userCharacterId = req.user.user_character_id;
     const character = await UserCharacters.findByPk(userCharacterId);
 
-    // 학습 진도율 (위에서 이미 구현한 방식)
+    // 캐릭터가 없을 때 안내 메시지
+    if (!character) {
+      return res.render('myCharacter', {
+        character: null,
+        noCharacterMsg: '캐릭터가 없습니다. 시작하기를 눌러 캐릭터를 먼저 생성해주세요!',
+      });
+    }
+
+    // 학습 진도율
     const totalLearning = await Learning.count();
     const passedLearning = await LearningProgress.findAll({
       attributes: [[Sequelize.col('learning_id'), 'learning_id']],
@@ -54,20 +62,7 @@ exports.renderCharacter = async (req, res) => {
     const passedLearningCount = passedLearning.length;
     const percentLearning = totalLearning > 0 ? Math.round((passedLearningCount / totalLearning) * 100) : 0;
 
-    // 퀴즈 진도율 (quiz_id가 없다면 curriculum_id 기준, quiz_id가 있다면 quiz_id 기준)
-    // quiz_id가 있다면 아래처럼 사용하세요:
-    /*
-    const totalQuiz = await Quiz.count();
-    const passedQuiz = await QuizProgress.findAll({
-      attributes: [[Sequelize.col('quiz_id'), 'quiz_id']],
-      where: { user_character_id: userCharacterId, quiz_pass: true },
-      group: ['quiz_id']
-    });
-    const passedQuizCount = passedQuiz.length;
-    const percentQuiz = totalQuiz > 0 ? Math.round((passedQuizCount / totalQuiz) * 100) : 0;
-    */
-
-    // quiz_id가 없고, quiz_progress row 개수로만 할 경우:
+    // 퀴즈 진도율 (quiz_id가 없다면 row 개수 기준)
     const totalQuiz = await QuizProgress.count({ where: { user_character_id: userCharacterId } });
     const passedQuiz = await QuizProgress.count({ where: { user_character_id: userCharacterId, quiz_pass: true } });
     const percentQuiz = totalQuiz > 0 ? Math.round((passedQuiz / totalQuiz) * 100) : 0;
@@ -95,7 +90,8 @@ exports.renderCharacter = async (req, res) => {
       // 스토리
       totalStory,
       passedStoryCount,
-      percentStory
+      percentStory,
+      noCharacterMsg: null
     });
   } catch (error) {
     console.error(error);
