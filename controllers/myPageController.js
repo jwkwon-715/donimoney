@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const { Learning, LearningProgress, QuizProgress, StoryProgress, Stories, UserCharacters } = require('../models');
+const { Curriculum, Learning, LearningProgress, QuizProgress, StoryProgress, Stories, UserCharacters } = require('../models');
 const { Sequelize } = require('sequelize');
 
 // 마이페이지 메인
@@ -63,7 +63,7 @@ exports.renderCharacter = async (req, res) => {
     const percentLearning = totalLearning > 0 ? Math.round((passedLearningCount / totalLearning) * 100) : 0;
 
     // 퀴즈 진도율 (quiz_id가 없다면 row 개수 기준)
-    const totalQuiz = await QuizProgress.count({ where: { user_character_id: userCharacterId } });
+    const totalQuiz = await Curriculum.count();
     const passedQuiz = await QuizProgress.count({ where: { user_character_id: userCharacterId, quiz_pass: true } });
     const percentQuiz = totalQuiz > 0 ? Math.round((passedQuiz / totalQuiz) * 100) : 0;
 
