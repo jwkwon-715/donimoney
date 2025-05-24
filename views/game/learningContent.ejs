@@ -1,5 +1,35 @@
-<% if (learningContent.LearningProgresses) { %>
-  <p>진행 상태: <%= learningContent.LearningProgresses[0].learning_pass ? "완료" : "미완료" %></p>
-<% } else { %>
-  <p>아직 학습하지 않았습니다.</p>
-<% } %>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link rel="stylesheet" href="/stylesheets/learningContent.css">
+</head>
+<body>
+  <div class="buttons">
+    <button class="home-button" id="homeButton" onclick="location.href='/game/school/learning/list'">
+        <img src="/images/home_icon.png" class="home-icon" alt="">
+    </button>
+    <button class="close-button" id="closeButton" onclick="location.href='/game/main'">
+        <img src="/images/close_icon.png" class="close-icon" alt="">
+    </button>
+  </div>
+
+  <% if (learningContent.LearningProgresses) { %>
+    <p>진행 상태: <%= learningContent.LearningProgresses[0].learning_pass ? "완료" : "미완료" %></p>
+  <% } else { %>
+    <p>아직 학습하지 않았습니다.</p>
+  <% } %>
+</body>
+</html>
+
+
+
+<!--
+game/learnigContent.ejs 에 사용자 진행 현황 보내둠. 이걸로 학습 완료 버튼 활성화 여부 구현하면 됨
+
+학습 완료 후 프론트에서 넘겨줘야 할 값:
+/game/school/learning/complete 경로로 post 요청
+learningId: 해당 학습 파트의 아이디
+-->
