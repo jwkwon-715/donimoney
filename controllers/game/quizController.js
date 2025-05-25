@@ -106,6 +106,12 @@ module.exports = {
     renderRandomQuizList: (req, res, next) => {
         res.render("game/randomQuizSelect");
     },
+    renderQuizSuccess: (req, res) => {
+        res.render('game/quizSuccess');
+    },
+    renderQuizFail: (req, res) => {
+        res.render('game/quizFail');
+    },
 
     //각 모드에 맞는 퀴즈 보여주기
     solveQuiz: async (req, res, next) => {

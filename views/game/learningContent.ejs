@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/stylesheets/style.css">
-  <link rel="stylesheet" href="/stylesheets/learningContent.css">
+  <link rel="stylesheet" href="/stylesheets/learningCard.css">
 </head>
 <body>
   <div class="buttons">
@@ -16,20 +16,35 @@
     </button>
   </div>
 
-<% if (learningContent.LearningProgresses && learningContent.LearningProgresses.length > 0) { %>
-  <p>진행 상태: <%= learningContent.LearningProgresses[0].learning_pass ? "완료" : "미완료" %></p>
-<% } else { %>
-  <p>아직 학습하지 않았습니다.</p>
-<% } %>
+  <div class="card-slider">
+    <button class="nav-btn left" id="prevBtn">&#8592;</button>
+    <div class="card-section" id="cardSection">
+      <% contentArr.forEach(function(card, idx) { %>
+        <div class="card" style="display: <%= idx === 0 ? 'block' : 'none' %>;">
+          <div class="card-body"><%- card.replace(/\n/g, "<br>") %></div>
+        </div>
+      <% }) %>
+    </div>
+    <button class="nav-btn right" id="nextBtn">&#8594;</button>
+  </div>
+  <div class="indicator" id="indicator"></div>
+
+  <div style="margin-top:30px; text-align:center;">
+  <!--
+  <% if (learningContent.LearningProgresses && learningContent.LearningProgresses.length > 0) { %>
+    <p>진행 상태: <%= learningContent.LearningProgresses[0].learning_pass ? "완료" : "미완료" %></p>
+  <% } else { %>
+    <p>아직 학습하지 않았습니다.</p>
+  <% } %>
+  -->
+    <!-- 학습 완료 버튼: 마지막 카드에서만 보이게 JS로 제어 -->
+    <button type="button" class="complete-btn" id="completeBtn" style="display:none;">학습 완료</button>
+    <input type="hidden" id="learningId" value="<%= learningContent.learning_id %>">
+  </div>
+
+  <script>
+    const cardCount = <%= contentArr.length %>;
+  </script>
+  <script src="/javascripts/learningCard.js"></script>
 </body>
 </html>
-
-
-
-<!--
-game/learnigContent.ejs 에 사용자 진행 현황 보내둠. 이걸로 학습 완료 버튼 활성화 여부 구현하면 됨
-
-학습 완료 후 프론트에서 넘겨줘야 할 값:
-/game/school/learning/complete 경로로 post 요청
-learningId: 해당 학습 파트의 아이디
--->

@@ -19,6 +19,8 @@ router.get("/school/quiz/select/general", quizController.showPossibleQuizList, q
 router.get("/school/quiz/select/random", quizController.showPossibleQuizList, quizController.renderRandomQuizList);
 router.post("/school/quiz/select", quizController.solveQuiz);  //두개의 퀴즈 문제 요청은 하나의 라우터에서 해결
 router.post("/school/quiz/complete", quizController.updateQuizProg, mainController.renderHome);
+router.get("/school/quiz/success", quizController.renderQuizSuccess);
+router.get("/school/quiz/fail", quizController.renderQuizFail);
 
 router.get("/school/learning/list", learningController.renderLearningList);
 router.get("/school/learning/content/:learningId", learningController.renderLearningContent);

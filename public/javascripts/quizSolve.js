@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     let currentIndex = 0;
     let userAnswers = []; // 사용자가 선택한 답 저장
+    const passScore = 80; // 서버와 동일하게 맞춰주세요
 
     function renderQuiz(index) {
         const quiz = quizzes[index];
@@ -70,7 +71,11 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .then(res => {
             if (res.ok) {
-                window.location.href = '/game/home'; // 원하는 페이지로 이동
+                if (finalScore >= passScore) {
+                    window.location.href = '/game/school/quiz/success';
+                } else {
+                    window.location.href = '/game/school/quiz/fail';
+                }
             } else {
                 alert('퀴즈 결과 저장에 실패했습니다.');
             }
