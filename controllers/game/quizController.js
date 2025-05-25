@@ -9,7 +9,7 @@ const db = require("../../models/index"),
     sequelize = db.sequelize,
     Sequelize = db.Sequelize;
 
-const userCharacterId = 1; //세션(임시)
+const userCharacterId = 7; //세션(임시)
 
 const generalQReward = 600;
 const randomQReward = 200;
@@ -26,11 +26,12 @@ function shuffleArray(array) {
 async function isNewProg(curriculumId) {
     try {
         const quizProg = await QuizProgress.findOne({
-            where: { curriculum_id: curriculumId }
+            where: { user_character_id: userCharacterId, curriculum_id: curriculumId }
         });
         return !quizProg;  // 없는 경우 true, 있는 경우 false
     } catch (err) {
         console.error(err);
+        return false;
     }
 }
 
@@ -120,18 +121,21 @@ module.exports = {
                     order: Sequelize.literal('RAND()')  // 랜덤
                 });
 
-                res.render("game/solveQuiz", {quizzes})
+                res.render("game/solveQuiz", {
+                    quizzes,
+                    quizType: 'general',
+                    curriculumId
+                });
 
             }else if(quizType == 'random'){
                 let curriculumList = req.body.curriculumList;  //프론트에서 form의 체크박스 활용할 예정
                 curriculumList = curriculumList.map(curr => parseInt(curr));
 
                 let quizzes = [];
-                for(i = 0; i < curriculumList.length; i++){
+                for(let i = 0; i < curriculumList.length; i++){
                     const result = await Quiz.findAll({
                         where: {curriculum_id: curriculumList[i]},
                         include: [QuizOption],
-                        order: sequelize.random(),
                         order: Sequelize.literal('RAND()'),
                         limit: 4
                     });
@@ -139,7 +143,11 @@ module.exports = {
                 }
                 //커리큘럼 순서도 섞고 최대 10개 선택
                 quizzes = shuffleArray(quizzes).slice(0, 10);
-                res.render("game/solveQuiz", {quizzes});
+                res.render("game/solveQuiz", {
+                    quizzes,
+                    quizType: 'random',
+                    curriculumId: null
+                });
             }
         }catch(err){
             console.log(err);
@@ -150,21 +158,29 @@ module.exports = {
     updateQuizProg: async (req, res, next) => {
         const quizType = req.body.type;
         const score = req.body.score;
-        try{
+        try {
+            console.log('=== updateQuizProg 진입 ===');
+            console.log('quizType:', quizType, 'score:', score);
             if(score >= passScore){  //기준 점수 넘은 경우
                 if(quizType == "general"){
                     const curriculumId = req.body.curriculumId;
-    
-                    //최초 성공 시에만 progress 정보 변경
-                    if(!progressState(curriculumId)){ 
-                        if(isNewProg(curriculumId)){  //처음 풀어보는 퀴즈
+                    console.log('curriculumId:', curriculumId);
+
+                    const progState = await progressState(curriculumId);
+                    console.log('progState:', progState);
+
+                    if(!progState){ 
+                        const isNew = await isNewProg(curriculumId);
+                        console.log('isNew:', isNew);
+
+                        if(isNew){  //처음 풀어보는 퀴즈
                             await QuizProgress.create({
                                 user_character_id: userCharacterId,
                                 quiz_pass: true,
                                 curriculum_id: curriculumId
                             });
                         }else{  //기존에 풀었던 퀴즈
-                            await QuizProgress.updateQuizProg(
+                            await QuizProgress.update(
                                 {quiz_pass: true},
                                 {
                                     where: {
@@ -175,20 +191,29 @@ module.exports = {
                             );
                         }
                         //보상 지급
+                        const user = await UserCharacters.findOne({
+                            where: { user_character_id: userCharacterId },
+                            attributes: ['money']
+                        });
+                        if(!user) throw new Error('User not found');
+                        const currentMoney = user.money;
                         await UserCharacters.update(
-                            { money: money + generalQReward },
+                            { money: currentMoney + generalQReward },
                             {
                                 where: { user_character_id: userCharacterId }
                             }
                         );
-    
-                    }else{
-                        //현재로서는 최초 성공만 처리 필요
                     }
                 }else if(quizType == "random"){
                     //random은 보상만 지급됨
+                    const user = await UserCharacters.findOne({
+                        where: { user_character_id: userCharacterId },
+                        attributes: ['money']
+                    });
+                    if(!user) throw new Error('User not found');
+                    const currentMoney = user.money;
                     await UserCharacters.update(
-                        { money: money + randomQReward },
+                        { money: currentMoney + randomQReward },
                         {
                             where: { user_character_id: userCharacterId }
                         }
@@ -197,6 +222,7 @@ module.exports = {
             }
             next();
         }catch(err){
+            console.error('updateQuizProg 에러:', err);
             next(err);
         }
     }

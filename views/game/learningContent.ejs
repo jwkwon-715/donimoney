@@ -16,11 +16,11 @@
     </button>
   </div>
 
-  <% if (learningContent.LearningProgresses) { %>
-    <p>진행 상태: <%= learningContent.LearningProgresses[0].learning_pass ? "완료" : "미완료" %></p>
-  <% } else { %>
-    <p>아직 학습하지 않았습니다.</p>
-  <% } %>
+<% if (learningContent.LearningProgresses && learningContent.LearningProgresses.length > 0) { %>
+  <p>진행 상태: <%= learningContent.LearningProgresses[0].learning_pass ? "완료" : "미완료" %></p>
+<% } else { %>
+  <p>아직 학습하지 않았습니다.</p>
+<% } %>
 </body>
 </html>
 

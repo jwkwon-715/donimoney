@@ -51,9 +51,10 @@
         </div> -->
 
     </div>
-
     <script>
-        const quizzes = JSON.parse('<%- JSON.stringify(quizzes) %>');
+        const quizzes = <%- JSON.stringify(quizzes) %>;
+        const quizType = "<%= quizType %>";
+        const selectedCurriculumId = <%= (typeof curriculumId !== 'undefined' && curriculumId !== null) ? curriculumId : 'null' %>;
     </script>
     <script src="/javascripts/quizSolve.js"></script>
 </body>
