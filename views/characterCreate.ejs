@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>캐릭터 생성</title>
+  <link rel="stylesheet" href="/stylesheets/characterCreate.css">
+</head>
+<body>
+  <div class="forest-bg"></div>
+  
+  <a href="/" class="home-btn">
+    <img src="/images/home.svg" alt="홈" class="home-icon">
+  </a>
+  <a href="javascript:history.back()" class="close-btn">
+    <img src="/images/disable.png" alt="뒤로가기" class="close-icon">
+  </a>
+
+  <div class="center-container">
+    <div class="character-box">
+      <div class="label">너는 이름이 뭐야?</div>
+      <form action="/character/create" method="POST" class="input-area" autocomplete="off">
+        <label for="characterName" class="input-label">내 이름은</label>
+        <input
+          type="text"
+          id="characterName"
+          name="characterName"
+          class="dashed-box"
+          maxlength="10"
+          required
+          placeholder="토룡이"
+        >
+        <span class="input-label">야!</span>
+        <button type="submit" class="submit-btn">확인</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

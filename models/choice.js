@@ -1,3 +1,4 @@
+
 // const { sequelize } = require(".");
 module.exports = (sequelize, DataTypes) => {
     const Choices = sequelize.define("Choices", {

@@ -1,3 +1,4 @@
+
 // scenes 테이블, scenes.js
 module.exports = (sequelize, DataTypes) =>{
     const Scenes = sequelize.define("Scenes", {
