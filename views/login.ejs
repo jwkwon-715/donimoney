@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>도니머니</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/stylesheets/login.css">
+</head>
+<body>
+  <div class="forest-bg"></div>
+
+  <a href="/" class="home-btn">
+    <img src="/images/home.svg" alt="홈" class="home-icon">
+  </a>
+  <a href="javascript:history.back()" class="close-btn">
+    <img src="/images/disable.png" alt="뒤로가기" class="close-icon">
+  </a>
+
+  <div class="login-center">
+    <div class="login-container">
+      <div class="logo-img-wrap">
+        <img src="/images/todragon_transparent.png" alt="도니머니 로고" class="logo-img">
+      </div>
+      <% if (success && success.length > 0) { %>
+        <p class="message success">🎉 <%= success[0] %></p>
+      <% } %>
+      <% if (note && note.length > 0) { %>
+        <p class="message note">📌 <%= note[0] %></p>
+      <% } %>
+      <% if (error && error.length > 0) { %>
+        <p class="message error">❌ <%= error[0] %></p>
+      <% } %>
+      <form action="/users/login" method="POST">
+        <div class="input-group">
+          <input type="text" class="input-field" id="user_id" name="user_id" placeholder="아이디" required>
+    
+          <input type="password" class="input-field" id="password" name="password" placeholder="비밀번호" required>
+        </div>
+        <button type="submit" class="login-btn">로그인</button>
+      </form>
+      <div class="login-options">
+        <a href="/users/find">아이디/비밀번호 찾기</a> | <a href="/users/signup">회원가입</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

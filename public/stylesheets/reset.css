@@ -1,0 +1,122 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(to bottom, #6a8d92, #4a6d72);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.forest-bg {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  z-index: 0;
+  background-image: url('/images/배경.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.95;
+}
+
+.reset-container {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: 400px;
+  background-color: rgba(255,255,255,0.97);
+  border-radius: 20px;
+  padding: 38px 24px 30px 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+  text-align: center;
+  margin: 0 16px;
+}
+
+.reset-container h1 {
+  color: #2d6a39;
+  font-size: 28px;
+  margin-bottom: 24px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.09);
+}
+
+.reset-form {
+  margin-top: 12px;
+}
+
+.reset-form label {
+  display: block;
+  text-align: left;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 6px;
+  margin-left: 2px;
+}
+
+.reset-form input {
+  width: 100%;
+  padding: 13px 16px;
+  margin-bottom: 16px;
+  border: 1.5px solid #ddd;
+  border-radius: 10px;
+  font-size: 15px;
+  transition: border-color 0.3s;
+  background: #f7fafd;
+}
+
+.reset-form input:focus {
+  border-color: #5b9bd5;
+  outline: none;
+}
+
+.reset-form button {
+  width: 100%;
+  padding: 13px;
+  background: linear-gradient(45deg, #5b9bd5, #86c166);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.2s, transform 0.18s;
+}
+
+.reset-form button:hover {
+  background: linear-gradient(45deg, #86c166, #5b9bd5);
+  transform: translateY(-2px);
+}
+
+.message {
+  padding: 12px;
+  border-radius: 8px;
+  margin: 15px 0 10px 0;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.error {
+  background: #ffe6e6;
+  color: #e57373;
+  border: 1px solid #ffb3b3;
+}
+
+@media (max-width: 500px) {
+  .reset-container {
+    padding: 24px 8px 18px 8px;
+    max-width: 95vw;
+  }
+  .reset-container h1 {
+    font-size: 22px;
+  }
+}
