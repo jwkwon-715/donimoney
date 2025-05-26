@@ -30,7 +30,7 @@ exports.createCharacter = async (req, res) => {
         console.error(err);
         return res.send('세션 갱신 중 오류가 발생했습니다.');
       }
-      res.redirect('/game/home');
+      res.redirect('/game/main');
     });
   } catch (error) {
     console.error(error);
