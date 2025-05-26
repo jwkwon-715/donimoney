@@ -1,3 +1,4 @@
+
 module.exports = (sequelize, DataTypes) => {
     const Dialogues = sequelize.define("Dialogues", {
         dialogue_id: {

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920px, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/school.css">
+</head>
+<body>
+    <!-- <h1>학교 화면</h1> -->
+    <div class="buttons">
+        <button class="home-button" id="homeButton" onclick="location.href='/game/main'">
+            <img src="/images/home_icon.png" class="home-icon" alt="">
+        </button>
+        <button class="close-button" id="closeButton" onclick="location.href='/game/main'">
+            <img src="/images/close_icon.png" class="close-icon" alt="">
+        </button>
+    </div>
+    
+    <div class="school-container">
+        <div class="card" id="learningCard" onclick="location.href='/game/school/learning/list'">
+            <img src="/images/book_icon.png" class="icon" alt="">
+            <h2>학습</h2>
+            <p>차근차근 경제&금융이랑 친해지기</p>
+        </div>
+        <div class="card" id="quizCard" onclick="location.href='/game/school/quiz/typeList'">
+            <img src="/images/q_icon.png" class="icon quizIcon" alt="">
+            <h2>퀴즈</h2>
+            <p>배운 내용을 재밌게 복습해 보아요!</p>
+        </div>
+    </div>
+</body>
+</html>

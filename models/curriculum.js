@@ -1,3 +1,4 @@
+
 // curriculum 테이블, curriculum.js
 module.exports = (sequelize, DataTypes) => {
     const Curriculum = sequelize.define("Curriculum", {

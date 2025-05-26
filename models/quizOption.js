@@ -1,3 +1,4 @@
+
 module.exports = (sequelize, DataTypes) => {
     const QuizOption = sequelize.define("QuizOption", {
       quiz_option_id: {
@@ -37,4 +38,3 @@ module.exports = (sequelize, DataTypes) => {
   
     return QuizOption;
   };
-  

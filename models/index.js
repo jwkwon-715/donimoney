@@ -177,6 +177,7 @@ db.Scenes.belongsToMany(db.StoryCharacter, {
   otherKey: 'character_id'
 });
 
+
 // 여기서 Users와 Token의 관계 설정!
 db.Users.hasMany(db.Token, { foreignKey: 'user_id', sourceKey: 'user_id' });
 db.Token.belongsTo(db.Users, { foreignKey: 'user_id', targetKey: 'user_id' });

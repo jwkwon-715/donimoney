@@ -11,7 +11,7 @@ const passportConfig = require('./config/passport');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var gameRouter = require('./routes/game');
+var mainGameRouter = require('./routes/mainGame');
 var characterRouter = require('./routes/character');
 const myPageRouter = require('./routes/myPage');
 
@@ -55,7 +55,7 @@ app.use((req, res, next) => {
 // 🔽 라우터는 passport 설정 이후에 등록해야 함!
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/game', gameRouter);
+app.use('/game', mainGameRouter);
 app.use('/character', characterRouter);
 app.use('/mypage', myPageRouter);
 
@@ -82,10 +82,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-// 서버 실행
-app.listen(3000, '0.0.0.0', () => {
-  console.log('Server running on http://34.64.197.111:3000');
-});
+app.listen(3000); //로컬 환경 포트번호
 
 module.exports = app;
 

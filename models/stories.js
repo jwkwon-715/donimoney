@@ -1,3 +1,4 @@
+
 module.exports = (sequelize, DataTypes) => {
   const Stories = sequelize.define("Stories", {
     story_id: {

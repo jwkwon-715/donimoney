@@ -1,3 +1,4 @@
+
 // story_progress 테이블 , storyProgress.js
 module.exports = (sequelize, DataTypes) => {
     const StoryProgress = sequelize.define("StoryProgress", {

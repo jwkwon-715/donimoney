@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/solveQuiz.css">
+</head>
+<body>
+    <div class="buttons">
+        <button class="home-button" id="homeButton" onclick="location.href='/game/school/quiz/typeList'">
+            <img src="/images/home_icon.png" class="home-icon" alt="">
+        </button>
+
+        <div class="progress-wrapper">
+            <img src="/images/slider_background.png" class="progress-bar-container">
+                <img src="/images/clock_icon.png" class="clock-icon" alt="">
+                <div class="progress-track" id="track">
+                    <div class="progress-fill" id="fill"></div>
+                </div>
+                <img src="/images/pencil_icon.png" class="progress-slider" id="slider" alt="">
+        </div>
+
+        <button class="close-button" id="closeButton" onclick="location.href='/game/main'">
+            <img src="/images/close_icon.png" class="close-icon" alt="">
+        </button>
+    </div>
+
+    <div id="quiz-wrapper">
+        <div class="quiz-box">
+            <div id="quiz-container"></div>
+            <div id="solution-box">
+                <!-- <div class="answer-wrap">
+                    <span class="answer-badge">정답</span>
+                </div> -->
+                <!-- <div class="solution-wrap">
+                    <span class="solution-badge">풀이 내용</span>
+                    <div id="solution-text"></div>
+                </div> -->
+            </div>
+            <button id="check-answer-btn">정답 확인</button>
+            <button id="next-btn" style="display:none;">다음 문제</button>
+        </div>
+
+        <!-- <div class="quiz-sidebar">
+            <div>
+                <h3>Quiz</h3>
+                <h3 class="quiz-type">학습 퀴즈 모드</h3>
+                <p class="quiz-text">스토리 모드, 학습 모드에서<br>배운 내용만 퀴즈쇼!</p>
+            </div>
+        </div> -->
+
+    </div>
+    <script>
+        const quizzes = <%- JSON.stringify(quizzes) %>;
+        const quizType = "<%= quizType %>";
+        const selectedCurriculumId = <%= (typeof curriculumId !== 'undefined' && curriculumId !== null) ? curriculumId : 'null' %>;
+    </script>
+    <script src="/javascripts/quizSolve.js"></script>
+</body>
+</html>
+
+<!--
+<div id="quiz-container"></div>
+<div id="solution-box"></div>
+
+<button id="check-answer-btn">정답 확인</button>
+<button id="next-btn" style="display:none;">다음 문제</button>
+
+<script>
+    const quizzes = JSON.parse('<%- JSON.stringify(quizzes) %>');
+</script>
+
+<script src="/javascripts/quizSolve.js"></script>
+
+<hr>
+<h2>quizzes 구조 참고</h2>
+<pre><%= JSON.stringify(quizzes, null, 2) %></pre> -->

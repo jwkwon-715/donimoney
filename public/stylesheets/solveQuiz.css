@@ -1,0 +1,216 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'NanumSquareRound';
+    background-color: #E2EDFF;
+}
+
+.buttons {
+    align-items: center;
+    padding: 25px 0 0 0;
+}
+
+.quiz-wrapper {
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    justify-content: center;
+    /* gap: 40px; */
+    /* padding: 80px 60px; */
+    height: 1080px;
+}
+
+.quiz-box {
+    flex: 3;
+    width: calc(100vw - 140px);
+    min-height: 500px;
+    box-sizing: border-box;
+    overflow: visible;
+
+    background-color: #F5F5F5;
+    margin: 60px 69px;
+    padding: 55px 100px 0 100px;
+    border-radius: 24px;
+    box-shadow: 0 5px rgba(0, 0, 0, 0.1);
+}
+
+h3 {
+    margin: 0 0 36px 0;
+    font-size: 36px;
+    font-weight: 900;
+    color: #333;
+} 
+
+/* .quiz-sidebar {
+    flex: 1.2;
+    background-color: #E2EDFF;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.quiz-sidebar h3 {
+    font-size: 28px;
+    font-family: 'Cafe24DongDong';
+    margin: 10px 0;
+}
+
+.quiz-sidebar p {
+    font-size: 32px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.quiz-sidebar .quix-type {
+    font-size: 32px;
+    font-weight: bold;
+    margin-top: 20px;
+} */
+
+#solution-box {
+    background-color: #ffffff;
+    border-radius: 24px;
+    margin-top: 24px;
+    padding: 40px;
+    font-size: 24px;
+    color: #505050;
+}
+
+/* .answer-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    font-size: 24px;
+    color: #F5F5F5;
+}
+
+.answer-badge {
+    background-color: #D53A3A;
+    color: #F5F5F5;
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 18px;
+    font-weight: 600;
+} */
+
+/* .solution-wrap {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.solution-badge {
+    border: 2px solid #D53A3A;
+    color: #D53A3A;
+    font-weight: bold;
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 18px;
+    white-space: nowrap;
+} */
+
+#check-answer-btn, #next-btn {
+    width: 200px;
+    height: 80px;
+    align-self: flex-end;
+    margin: 60px 0 55px 1380px;
+    padding: 12px 24px 20px;
+    border: none;
+    border-radius: 60px;
+    
+    background-color: #F9CF45;
+    font-family: 'NanumSquareRound';
+    font-size: 28px;
+    font-weight: 900;
+    color: #F5F5F5;
+    cursor: pointer;
+    text-align: center;
+    box-shadow:inset 0 -3.74px 0 0 #F3C83A, 0 3px 0 0 rgba(0, 0, 0, 0.1);
+}
+
+#check-answer-btn:hover, #check-answer-btn:active, #next-btn:hover, #next-btn:active {
+    transform: translateY(4px);
+    color: #E4AF00;
+    box-shadow: 0 3px 0 0 rgba(0, 0, 0, 0.1);
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    font-size: 20px;
+    margin-bottom: 14px;
+}
+
+label {
+    font-size: 24px;
+    color: #505050;
+}
+
+.progress-wrapper {
+    position: relative;
+    width: 781px;
+    height: 105px;
+    margin: 50px auto;
+}
+
+.progress-bar-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    display: block;
+    transform: rotate(180deg);
+    filter: drop-shadow(0 -4px rgba(0, 0, 0, 0.1));
+}
+
+.clock-icon {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    top: calc(50% - 42px);
+    margin: 0 0 13px 688px;
+    filter: drop-shadow(0 2px rgba(0, 0, 0, 0.1));
+}
+
+.progress-track {
+    position: relative;
+    top: calc(50% - 130px);
+    width: 652px;
+    height: 46.73px;
+    background-color: #C4C4C4;
+    border-radius: 24px;
+    margin-left: 13px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    position: absolute;
+    height: 100%;
+    width: 0%; 
+    background-color: #F9CF45;
+    border-radius: 24px;
+    transition: width 0.2s ease-in-out;
+}
+
+.progress-slider {
+    position: absolute;
+    width: 120px;
+    height: 130px;
+    top: -10px;
+    transform: translate(-50%);
+    z-index: 10;
+    transition: left 0.2s ease-in-out;
+    filter: drop-shadow(0 5px rgba(0,0,0,0.1));
+    opacity: 0;
+}

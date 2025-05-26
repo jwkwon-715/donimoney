@@ -5,6 +5,7 @@ module.exports = {
     password: process.env.DB_PW,
     database: process.env.DB_NAME,
     host: process.env.DB_HOST,
+    port: parseInt(process.env.DB_PORT), //추가
     dialect: "mysql"
   },
   test: {
@@ -12,6 +13,7 @@ module.exports = {
     password: process.env.DB_PW,
     database: process.env.DB_NAME,
     host: process.env.DB_HOST,
+    port: parseInt(process.env.DB_PORT), //추가
     dialect: "mysql"
   },
   production: {
@@ -19,6 +21,7 @@ module.exports = {
     password: process.env.DB_PW,
     database: process.env.DB_NAME,
     host: process.env.DB_HOST,
+    port: parseInt(process.env.DB_PORT), //추가
     dialect: "mysql"
   }
 }

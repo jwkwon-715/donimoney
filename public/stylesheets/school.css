@@ -1,0 +1,60 @@
+body {
+    background-color: #FFFCF5;
+    margin: 0;
+    padding: 0;
+    font-family: 'Cafe24Dongdong';
+}
+
+.school-container {
+    width: 1920px;
+    height: 1080px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+}
+
+.card {
+    width: 527.71px;
+    height: 686.71px;
+    border-radius: 20px;
+    margin: 0;
+    text-align: center;
+    box-shadow: 4px 4px 18.9px 2px rgba(0, 0, 0, 0.26);
+    cursor: pointer;
+}
+
+.card:first-child {
+    background-color: #292929;
+    color: #EDEDED;
+}
+
+.card:last-child {
+    background-color: #EDEDED;
+    color: #333333;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    transition: 0.3s;
+}
+
+img {
+    width: 112px;
+    height: 112px;
+}
+
+.quizIcon {
+    width: 75.78px;
+    height: 113.06px;
+}
+
+.icon { margin: 98.38px 0 0 0; }
+
+h2 {
+    font-size: 160px;
+    margin: 60px 0 119.02px 0;
+}
+
+p { font-size: 32px; }

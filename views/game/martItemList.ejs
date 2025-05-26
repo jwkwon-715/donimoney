@@ -1,0 +1,20 @@
+<h1>마트 화면</h1>
+<ul>
+    <% items.forEach(item => { %>
+        <li>
+            <%= item.item_name %><br>
+            Description: <%= item.item_description %><br>
+            Price: <%= item.item_price %> coins<br>
+            Type: <%= item.item_type %><br>
+    
+            <button type="button" onclick="decreaseQuantity('<%= item.item_id %>')">-</button>
+            <span id="quantity-<%= item.item_id %>" class="quantity">1</span>
+            <button type="button" onclick="increaseQuantity('<%= item.item_id %>')">+</button><br>
+    
+            <button type="button" onclick="addBuyItem('<%= item.item_id %>', '<%= item.item_price %>')">구매하기</button>
+        </li>
+    <% }); %>
+</ul>
+<button type="button" onclick="confirmePurchase()">마트 나가기</button>
+
+<script src="/javascripts/martPurchase.js"></script>

@@ -1,3 +1,4 @@
+
 module.exports = (sequelize, DataTypes) => {
   const Appear = sequelize.define("Appear", {
     scene_id: {
