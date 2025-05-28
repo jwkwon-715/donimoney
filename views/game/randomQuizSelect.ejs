@@ -6,8 +6,16 @@
   <% curriculumList.forEach(curriculum => { %>
     <div>
       <label>
-        <input type="checkbox" name="curriculumList" value="<%= curriculum.curriculum_id %>">
+        <input
+          type="checkbox"
+          name="curriculumList"
+          value="<%= curriculum.curriculum_id %>"
+          <% if (totalProg < curriculum.curriculum_id) { %> disabled <% } %>
+        >
         <%= curriculum.curriculum_title %>
+        <% if (totalProg < curriculum.curriculum_id) { %>
+          <span style="color: #aaa;">(잠김)</span>
+        <% } %>
       </label>
     </div>
   <% }) %>
@@ -19,6 +27,7 @@
 
 <script>
   document.getElementById('curriculumList').addEventListener('submit', function(e) {
+    // 잠긴(비활성화된) 체크박스는 선택되지 않으므로, 그냥 기존 로직 사용
     const checked = document.querySelectorAll('input[name="curriculumList"]:checked');
     if (checked.length < 3 || checked.length > 5) {
       e.preventDefault();
