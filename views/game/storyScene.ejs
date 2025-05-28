@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>스토리 플레이</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      overflow: hidden;
+    }
+  </style>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+
+</head>
+<body>
+  <!-- 게임이 렌더링될 컨테이너 -->
+  <div id="game-container"></div>
+
+  <!-- storyId를 JS 변수로 설정 -->
+  <script>
+    window.storyId = <%= storyId %>; 
+  </script>
+
+  <!-- Phaser 라이브러리 -->
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3.88.2/dist/phaser.js"></script>
+
+  <!-- 게임 초기화 스크립트 -->
+  <script type="module">
+    import { StoryScene1 } from '/javascripts/story1.js';
+    import { StoryScene2 } from '/javascripts/story2.js';
+
+    const sceneMap = {
+      1: StoryScene1,
+      2: StoryScene2
+    };
+
+    // Phaser 게임 설정
+    const config = {
+    type: Phaser.AUTO,
+    width: 1920,
+    height: 1080,
+    scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH, // 중앙 정렬
+    },
+    physics: {
+        default: 'arcade',
+        arcade: {
+        debug: false
+        }
+    },
+    backgroundColor: '#000',
+    scene: []
+    };
+
+    if (sceneMap[window.storyId]) {
+      config.scene = [sceneMap[window.storyId]];
+    } else {
+      console.error('Invalid storyId:', window.storyId);
+    }
+
+    const game = new Phaser.Game(config);
+  </script>
+</body>
+</html>

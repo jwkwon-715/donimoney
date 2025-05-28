@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Story List</title>
+</head>
+<body>
+  <h1>스토리 목록</h1>
+  <div id="story-buttons">
+    <% storyList.forEach(function(story) { %>
+      <button data-story-id="<%= story.story_id %>" >
+        <%= story.story_id %>
+        <%= story.story_title %>
+        <%= story.simple_description %>
+      </button>
+    <% }); %>
+  </div>
+  <div id="game-container"></div>
+  <script type="module" src="/javascripts/story.js"></script>
+</body>
+</html>
