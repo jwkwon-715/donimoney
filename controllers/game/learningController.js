@@ -7,7 +7,7 @@ const db = require("../../models/index"),
 
 const learningReward = 500;
 
-// userCharacterId 매개변수로 받도록 수정
+// 학습 진행 여부 확인 함수
 async function isNewProg(learningId, userCharacterId) { 
     try {
         const LearningProg = await LearningProgress.findOne({
@@ -77,14 +77,14 @@ module.exports = {
     },
 
     renderLearningList: async (req, res, next) => {
-    try {
-        const learningList = await Learning.findAll();
-        res.render("game/learningList", { learningList });
-    } catch (err) {
-        console.log(err);
-        res.status(500).send('서버 오류');
-    }
-},
+        try {
+            const learningList = await Learning.findAll();
+            res.render("game/learningList", { learningList });
+        } catch (err) {
+            console.log(err);
+            res.status(500).send('서버 오류');
+        }
+    },
 
     renderLearningContent: async (req, res, next) => {
         const learningId = req.params.learningId;
@@ -103,9 +103,15 @@ module.exports = {
                 ]
             });
 
-            const contentArr = learningContent.content.split(/\n\n/);
+            // 제목과 본문 분리
+            const [title, ...bodyParts] = learningContent.content.split(/\n\n/);
+            // 카드 배열 생성: 첫 번째 카드만 제목, 나머지는 본문만
+            const contentArr = bodyParts.map((body, idx) => ({
+                title: idx === 0 ? title : '',
+                body
+            }));
+
             let learningPass = false;
-            
             if (learningContent.LearningProgresses?.length > 0) {
                 learningPass = !!learningContent.LearningProgresses[0].learning_pass;
             }
