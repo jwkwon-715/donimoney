@@ -26,4 +26,7 @@ router.get('/info', isAuthenticated, myPageController.renderInfo);
 // 내 캐릭터 보기 (진행도 계산)
 router.get('/character', isAuthenticated, myPageController.renderCharacter);
 
+//인벤토리 보기
+router.get('/inventory', myPageController.renderInventory);
+
 module.exports = router;

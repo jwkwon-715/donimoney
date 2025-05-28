@@ -1,6 +1,8 @@
 const bcrypt = require('bcrypt');
-const { Curriculum, Learning, LearningProgress, QuizProgress, StoryProgress, Stories, UserCharacters } = require('../models');
-const { Sequelize } = require('sequelize');
+const { Curriculum, Learning, LearningProgress, QuizProgress, StoryProgress, 
+  Stories, UserCharacters, Inventory, Items } = require('../models');
+const { Sequelize, where } = require('sequelize');
+
 
 // 마이페이지 메인
 exports.renderMain = (req, res) => {
@@ -98,3 +100,18 @@ exports.renderCharacter = async (req, res) => {
     res.status(500).send('서버 오류');
   }
 };
+
+exports.renderInventory = async(req, res) => {
+  const userCharacterId = req.user.user_character_id;
+
+  const inventory = await Inventory.findAll({
+    where: {user_character_id: userCharacterId},
+    include: [{
+      model: Items,
+      require: true
+    }],
+  })
+
+  res.render('inventory', {inventory});
+
+}

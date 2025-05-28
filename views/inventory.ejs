@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Inventory Test</title>
+</head>
+<body>
+  <h1>Inventory 목록</h1>
+
+  <% if (inventory.length === 0) { %>
+    <p>인벤토리에 아이템이 없습니다.</p>
+  <% } else { %>
+    <ul>
+      <% inventory.forEach(item => { %>
+        <li>
+          <strong>수량:</strong> <%= item.quantity %><br>
+          <strong>아이템 이름:</strong> <%= item.Item?.item_name %><br>
+          <strong>아이템 설명:</strong> <%= item.Item?.item_description %><br>
+          <strong>가격:</strong> <%= item.Item?.item_price %><br>
+          <strong>종류:</strong> <%= item.Item?.item_type %><br>
+          <hr>
+        </li>
+      <% }) %>
+    </ul>
+  <% } %>
+</body>
+</html>

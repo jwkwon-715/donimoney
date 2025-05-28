@@ -26,5 +26,17 @@
     "passport-local-sequelize": "^0.9.1",
     "sequelize": "^6.37.7",
     "sequelize-cli": "^6.6.2"
-  }
+  },
+  "description": "2025-1 서버 시스템 구축 실습 6조",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jwkwon-715/donimoney.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jwkwon-715/donimoney/issues"
+  },
+  "homepage": "https://github.com/jwkwon-715/donimoney#readme"
 }

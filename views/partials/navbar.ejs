@@ -3,10 +3,10 @@
 <link rel="stylesheet" href="/stylesheets/style.css">
 
 <nav class="navbar">
+  <% if (typeof userMoney !== 'undefined') { %>
     <div class="money-badge" style="position:relative;">
-      <% if (typeof userMoney !== 'undefined') { %>
         <img src="/images/coin.png" alt="코인" class="coin-icon">
         <span id="userMoney"><%= userMoney %></span>
-      <% }%>
     </div>
-  </nav>
+  <% }%>
+</nav>
