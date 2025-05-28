@@ -1,10 +1,16 @@
 <h1>일반 모드 커리큘럼 고르기</h1>
 
 <% curriculumList.forEach(curriculum => { %>
-    <form method="post" action="/game/school/quiz/select">
+    <form method="post" action="/game/school/quiz/select" style="display:inline;">
         <input type="hidden" name="type" value="general">
         <input type="hidden" name="curriculumId" value="<%= curriculum.curriculum_id %>">
-        <button type="submit"><%= curriculum.curriculum_title %></button>
+        <% if (totalProg >= curriculum.curriculum_id) { %>
+            <button type="submit"><%= curriculum.curriculum_title %></button>
+        <% } else { %>
+            <button type="button" disabled style="background: #ccc;">
+                <%= curriculum.curriculum_title %> (잠김: 스토리 <%= curriculum.curriculum_id %>, 학습 <%= curriculum.curriculum_id %> 필요)
+            </button>
+        <% } %>
     </form>
 <% }) %>
 
