@@ -3,10 +3,11 @@ const db = require("../../models/index"),
     UserCharacters = db.UserCharacters,
     { sequelize } = db;
 
-const userCharacterId = 1; //세션(임시로 하드코딩)
-
 module.exports = {
     buy: async (req, res, next) => {
+        // 세션에서 캐릭터 ID 가져오기
+        const userCharacterId = req.user.user_character_id;
+
         // 사용자가 구매 시도한 아이템과 수량 정보(int형으로 전환)
         const buyItems = req.body.buyItems.map(item => ({
             itemId: parseInt(item.itemId, 10),
@@ -25,6 +26,12 @@ module.exports = {
                 transaction: t
             });
 
+            // 머니 부족 체크(선택)
+            if (!userCharacter || userCharacter.money < totalCost) {
+                await t.rollback();
+                return res.status(400).send('잔액이 부족합니다.');
+            }
+
             // 사용자 인게임 머니 차감
             await UserCharacters.update(
                 { money: userCharacter.money - totalCost },
@@ -38,7 +45,7 @@ module.exports = {
             for (const buyItem of buyItems) {
                 const isExist = await Inventory.findOne({
                     where: {
-                        user_character_id: userCharacter.user_character_id,
+                        user_character_id: userCharacterId,
                         item_id: buyItem.itemId
                     },
                     transaction: t
@@ -49,7 +56,7 @@ module.exports = {
                         { quantity: buyItem.quantity + isExist.quantity },
                         {
                             where: {
-                                user_character_id: userCharacter.user_character_id,
+                                user_character_id: userCharacterId,
                                 item_id: buyItem.itemId
                             },
                             transaction: t
@@ -58,7 +65,7 @@ module.exports = {
                 } else {  // 없는 경우
                     await Inventory.create(
                         {
-                            user_character_id: userCharacter.user_character_id,
+                            user_character_id: userCharacterId,
                             item_id: buyItem.itemId,
                             quantity: buyItem.quantity
                         },

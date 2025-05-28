@@ -30,16 +30,17 @@
   <div class="indicator" id="indicator"></div>
 
   <div style="margin-top:30px; text-align:center;">
-  <!--
-  <% if (learningContent.LearningProgresses && learningContent.LearningProgresses.length > 0) { %>
-    <p>진행 상태: <%= learningContent.LearningProgresses[0].learning_pass ? "완료" : "미완료" %></p>
-  <% } else { %>
-    <p>아직 학습하지 않았습니다.</p>
-  <% } %>
-  -->
-    <!-- 학습 완료 버튼: 마지막 카드에서만 보이게 JS로 제어 -->
+    <!--
+    
+    <% if (learningContent.LearningProgresses && learningContent.LearningProgresses.length > 0) { %>
+      <p>진행 상태: <%= learningContent.LearningProgresses[0].learning_pass ? "완료" : "미완료" %></p>
+    <% } else { %>
+      <p>아직 학습하지 않았습니다.</p>
+    <% } %>
+    -->
     <button type="button" class="complete-btn" id="completeBtn" style="display:none;">학습 완료</button>
     <input type="hidden" id="learningId" value="<%= learningContent.learning_id %>">
+    <input type="hidden" id="learningPass" value="<%= learningPass ? 'true' : 'false' %>">
   </div>
 
   <script>

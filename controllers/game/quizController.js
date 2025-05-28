@@ -9,13 +9,11 @@ const db = require("../../models/index"),
     sequelize = db.sequelize,
     Sequelize = db.Sequelize;
 
-const userCharacterId = 7; //세션(임시)
-
 const generalQReward = 600;
 const randomQReward = 200;
 const passScore = 80;
 
-//랜덤 퀴즈: 커리큘럼에서 뽑힌 문제들을 모은 전체 배열을 섞음(커리큘럼 순서대로 보이지 않고 랜덤)
+//랜덤 퀴즈: 커리큘럼에서 뽑힌 문제들을 모은 전체 배열을 섞음
 function shuffleArray(array) {
     return array
         .map(value => ({ value, sort: Math.random() }))
@@ -23,20 +21,21 @@ function shuffleArray(array) {
         .map(({ value }) => value);
 }
 
-async function isNewProg(curriculumId) {
+// userCharacterId를 인자로 받도록 변경
+async function isNewProg(curriculumId, userCharacterId) {
     try {
         const quizProg = await QuizProgress.findOne({
             where: { user_character_id: userCharacterId, curriculum_id: curriculumId }
         });
-        return !quizProg;  // 없는 경우 true, 있는 경우 false
+        return !quizProg;
     } catch (err) {
         console.error(err);
         return false;
     }
 }
 
-//현재 푼 퀴즈의 progress의 상태가 true인지 false인지...
-async function progressState(curriculumId) {
+// userCharacterId를 인자로 받도록 변경
+async function progressState(curriculumId, userCharacterId) {
     const progress = await QuizProgress.findOne({
         where: {
             user_character_id: userCharacterId,
@@ -48,12 +47,14 @@ async function progressState(curriculumId) {
 }
 
 module.exports = {
-    showPossibleQuizList: async (req, res, next) => {  //도전 가능한 퀴즈 리스트들 보여주기(일반 랜덤 둘 다에서 사용)        
-        try{
-            // userCharacter의 진행도
-            //스토리
+    // 도전 가능한 퀴즈 리스트들 보여주기
+    showPossibleQuizList: async (req, res, next) => {
+        try {
+            const userCharacterId = req.user.user_character_id;
+
+            // 스토리
             const latestStoryProgress = await StoryProgress.findOne({
-                where:{
+                where: {
                     user_character_id: userCharacterId,
                     story_pass: true
                 },
@@ -62,7 +63,7 @@ module.exports = {
             });
             const storyProg = latestStoryProgress ? latestStoryProgress.story_id : 0;
 
-            //학습 
+            // 학습
             const latestLearningProgress = await LearningProgress.findOne({
                 where: {
                     user_character_id: userCharacterId,
@@ -71,16 +72,15 @@ module.exports = {
                 order: [["learning_id", "DESC"]],
                 attributes: ["learning_id"]
             });
-            const learningProg = latestLearningProgress ? latestLearningProgress.learning_id : 0; //아무 현황도 없을 시 0으로 세팅
+            const learningProg = latestLearningProgress ? latestLearningProgress.learning_id : 0;
 
             res.locals.storyProg = storyProg;
             res.locals.learningProg = learningProg;
 
-            //사용자의 총 진행률 체크(story, learning)
             let totalProg;
-            if(storyProg >= learningProg){
+            if (storyProg >= learningProg) {
                 totalProg = learningProg;
-            }else if(storyProg < learningProg){
+            } else {
                 totalProg = storyProg;
             }
             res.locals.totalProg = totalProg;
@@ -89,42 +89,43 @@ module.exports = {
             res.locals.curriculumList = curriculumList;
 
             next();
-        }catch(err){
+        } catch (err) {
             console.log(err);
             next(err);
         }
-        
     },
-    
+
     renderQuizTypeList: (req, res, next) => {
-        res.render("game/quizTypeList")
+        res.render("game/quizTypeList");
     },
-    
+
     renderQuizList: (req, res, next) => {
         res.render("game/quizSelect");
     },
+
     renderRandomQuizList: (req, res, next) => {
         res.render("game/randomQuizSelect");
     },
+
     renderQuizSuccess: (req, res) => {
         res.render('game/quizSuccess');
     },
+
     renderQuizFail: (req, res) => {
         res.render('game/quizFail');
     },
 
-    //각 모드에 맞는 퀴즈 보여주기
+    // 각 모드에 맞는 퀴즈 보여주기
     solveQuiz: async (req, res, next) => {
-        let quizType = req.body.type;  //general or random
-        
-        try{
-            if(quizType == 'general'){
+        let quizType = req.body.type;
+        try {
+            if (quizType == 'general') {
                 const curriculumId = parseInt(req.body.curriculumId);
 
                 const quizzes = await Quiz.findAll({
-                    where: {curriculum_id: curriculumId},
+                    where: { curriculum_id: curriculumId },
                     include: [QuizOption],
-                    order: Sequelize.literal('RAND()')  // 랜덤
+                    order: Sequelize.literal('RAND()')
                 });
 
                 res.render("game/solveQuiz", {
@@ -133,21 +134,19 @@ module.exports = {
                     curriculumId
                 });
 
-            }else if(quizType == 'random'){
-                let curriculumList = req.body.curriculumList;  //프론트에서 form의 체크박스 활용할 예정
+            } else if (quizType == 'random') {
+                let curriculumList = req.body.curriculumList;
                 curriculumList = curriculumList.map(curr => parseInt(curr));
-
                 let quizzes = [];
-                for(let i = 0; i < curriculumList.length; i++){
+                for (let i = 0; i < curriculumList.length; i++) {
                     const result = await Quiz.findAll({
-                        where: {curriculum_id: curriculumList[i]},
+                        where: { curriculum_id: curriculumList[i] },
                         include: [QuizOption],
                         order: Sequelize.literal('RAND()'),
                         limit: 4
                     });
-                    quizzes.push(...result);  //결과 누적
+                    quizzes.push(...result);
                 }
-                //커리큘럼 순서도 섞고 최대 10개 선택
                 quizzes = shuffleArray(quizzes).slice(0, 10);
                 res.render("game/solveQuiz", {
                     quizzes,
@@ -155,7 +154,7 @@ module.exports = {
                     curriculumId: null
                 });
             }
-        }catch(err){
+        } catch (err) {
             console.log(err);
             next(err);
         }
@@ -164,30 +163,27 @@ module.exports = {
     updateQuizProg: async (req, res, next) => {
         const quizType = req.body.type;
         const score = req.body.score;
+        const userCharacterId = req.user.user_character_id;
+
         try {
-            console.log('=== updateQuizProg 진입 ===');
-            console.log('quizType:', quizType, 'score:', score);
-            if(score >= passScore){  //기준 점수 넘은 경우
-                if(quizType == "general"){
+            if (score >= passScore) {
+                if (quizType == "general") {
                     const curriculumId = req.body.curriculumId;
-                    console.log('curriculumId:', curriculumId);
 
-                    const progState = await progressState(curriculumId);
-                    console.log('progState:', progState);
+                    const progState = await progressState(curriculumId, userCharacterId);
 
-                    if(!progState){ 
-                        const isNew = await isNewProg(curriculumId);
-                        console.log('isNew:', isNew);
+                    if (!progState) {
+                        const isNew = await isNewProg(curriculumId, userCharacterId);
 
-                        if(isNew){  //처음 풀어보는 퀴즈
+                        if (isNew) {
                             await QuizProgress.create({
                                 user_character_id: userCharacterId,
                                 quiz_pass: true,
                                 curriculum_id: curriculumId
                             });
-                        }else{  //기존에 풀었던 퀴즈
+                        } else {
                             await QuizProgress.update(
-                                {quiz_pass: true},
+                                { quiz_pass: true },
                                 {
                                     where: {
                                         user_character_id: userCharacterId,
@@ -196,12 +192,12 @@ module.exports = {
                                 }
                             );
                         }
-                        //보상 지급
+                        // 보상 지급
                         const user = await UserCharacters.findOne({
                             where: { user_character_id: userCharacterId },
                             attributes: ['money']
                         });
-                        if(!user) throw new Error('User not found');
+                        if (!user) throw new Error('User not found');
                         const currentMoney = user.money;
                         await UserCharacters.update(
                             { money: currentMoney + generalQReward },
@@ -210,13 +206,13 @@ module.exports = {
                             }
                         );
                     }
-                }else if(quizType == "random"){
-                    //random은 보상만 지급됨
+                } else if (quizType == "random") {
+                    // random은 보상만 지급
                     const user = await UserCharacters.findOne({
                         where: { user_character_id: userCharacterId },
                         attributes: ['money']
                     });
-                    if(!user) throw new Error('User not found');
+                    if (!user) throw new Error('User not found');
                     const currentMoney = user.money;
                     await UserCharacters.update(
                         { money: currentMoney + randomQReward },
@@ -227,9 +223,9 @@ module.exports = {
                 }
             }
             next();
-        }catch(err){
+        } catch (err) {
             console.error('updateQuizProg 에러:', err);
             next(err);
         }
     }
-}
+};

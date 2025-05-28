@@ -37,7 +37,7 @@ router.get('/start', ensureAuthenticated, async (req, res) => {
   }
 });
 
-// 게임 홈 화면 렌더링 (캐릭터 확인 및 닉네임 전달)
+// 게임 메인  화면 렌더링 (캐릭터 확인 및 닉네임 전달)
 router.get('/main', ensureAuthenticated, async (req, res) => {
   try {
     const userId = req.user.user_id;
@@ -54,9 +54,11 @@ router.get('/main', ensureAuthenticated, async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    res.send('게임 홈 로딩 중 오류가 발생했습니다.');
+    res.send('게임 메인인 로딩 중 오류가 발생했습니다.');
   }
 });
+
+router.get("/home", mainController.renderHome);
 
 // ----- 마트/학교/퀴즈/학습 라우트 -----
 
