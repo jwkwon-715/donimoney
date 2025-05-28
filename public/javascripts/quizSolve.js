@@ -40,13 +40,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const solution = quiz.solution;
 
         const solutionBox = document.getElementById('solution-box');
-
-        if (parseInt(selected.value) === answer) {
-            alert('정답입니다!');
-        } else {
-            alert('오답입니다!');
-        }
+        const isCorrect = parseInt(selected.value) === answer;
+        // if (parseInt(selected.value) === answer) {
+        //     alert('정답입니다!');
+        // } else {
+        //     alert('오답입니다!');
+        // }
         solutionBox.textContent = `${solution}`;
+
+        solutionBox.innerHTML = `
+            <p style="font-weight: 900; color: ${isCorrect ? '#2393F6' : '#D53A3A'};">
+                ${isCorrect ? '정답입니다!' : '오답입니다!'}
+            </p>
+            <p>${solution}</p>
+        `;
         solutionBox.style.display = 'block';
 
         document.getElementById('check-answer-btn').style.display = 'none';
