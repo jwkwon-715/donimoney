@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <%- include('partials/navbar') %>
+
+  <%- body %>
+</body>
+</html>
+
+<script>
+    window.userMoney = <%= typeof userMoney !== 'undefined' ? userMoney : 0 %>;
+</script>

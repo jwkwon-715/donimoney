@@ -8,6 +8,7 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
 const passportConfig = require('./config/passport');
+const expressLayouts = require('express-ejs-layouts');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -17,6 +18,7 @@ const myPageRouter = require('./routes/myPage');
 
 var app = express();
 const db = require('./models'); // index.js가 있는 models 폴더
+const UserCharacters = db.UserCharacters;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -29,48 +31,72 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// 세션과 passport 설정은 라우터보다 먼저!
+app.set('view engine', 'ejs');
+app.use(expressLayouts);
+app.set('layout', 'layout');
+
 app.use(session({
   secret: 'yourSecretKey',
   resave: false,
   saveUninitialized: false
 }));
-app.use(flash()); // 이 줄 추가!!
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 passportConfig(passport);  // passport 설정 적용
 
-app.use((req, res, next) => {
+app.use('/game', async (req, res, next) => {
   res.locals.isAuthenticated = req.isAuthenticated();
   res.locals.user = req.user;
+
+  try {
+    if (req.isAuthenticated?.() && req.session?.passport?.user?.user_character_id) {
+      const userCharacterId = req.session.passport.user.user_character_id;
+
+      const user = await UserCharacters.findOne({
+        where: { user_character_id: userCharacterId }
+      });
+
+      res.locals.userMoney = user?.money || 0;
+    } else {
+      res.locals.userMoney = 0;
+    }
+  } catch (err) {
+    console.error(err);
+    res.locals.userMoney = 0;
+  }
+
   next();
 });
 
-// 쿼리 파라미터를 EJS에서 사용할 수 있도록 설정 추가
 app.use((req, res, next) => {
   res.locals.query = req.query;
   next();
 });
 
-// 🔽 라우터는 passport 설정 이후에 등록해야 함!
+//사용자 보유 돈 보여주기
+app.use(async (req, res, next) => {
+  
+  next();
+});
+
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/game', mainGameRouter);
 app.use('/character', characterRouter);
 app.use('/mypage', myPageRouter);
 
-// 404 에러 처리
 app.use(function(req, res, next) {
   next(createError(404));
 });
 
-// DB 연결
 db.sequelize.sync()
   .then(() => {
-    console.log('✅ 데이터베이스 연결 성공');
+    console.log('연결 성공');
   })
   .catch((err) => {
-    console.error('❌ 데이터베이스 연결 실패:', err);
+    console.error('실패:', err);
   });
 
 // 에러 핸들러

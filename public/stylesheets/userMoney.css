@@ -1,0 +1,26 @@
+.money-badge {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background: rgba(60,60,60,0.8);
+    color: #fffbe9;
+    border-radius: 18px;
+    padding: 8px 22px 8px 18px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    box-shadow: 2px 4px 8px rgba(0,0,0,0.08);
+    min-width: 90px;
+    z-index: 3;
+    max-width: 70px;
+  }
+  
+  .coin-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+  

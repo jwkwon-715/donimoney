@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     let currentIndex = 0;
     let userAnswers = []; // 사용자가 선택한 답 저장
-    const passScore = 80; // 서버와 동일하게 맞춰주세요
+    const passScore = 80;
 
     function renderQuiz(index) {
         const quiz = quizzes[index];
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderQuiz(currentIndex);
 
     // slider
-    let duration = 120; // 총 시간 (초)
+    let duration = 300; // 총 시간 (초)
     let progress = 0;
 
     const fill = document.getElementById('fill');

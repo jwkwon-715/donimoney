@@ -21,13 +21,17 @@ function addBuyItem(itemId, itemPrice){
     const price = parseInt(itemPrice)
     const cost = quantity * price;
 
-    userCharacter = 1; //수정: 임시 값
-    if(userCharacter.money < cost){
+    const userMoneyDisplay = document.getElementById('userMoney');
+    const userMoneyNum = parseInt(userMoneyDisplay.textContent, 10);
+
+    if(userMoney < cost){
         alert("돈이 부족해요...");
     }else{
         buyItems.push({itemId: itemId, quantity: quantity, cost: cost});
         quantitySpan.textContent = '1'; //구매 수량 1로 리셋
-        //수정: 프론트 상에서 동적으로 사용자 돈 보유 현황 변화시켜야 함
+
+        //프론트 딴에서 소유 돈 업데이트
+        userMoneyDisplay.textContent = userMoneyNum - cost;
     }
 }
 

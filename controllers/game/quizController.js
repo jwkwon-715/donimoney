@@ -205,6 +205,7 @@ module.exports = {
                                 where: { user_character_id: userCharacterId }
                             }
                         );
+                        console.log(currentMoney);
                     }
                 } else if (quizType == "random") {
                     // random은 보상만 지급
