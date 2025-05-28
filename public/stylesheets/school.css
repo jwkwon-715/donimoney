@@ -2,12 +2,13 @@ body {
     background-color: #FFFCF5;
     margin: 0;
     padding: 0;
+    min-height: 100vh;
     font-family: 'Cafe24Dongdong';
 }
 
 .school-container {
-    width: 1920px;
-    height: 1080px;
+    width: 100vw;
+    height: calc(100vh / 1.21);
     margin: 0 auto;
     display: flex;
     justify-content: center;
@@ -16,8 +17,8 @@ body {
 }
 
 .card {
-    width: 527.71px;
-    height: 686.71px;
+    width: 24%;
+    height: 70%;
     border-radius: 20px;
     margin: 0;
     text-align: center;
@@ -41,20 +42,20 @@ body {
 }
 
 img {
-    width: 112px;
-    height: 112px;
+    width: 83px;
+    height: 83px;
 }
 
 .quizIcon {
-    width: 75.78px;
-    height: 113.06px;
+    width: 56px;
+    height: 83px;
 }
 
-.icon { margin: 98.38px 0 0 0; }
+.icon { margin: 12% 0 0 0; }
 
 h2 {
-    font-size: 160px;
-    margin: 60px 0 119.02px 0;
+    font-size: 140px;
+    margin: 14% 0 20% 0;
 }
 
-p { font-size: 32px; }
+p { font-size: 24px; }

@@ -1,6 +1,63 @@
-<h1>일반 모드 커리큘럼 고르기</h1>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/quizSelect.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
 
-<% curriculumList.forEach(curriculum => { %>
+    <!-- Swiper -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+</head>
+<body>
+    <div class="buttons">
+        <button class="home-button" id="homeButton" onclick="location.href='/game/main'">
+            <img src="/images/home_icon.png" class="home-icon" alt="">
+        </button>
+        <button class="close-button" id="closeButton" onclick="location.href='/game/school/quiz/typeList'">
+            <img src="/images/close_icon.png" class="close-icon" alt="">
+        </button>
+    </div>
+    
+    <div class="swiper quiz-swiper">
+        <h1>일반 모드 퀴즈 선택</h1>
+        <div class="swiper-wrapper">
+            <% curriculumList.forEach(curriculum => { %>
+            <div class="swiper-slide">
+                <form method="post" action="/game/school/quiz/select">
+                    <input type="hidden" name="type" value="general">
+                    <input type="hidden" name="curriculumId" value="<%= curriculum.curriculum_id %>">
+                    <div class="card-text">
+                        <button class="quiz-card" type="submit"><%= curriculum.curriculum_title %></button>
+                    </div>
+              </form>
+            </div>
+          <% }) %>
+        </div>
+      </div>
+
+      <script>
+        const swiper = new Swiper('.quiz-swiper', {
+          slidesPerView: 2.6,
+          spaceBetween: 88,
+          centeredSlides: true,
+          breakpoints: {
+            768: {
+              slidesPerView: 2.5
+            },
+            1024: {
+              slidesPerView: 3
+            }
+          }
+        });
+      </script>
+</body>
+</html>
+
+<!-- <h1>일반 모드 커리큘럼 고르기</h1> -->
+
+<!-- <% curriculumList.forEach(curriculum => { %>
     <form method="post" action="/game/school/quiz/select" style="display:inline;">
         <input type="hidden" name="type" value="general">
         <input type="hidden" name="curriculumId" value="<%= curriculum.curriculum_id %>">
@@ -18,4 +75,4 @@
 사용자 프로그레스 현황 참고. 체크할 때 tatalProg 사용하시면 됩니다
 <%=storyProg%>
 <%=learningProg%>
-<%=totalProg%>
+<%=totalProg%> -->

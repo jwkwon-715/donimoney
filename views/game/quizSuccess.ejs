@@ -2,9 +2,41 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>퀴즈 성공</title>
+  <!-- <title>퀴즈 성공</title> -->
+  <link rel="stylesheet" href="/stylesheets/afterQuiz.css">
+  <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 <body>
-  <h2 style="text-align:center; margin-top:60px;">퀴즈에 성공했습니다!</h2>
+  <img class="bg" src="/images/배경.png" alt="">
+  <!-- <img class="confetti-bg" src="/images/confetti_bg.png" alt=""> -->
+
+  <div class="buttons">
+    <button class="home-button" id="homeButton" onclick="location.href='/game/main'">
+        <img src="/images/home_icon.png" class="home-icon" alt="">
+    </button>
+    <button class="close-button" id="closeButton" onclick="location.href='/game/school/quiz/typeList'">
+        <img src="/images/close_icon.png" class="close-icon" alt="">
+    </button>
+  </div>
+  
+  <div class="wrapper">
+    <div class="quiz-success"> 
+      <div class="quiz-success-child"></div>
+      <div class="rectangle-parent">
+          <div class="post-2"></div>
+          <img class="stickers smile" alt="" src="/images/sticker_smile.png">
+          <img class="stickers blueHeart" alt="" src="/images/sticker_blueHeart.png">
+          <img class="stickers confetti" alt="" src="/images/sticker_confetti.png">
+          <img class="stickers heart" alt="" src="/images/sticker_heart.png">
+          <img class="stickers star" alt="" src="/images/sticker_star.png">
+          
+          <div class="post-1">
+            <h1 class="text">참 잘했어요!</h1>
+            <img class="stickers thumb" src="/images/sticker_thumb.png" alt="">
+          </div>
+
+          <button class="btn reBtn successBtn" onclick="location.href='/game/school/quiz/typeList'">다시 하기</button>
+          <button class="btn nxtBtn" onclick="location.href='/game/school/quiz/typeList'">다음으로</button>
+      </div>
 </body>
 </html>
