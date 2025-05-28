@@ -21,7 +21,14 @@
     <div class="card-section" id="cardSection">
       <% contentArr.forEach(function(card, idx) { %>
         <div class="card" style="display: <%= idx === 0 ? 'block' : 'none' %>;">
-          <div class="card-body"><%- card.replace(/\n/g, "<br>") %></div>
+          <div class="card-body">
+            <% if(card.title) { %>
+              <div class="card-title" style="font-weight:bold; font-size:1.2em; margin-bottom:10px;">
+                <%= card.title %>
+              </div>
+            <% } %>
+            <%- card.body.replace(/\n/g, "<br>") %>
+          </div>
         </div>
       <% }) %>
     </div>
@@ -31,7 +38,6 @@
 
   <div style="margin-top:30px; text-align:center;">
     <!--
-    
     <% if (learningContent.LearningProgresses && learningContent.LearningProgresses.length > 0) { %>
       <p>진행 상태: <%= learningContent.LearningProgresses[0].learning_pass ? "완료" : "미완료" %></p>
     <% } else { %>
