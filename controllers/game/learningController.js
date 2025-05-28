@@ -117,6 +117,7 @@ module.exports = {
             }
 
             res.render('game/learningContent', {
+                learningId,
                 learningContent,
                 contentArr,
                 learningPass
