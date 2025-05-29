@@ -8,6 +8,7 @@ const mainController = require("../controllers/game/mainController");
 const martController = require("../controllers/game/martController");
 const learningController = require("../controllers/game/learningController");
 const quizController = require("../controllers/game/quizController");
+const storyController = require("../controllers/game/storyController");
 
 // 로그인 체크 미들웨어
 function ensureAuthenticated(req, res, next) {
@@ -60,7 +61,7 @@ router.get('/main', ensureAuthenticated, async (req, res) => {
 
 router.get("/home", mainController.renderHome);
 
-// ----- 마트/학교/퀴즈/학습 라우트 -----
+// ----- 마트/학교/퀴즈/학습/스토리 라우트 -----
 
 // 마트
 router.get("/mart/itemList", ensureAuthenticated, mainController.renderMart);
@@ -89,4 +90,12 @@ router.post("/school/learning/complete", ensureAuthenticated, learningController
   res.redirect('/game/main');
 });
 
+//스토리
+router.get(
+  "/stories/storyList",
+  ensureAuthenticated,
+  storyController.showPossibleStoryList,
+  storyController.isUnlock,
+  storyController.renderStoriesList    
+);
 module.exports = router;

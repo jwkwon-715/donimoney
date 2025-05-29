@@ -3,16 +3,16 @@ const router = express.Router();
 const { Stories } = require('../models'); // Sequelize models 폴더 import
 
 
-router.get('/storyList', async (req, res) => {
-  try {
-    const storyList = await Stories.findAll({ 
-      attributes: ['story_id', 'story_title', 'simple_description']
-    });
-    res.render('game/storyList', { storyList });
-  } catch (err) {
-    res.status(500).send('스토리 목록을 불러올 수 없습니다.');
-  }
-});
+// router.get('/storyList', async (req, res) => {
+//   try {
+//     const storyList = await Stories.findAll({ 
+//       attributes: ['story_id', 'story_title', 'simple_description']
+//     });
+//     res.render('game/storyList', { storyList });
+//   } catch (err) {
+//     res.status(500).send('스토리 목록을 불러올 수 없습니다.');
+//   }
+// });
 
 // 전체 스토리 목록 가져오기
 router.get('/', async (req, res) => {

@@ -14,12 +14,12 @@ module.exports = {
         }
     },
 
-    // 메인/홈/학교 화면 렌더링 (필요시 세션 정보 추가 가능)
+    // 메인/홈/학교 화면 렌더링
     renderMain: (req, res) => {
         res.render("game/main");
     },
     renderHome: (req, res) => {
-        res.render("game/home");
+        res.render("game/storyList");
     },
     renderSchool: (req, res) => {
         res.render("game/school");
