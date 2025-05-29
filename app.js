@@ -13,6 +13,18 @@ const expressLayouts = require('express-ejs-layouts');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var mainGameRouter = require('./routes/mainGame');
+var quizRouter = require('./routes/quiz');
+var quizOptionRouter = require('./routes/quizOption');
+var quizProgressRouter = require('./routes/quizProgress');
+
+var curriculumRouter = require('./routes/curriculum');
+var storiesRouter = require('./routes/stories');
+var scenesRouter = require('./routes/scenes');
+//var dialoguesRouter = require('./routes/dialogues');
+//var storyCharacterRouter = require('./routes/storyCharacter');
+//var appearRouter = require('./routes/appear');
+//var choiceRouter = require('./routes/choice');
+var jsonFilesRouter = require('./routes/jsonFiles');
 var characterRouter = require('./routes/character');
 const myPageRouter = require('./routes/myPage');
 
@@ -86,6 +98,17 @@ app.use('/users', usersRouter);
 app.use('/game', mainGameRouter);
 app.use('/character', characterRouter);
 app.use('/mypage', myPageRouter);
+app.use('/quiz', quizRouter);
+app.use('/quizOption', quizOptionRouter);
+app.use('/quizProgress', quizProgressRouter);
+app.use('/curriculum', curriculumRouter);
+app.use('/stories', storiesRouter);
+app.use('/scenes', scenesRouter);
+//app.use('/dialogues', dialoguesRouter);
+//app.use('/storyCharacter', storyCharacterRouter);
+//app.use('/appear', appearRouter);
+//app.use('/choice', choiceRouter);
+app.use('/jsonFiles', jsonFilesRouter);
 
 app.use(function(req, res, next) {
   next(createError(404));

@@ -10,20 +10,22 @@ export class StoryScene1 extends Phaser.Scene {
 
   preload() {
     const characterImageKeys = [
-      'todragon_basic', 'nabi_basic', 'choco_basic', 'dony_basic',
+      'todragon_basic', 'todragon_curious', 'todragon_embrrassed', 'todragon_happy', 'todragon_shame', 'todragon_surprised', 'todragon_worried',
+      'nabi_basic', 'nabi_pathetic', 'choco_basic', 'choco_embarrassed',
+      'dony_basic', 'dony_disappointed', 'dony_angry', 'dony_happy', 'dony_smile', 'dony_surprised', 'dony_worried',
       'dony_history1', 'dony_history2', 'dony_history3', 'dony_history4', 'dony_history5'
     ];
     const backgroundImageKeys = [
-      'bg_main', 'bg_school', 'colorbg',
+      'bg_main', 'bg_school',
     ];
     const etcImageKeys = [
       'todragon_chat', 'nabi_chat', 'choco_chat', 'dony_chat','extra_chat',
     ];
-    characterImageKeys.forEach(key => this.load.image(key, `images/character/${key}.png`));
-    backgroundImageKeys.forEach(key => this.load.image(key, `images/background/${key}.png`));
-    etcImageKeys.forEach(key => this.load.image(key, `images/etc/${key}.png`));
+    characterImageKeys.forEach(key => this.load.image(key, `/images/character/${key}.png`));
+    backgroundImageKeys.forEach(key => this.load.image(key, `/images/background/${key}.png`));
+    etcImageKeys.forEach(key => this.load.image(key, `/images/etc/${key}.png`));
 
-    this.load.json('dialogData', 'data/dialog1.json');
+    this.load.json('dialogData', 'http://localhost:3000/jsonFiles/dialog1.json');
   }
 
   create() {
@@ -49,15 +51,21 @@ export class StoryScene1 extends Phaser.Scene {
       'noname': 0x09537A
     };
 
-    const allScenes = this.cache.json.get('dialogData');
-    this.storyData1 = allScenes.find(scene => scene.id === this.sceneId);
-    if (!this.storyData1) {
+    // 캐시에서 데이터 가져오기 전에 존재 여부 확인
+    if (!this.cache.json.has('dialogData')) {
+      console.error('dialogData가 로드되지 않았습니다');
+      return;
+    }
+    const response = this.cache.json.get('dialogData');
+    const allScenes = response.data.json_content;
+    this.storyData = allScenes.find(scene => scene.id === this.sceneId);
+    if (!this.storyData) {
       console.error(`Scene with id ${this.sceneId} not found`);
       return;
     }
 
-    this.dialogs = this.storyData1.dialogs;
-    this.setBackground(this.storyData1.background);
+    this.dialogs = this.storyData.dialogs;
+    this.setBackground(this.storyData.background);
     this.dialogIndex = 0;
 
     this.showNextLine();
@@ -69,7 +77,8 @@ export class StoryScene1 extends Phaser.Scene {
 
   goToNextScene() {
     const nextId = this.sceneId + 1;
-    const allScenes = this.cache.json.get('dialogData');
+    const response = this.cache.json.get('dialogData');
+    const allScenes = response.data.json_content;
     const nextSceneData = allScenes.find(scene => scene.id === nextId);
 
     if (!nextSceneData) {
@@ -78,7 +87,7 @@ export class StoryScene1 extends Phaser.Scene {
     }
 
     this.sceneId = nextId;
-    this.storyData1 = nextSceneData;
+    this.storyData = nextSceneData;
     this.dialogs = nextSceneData.dialogs;
     this.setBackground(nextSceneData.background);
     this.dialogIndex = 0;
@@ -111,7 +120,11 @@ export class StoryScene1 extends Phaser.Scene {
   }
 
   showDialogue(char, text, noClick = false) {
+    const lineData = this.getCurrentLineData();
+    const name = lineData.name;
+    
     this.renderDialogueLine({
+      name,
       char,
       text,
       noClick,
@@ -135,11 +148,11 @@ export class StoryScene1 extends Phaser.Scene {
     const baseY = this.scale.height / 2.5;
 
     const positions = [
-      { x: 260, y: 350 },
+      { x: 260, y: 550 },
       { x: 610, y: 250 },
-      { x: 960, y: 350 },
+      { x: 960, y: 550 },
       { x: 1310, y: 250 },
-      { x: 1660, y: 350 }
+      { x: 1660, y: 550 }
     ];
 
     this.moneyImages = [];
@@ -161,14 +174,22 @@ export class StoryScene1 extends Phaser.Scene {
 
       if (data.image) {
         const pos = positions[currentIndex] || positions[positions.length - 1];
-        const image = this.add.image(pos.x, pos.y, data.image).setScale(0.8).setDepth(1);
+        const image = this.add.image(pos.x, pos.y, data.image).setScale(1).setDepth(1);
         this.moneyImages.push(image);
       }
 
       const showLine = () => {
+        const name = data.name;
+        const char = data.char;
         const text = lines[lineIndex];
+
+        
+        const centerX = this.scale.width / 2;
+        const centerY = this.scale.height * 0.87;
+
         this.renderDialogueLine({
-          char: data.char || 'dony',
+          name,
+          char,
           text,
           onClick: () => {
             lineIndex++;
@@ -179,7 +200,8 @@ export class StoryScene1 extends Phaser.Scene {
               currentIndex++;
               showNextEvent();
             }
-          }
+          },      
+        showCharacterImages: false
         });
       };
 
@@ -238,19 +260,27 @@ export class StoryScene1 extends Phaser.Scene {
     });
   }
 
-  renderDialogueLine({ char, text, noClick = false, onClick = null }) {
+  renderDialogueLine({ name, char, text, noClick = false, onClick = null, showCharacterImages = true }) {
     this.destroyUI();
 
     const centerX = this.scale.width / 2;
     const centerY = this.scale.height * 0.87;
-    const isMainChar = ['nabi', 'choco', 'todragon', 'dony'].includes(char);
-    const chatBoxKey = isMainChar ? `${char}_chat` : 'extra_chat';
-    const characterImageKey = isMainChar ? `${char}_basic` : null;
+    const isMainChar = ['nabi', 'choco', 'todragon', 'dony'].includes(name);
+    const chatBoxKey = isMainChar ? `${name}_chat` : 'extra_chat';
+    const characterImageKey = char;
 
     this.dialogBox = this.add.image(centerX, centerY, chatBoxKey).setScale(0.8).setDepth(2);
 
-    if (characterImageKey) {
-      this.chat_image = this.add.image(centerX - 600, centerY - 160, characterImageKey).setScale(0.65).setDepth(1);
+    // 캐릭터 이미지 출력 여부 제어
+    if (showCharacterImages) {
+      if (name === 'todragon' && characterImageKey) {
+        this.todragonImage = this.add.image(centerX - 500, centerY - 300, characterImageKey).setScale(0.65).setDepth(1);
+      }
+
+      if (name !== 'todragon' && characterImageKey) {
+        this.todragonImage = this.add.image(centerX - 500, centerY - 300, 'todragon_basic').setScale(0.65).setDepth(1);
+        this.speakingCharImage = this.add.image(centerX + 500, centerY - 300, characterImageKey).setScale(0.65).setDepth(1);
+      }
     }
 
     const boxWidth = this.dialogBox.width * this.dialogBox.scaleX;
@@ -258,7 +288,7 @@ export class StoryScene1 extends Phaser.Scene {
     const textStartX = centerX - boxWidth / 2 + 60;
     const textStartY = centerY - boxHeight / 2 - 10;
 
-    const displayName = this.charNameMap?.[char] ?? char;
+    const displayName = this.charNameMap?.[name] ?? name;
     this.nameText = this.add.text(textStartX, textStartY, displayName, {
       fontSize: '40px',
       fontFamily: 'Cafe24Dongdong',
@@ -290,6 +320,7 @@ export class StoryScene1 extends Phaser.Scene {
     }
   }
 
+
   setBackground(background) {
     if (this.bg) this.bg.destroy();
     this.bg = null;
@@ -304,7 +335,7 @@ export class StoryScene1 extends Phaser.Scene {
   destroyUI() {
     this.input.removeAllListeners();
 
-    ['dialogueText', 'nameText', 'dialogBox', 'chat_image', 'nameBg'].forEach(key => {
+    ['dialogueText', 'nameText', 'dialogBox', 'nameBg', 'todragonImage', 'speakingCharImage'].forEach(key => {
       if (this[key]) {
         this[key].destroy();
         this[key] = null;
