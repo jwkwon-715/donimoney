@@ -325,7 +325,7 @@ a {
 /* 도니머니 소개 섹션 스타일 */
 .info-section {
   padding: 80px 0;
-  background-color: white;
+  background-color: #f8f8f8;
 }
 
 /* 메인3 스타일 */
@@ -377,7 +377,7 @@ a {
   font-family: 'Paperlogy-8ExtraBold';
   font-size: 32px;
   font-weight: 800;
-  margin: 10px 0;
+  margin: 0;
 }
 
 .span10 {
@@ -395,7 +395,7 @@ a {
 
 .frame, .frame-div, .wrapper1, .wrapper2 {
   padding: 12px 20px;
-  border-radius: 20px;
+  border-radius: 28px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -556,7 +556,8 @@ a {
 }
 
 .how-to-play-section .section-title {
-  margin-top: -20px;
+  margin-top: 20px;
+  margin-bottom: 0;
   position: relative;
   z-index: 2;
 }
@@ -572,7 +573,7 @@ a {
 }
 
 .location-btn {
-  padding: 10px 25px;
+  padding: 10px 5px;
   border-radius: 20px;
   background-color: #333;
   color: white;
