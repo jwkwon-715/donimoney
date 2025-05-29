@@ -1,0 +1,275 @@
+[
+  {
+    "id": 1, 
+    "background": "bg_school",
+    "dialogs": [
+      {
+        "name": "nabi",
+        "char": "nabi_basic",
+        "type": "line",
+        "line": "나는 이번 주말에 부모님이랑 놀이공원 가기로 했어.\n게다가 새 게임기도 사주신대!"
+      },
+      {
+        "name": "choco",
+        "char": "choco_basic",
+        "type": "line",
+        "line": "와 재밌겠다! 나는 엄마랑 다음 달에 사러 가기로 했는데.\n이번 달은 지출이 많아서 같이 줄여보기로 했거든."
+      },
+      {
+        "name": "todragon",
+        "char": "todragon_curious",
+        "type": "line",
+        "line": "오잉, 어른들은 돈을 아낄 필요가 없는데?"
+      },
+      {
+        "name": "choco",
+        "char": "choco_basic",
+        "type": "line",
+        "line": "어라, 왜?"
+      },
+      {
+        "name": "todragon",
+        "char": "todragon_basic",
+        "type": "line",
+        "line": "그냥 카드로 사면 돼! 카드에서는 돈이 계속 계속 나오니까~!"
+      },
+      {
+        "name": "choco",
+        "char": "choco_embarrassed",
+        "type": "line",
+        "line": "..."
+      },
+      {
+        "name": "nabi",
+        "char": "nabi_pathetic",
+        "type": "line",
+        "line": "으이구 이 바보야! 카드가 왜 무제한이냐?"
+      }, 
+      {
+        "name": "choco",
+        "char": "choco_basic",
+        "type": "line",
+        "line": "맞아 {이름}아. 카드로 쓴 돈은 결국 어른들이 다시 갚아야 해."
+      }, 
+      {
+        "name": "nabi",
+        "char": "nabi_pathetic",
+        "type": "line",
+        "line": "{이름}이 너는 정말 세상 물정을 모르는구나?\n우리 부모님은 돈을 벌기 위해서 맨날 늦게까지 일하신다구."
+      },
+      {
+        "name": "todragon",
+        "char": "todragon_embrrassed",
+        "type": "line",
+        "line": "엇 그래...?"
+      },
+      {
+        "name": "todragon",
+        "char": "todragon_shame",
+        "type": "line",
+        "line": "(카드가 있으면 뭐든 살 수 있을 줄 알았는데...)"
+      }
+    ]
+  },
+  {
+    "id": 2,  
+    "background": "bg_main",
+    "dialogs": [
+      {
+        "name": "todragon",
+        "char": "todragon_shame",
+        "type": "line",
+        "line": "아무리 그래도 바보라니, 말이 너무 심하잖아!\n으으 창피해..."
+      },
+      {
+        "name": "dony",
+        "char": "dony_basic",
+        "type": "line",
+        "line": "흠, 여기 어디쯤일텐데..."
+      },
+      {
+        "name": "todragon",
+        "char": "todragon_surprised",
+        "type": "line",
+        "line": "으악!! 깜짝이야!"
+      },
+      {
+        "name": "dony",
+        "char": "dony_happy",
+        "type": "line",
+        "line": "와 드디어 찾았다! {이름}, 맞지?"
+      },
+      {
+        "name": "todragon",
+        "char": "todragon_basic",
+        "type": "line",
+        "line": "으응, 나 맞는데... 넌 누구야?"
+      },
+      {
+        "name": "dony",
+        "char": "dony_smile",
+        "type": "line",
+        "line": "나는 돈의 요정 도니! \n경제 관념이 부족한 아이들을 도와주기 위해 파견된 견습 요정이야!"
+      },
+      {
+        "name": "todragon",
+        "char": "todragon_surprised",
+        "type": "line",
+        "line": "요, 요정이라고?"
+      },
+      {
+        "name": "dony",
+        "char": "dony_smile",
+        "type": "line",
+        "line": "원래 계획대로라면 어제 도착했어야 했는데 \n길을 아주 조~금 헤매는 바람에 헤헤"
+      },
+      {
+        "name": "todragon",
+        "char": "todragon_basic",
+        "type": "line",
+        "line": "(왠지 못 미더운데...)"
+      },
+      {
+        "name": "dony",
+        "char": "dony_basic",
+        "type": "line",
+        "line": "{이름}, 딱 봐도 경제 관념이 어려워서 친구들 앞에서 창피를 당한 모양이지?"
+      },
+      {
+        "name": "todragon",
+        "char": "todragon_embrrassed",
+        "type": "line",
+        "line": "윽, 들켰다."
+      },
+      {
+        "name": "dony",
+        "char": "dony_happy",
+        "type": "line",
+        "line": "음음 그래, 하지만 이제부터는 이 도니가 도와줄테니 걱정 붙들어 매! \n우리 같이 금융 경제를 마스터해보는 거야! 우하하~!"
+      },
+      {
+        "name": "todragon",
+        "char": "todragon_basic",
+        "type": "line",
+        "line": "(...그냥 한 번 속는 셈 치고 믿어볼까?)"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "event":"history",
+    "background": "#F5FAFF",
+    "dialogs": [
+      {
+        "name": "dony",
+        "char": "dony_basic",
+        "type": "line",
+        "line": "우선 경제를 배우려면 먼저 돈이 뭔지 알아야 해!\n지금 우리가 쓰는 돈이 어떻게 만들어졌는지 궁금하지 않아?"
+      },
+      {
+        "name": "dony",
+        "char": "dony_basic",
+        "type": "line",
+        "line": "예전에는 지금같은 형태의 돈을 쓰지 않았어.\n그렇다면 먼저 돈이 어떻게 바뀌어 왔는지 함께 알아보자!"
+      },
+      {
+        "name": "dony",
+        "image": "dony_history1",
+        "char": "dony_basic",
+        "type": "show_history",
+        "line1": "소금이나 곡식을 가지고 다니면서 필요한 물품을 직접 교환했어.",
+        "line2": "하지만 물건을 사기 위해 저것들을 매일 들고 다녀야 한다고 생각해봐! \n가지고 다니기도 힘들고, 옮기는 동안 상하기도 해서 불편함이 많았겠지?"
+      },
+      {
+        "name": "dony",
+        "image": "dony_history2",
+        "char": "dony_basic",
+        "type": "show_history",
+        "line1": "그래서 이 다음에는 들고 다니기 편하고 잘 변하지 않는 금속을 사용하게 됐어.",
+        "line2": "하지만 무게를 재기 위해 매번 저울이 필요하고, 이게 진짜 금속이 맞는지 확인해야 했어."
+      },
+      {
+        "name": "dony",
+        "image": "dony_history3",
+        "char": "dony_basic",
+        "type": "show_history",
+        "line1": "이런 문제를 해결하기 위해 이 금속을 아예 똑같은 모양으로 만들어서 사용하기 시작한 거야!",
+        "line2": "너도 동전 많이 써봤을 거야!\n동전을 한꺼번에 많이 들고 다니기엔 무겁지 않았어?"
+      },
+      {
+        "name": "dony",
+        "image": "dony_history4",
+        "char": "dony_basic",
+        "type": "show_history",
+        "line1": "그래서 이번에는 아주 가벼운 종이를 활용해서 돈을 만든 거야.",
+        "line2": "지폐는 아직도 많이 쓰고 있지? 동전보다 들고 다니기도 편하고 말야!"
+      },
+      {
+        "name": "dony",
+        "image": "dony_history5",
+        "char": "dony_basic",
+        "type": "show_history",
+        "line1": "요즘에는 아예 돈을 들고 다니지 않고, 휴대전화나 카드 하나만 있으면 쉽게  결제할 수 있게 됐어! 요즘 가장 많이 쓰이는 방법이지.",
+        "line2": "이런 식으로 돈은 시대에 맞게 계속 변화해서 지금의 모습이 된 거야."
+      },
+      {
+        "name": "dony",
+        "char": "dony_smile",
+        "type": "line",
+        "line": "{이름}, 이제 조금은 돈에 대해 익숙해졌겠지?"
+      },
+      {
+        "name": "todragon",
+        "char": "todragon_happy",
+        "type": "line",
+        "line": "우와 그렇구나, 신기하다!"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "background": "bg_main", 
+    "dialogs": [
+      {
+        "name": "dony",
+        "char": "dony_basic",
+        "type": "line",
+        "line": "그럼 {이름}, 네가 생각하기에 돈은 왜 필요한 것 같아?"
+      },
+      {
+        "name": "dony",
+        "char": "dony_basic",
+        "type": "question",
+        "question": "돈은 왜 필요할까?",
+        "answerCount": 3,   
+        "answer0": "맛있는걸 사먹기 위해서",
+        "answer1": "아픈 곳을 낫게 하기 위해서",
+        "answer2": "여행을 가기 위해서"
+      },
+      {
+        "name": "dony",
+        "char": "dony_basic",
+        "type": "line",
+        "line": "네 말도 맞아! 돈이 있어야 생활에 필요한 물건을 사고, 하고 싶은 일을 하고, 아플 때 병원에 갈 수 있는 거야."
+      },
+      {
+        "name": "todragon",
+        "char": "todragon_happy",
+        "type": "line",
+        "line": "오오, 이제 경제 전문가가 된 기분인데?\n흠, 이제부터 내 돈은 내가 관리..."
+      },
+      {
+        "name": "dony",
+        "char": "dony_worried",
+        "type": "line",
+        "line": "잠깐~! 전문가가 되기에는 아직 한참 남았거든?!\n벌써부터 돈 쓸 궁리만 하지 말고 더 부지런히 공부하자구!"
+      },
+      {
+        "name": "todragon",
+        "char": "todragon_embrrassed",
+        "type": "line",
+        "line": "쳇..."
+      }
+    ]
+  } 
+]
