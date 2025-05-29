@@ -95,7 +95,7 @@ router.get(
   "/stories/storyList",
   ensureAuthenticated,
   storyController.showPossibleStoryList,
-  storyController.isUnlock,
+  storyController.hasUnlockItem,
   storyController.renderStoriesList    
 );
 module.exports = router;

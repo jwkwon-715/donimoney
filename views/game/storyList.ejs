@@ -16,9 +16,25 @@
     <% }); %>
   </div>
   <div id="game-container"></div>
+
   <h1>정보 테스트</h1>
-  사용자가 필요한 아이템 가지고 있나: <%= isUnlock %> <br>
-  사용자 학습 현황: <%= learningProg%>
+
+  스토리 해금에 필요한 아이템을 가지고 있는 커리큘럼:
+  <ul>
+    <% unlockedStories.forEach(function(item) { %>
+      <li><%= item %> </li>
+    <% }) %>
+  </ul>
+
+  사용자가 퀴즈, 학습 둘 다 통과한 커리큘럼: 
+  <ul>
+    <% passedBothList.forEach(function(item) { %>
+      <li><%= item.curriculum_id %></li>
+    <% }) %>
+  </ul>
+
+  사용자가 완수한 스토리 단계: <%= storyProg %>
+  
   <script type="module" src="/javascripts/story.js"></script>
 </body>
 </html>

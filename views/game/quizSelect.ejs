@@ -37,6 +37,18 @@
         </div>
       </div>
 
+      <h2>학습 진행 정보</h2>
+    <ul>
+    <% if (learningProgressList && learningProgressList.length > 0) { %>
+        <% learningProgressList.forEach(function(progress) { %>
+        <li>learning_id: <%= progress.learning_id %></li>
+        <% }); %>
+    <% } else { %>
+        <li>학습 진행 기록이 없습니다.</li>
+    <% } %>
+    </ul>
+
+
       <script>
         const swiper = new Swiper('.quiz-swiper', {
           slidesPerView: 2.6,
@@ -54,25 +66,3 @@
       </script>
 </body>
 </html>
-
-<!-- <h1>일반 모드 커리큘럼 고르기</h1> -->
-
-<!-- <% curriculumList.forEach(curriculum => { %>
-    <form method="post" action="/game/school/quiz/select" style="display:inline;">
-        <input type="hidden" name="type" value="general">
-        <input type="hidden" name="curriculumId" value="<%= curriculum.curriculum_id %>">
-        <% if (totalProg >= curriculum.curriculum_id) { %>
-            <button type="submit"><%= curriculum.curriculum_title %></button>
-        <% } else { %>
-            <button type="button" disabled style="background: #ccc;">
-                <%= curriculum.curriculum_title %> (잠김: 스토리 <%= curriculum.curriculum_id %>, 학습 <%= curriculum.curriculum_id %> 필요)
-            </button>
-        <% } %>
-    </form>
-<% }) %>
-
-<hr>
-사용자 프로그레스 현황 참고. 체크할 때 tatalProg 사용하시면 됩니다
-<%=storyProg%>
-<%=learningProg%>
-<%=totalProg%> -->

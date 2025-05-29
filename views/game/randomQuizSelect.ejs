@@ -4,18 +4,25 @@
   <input type="hidden" name="type" value="random">
 
   <% curriculumList.forEach(curriculum => { %>
+    <% 
+      const isUnlocked = learningProgressList.some(function(progress) {
+        return progress.learning_id === curriculum.curriculum_id;
+      });
+    %>
     <div>
       <label>
         <input
           type="checkbox"
           name="curriculumList"
           value="<%= curriculum.curriculum_id %>"
-          <% if (totalProg < curriculum.curriculum_id) { %> disabled <% } %>
+          <% if (!isUnlocked) { %> disabled <% } %>
         >
+
         <%= curriculum.curriculum_title %>
-        <% if (totalProg < curriculum.curriculum_id) { %>
+        <% if (!isUnlocked) { %>
           <span style="color: #aaa;">(잠김)</span>
         <% } %>
+
       </label>
     </div>
   <% }) %>
@@ -35,9 +42,3 @@
     }
   });
 </script>
-
-<hr>
-사용자 프로그레스 현황 참고. 체크할 때 tatalProg 사용하시면 됩니다
-<%=storyProg%>
-<%=learningProg%>
-<%=totalProg%>

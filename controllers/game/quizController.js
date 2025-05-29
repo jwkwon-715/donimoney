@@ -21,7 +21,6 @@ function shuffleArray(array) {
         .map(({ value }) => value);
 }
 
-// userCharacterId를 인자로 받도록 변경
 async function isNewProg(curriculumId, userCharacterId) {
     try {
         const quizProg = await QuizProgress.findOne({
@@ -34,7 +33,6 @@ async function isNewProg(curriculumId, userCharacterId) {
     }
 }
 
-// userCharacterId를 인자로 받도록 변경
 async function progressState(curriculumId, userCharacterId) {
     const progress = await QuizProgress.findOne({
         where: {
@@ -52,19 +50,8 @@ module.exports = {
         try {
             const userCharacterId = req.user.user_character_id;
 
-            // 스토리
-            const latestStoryProgress = await StoryProgress.findOne({
-                where: {
-                    user_character_id: userCharacterId,
-                    story_pass: true
-                },
-                order: [["story_id", "DESC"]],
-                attributes: ["story_id"]
-            });
-            const storyProg = latestStoryProgress ? latestStoryProgress.story_id : 0;
-
             // 학습
-            const latestLearningProgress = await LearningProgress.findOne({
+            const learningProgressList = await LearningProgress.findAll({
                 where: {
                     user_character_id: userCharacterId,
                     learning_pass: true
@@ -72,23 +59,14 @@ module.exports = {
                 order: [["learning_id", "DESC"]],
                 attributes: ["learning_id"]
             });
-            const learningProg = latestLearningProgress ? latestLearningProgress.learning_id : 0;
 
-            res.locals.storyProg = storyProg;
-            res.locals.learningProg = learningProg;
-
-            let totalProg;
-            if (storyProg >= learningProg) {
-                totalProg = learningProg;
-            } else {
-                totalProg = storyProg;
-            }
-            res.locals.totalProg = totalProg;
+            res.locals.learningProgressList = learningProgressList;
 
             const curriculumList = await Curriculum.findAll();
             res.locals.curriculumList = curriculumList;
 
             next();
+
         } catch (err) {
             console.log(err);
             next(err);
@@ -100,11 +78,19 @@ module.exports = {
     },
 
     renderQuizList: (req, res, next) => {
-        res.render("game/quizSelect");
+        res.render("game/quizSelect", 
+            { 
+                learningProgressList: res.locals.learningProgressList, 
+                curriculumList: res.locals.curriculumList
+            });
     },
 
     renderRandomQuizList: (req, res, next) => {
-        res.render("game/randomQuizSelect");
+        res.render("game/randomQuizSelect", 
+            { 
+                learningProgressList: res.locals.learningProgressList, 
+                curriculumList: res.locals.curriculumList
+            });
     },
 
     renderQuizSuccess: (req, res) => {

@@ -18,7 +18,7 @@ exports.createCharacter = async (req, res) => {
     const newCharacter = await UserCharacters.create({
       user_id: userId,
       nickname: characterName.trim(),
-      money: 5000
+      money: 1000
     });
 
     // req.user에 user_character_id를 반영
