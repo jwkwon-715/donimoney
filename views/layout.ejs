@@ -8,5 +8,6 @@
 </html>
 
 <script>
+    window.showHomeAndCloseButtons = <%= typeof showHomeAndCloseButtons !== 'undefined' && showHomeAndCloseButtons ? showHomeAndCloseButtons : 0 %>;
     window.userMoney = <%= typeof userMoney !== 'undefined' ? userMoney : 0 %>;
 </script>

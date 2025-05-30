@@ -12,6 +12,10 @@ body {
   line-height: 1.6;
 }
 
+.nav-buttons {
+  display: none !important;
+}
+
 a {
   text-decoration: none;
   color: inherit;

@@ -92,6 +92,24 @@ app.use(async (req, res, next) => {
   next();
 });
 
+app.use('/game/school/quiz/select', (req, res, next) => {
+  res.locals.showHomeAndCloseButtons = false;
+  next();
+});
+
+app.use((req, res, next) => {
+  res.locals.showHomeAndCloseButtons = false; // 기본값
+  next();
+});
+
+app.use((req, res, next) => {
+  const showBtns = [/^\/game/, /^\/quiz\/start/, /^\/mypage/];
+  res.locals.showHomeAndCloseButtons = showBtns.some(pattern => pattern.test(req.originalUrl));
+  console.log("▶️", req.originalUrl, "→ showHomeAndCloseButtons:", res.locals.showHomeAndCloseButtons);
+  next();
+});
+
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -134,5 +152,3 @@ app.use(function(err, req, res, next) {
 app.listen(3000); //로컬 환경 포트번호
 
 module.exports = app;
-
-

@@ -102,34 +102,34 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('next-btn').addEventListener('click', nextQuiz);
 
     renderQuiz(currentIndex);
-
-    // slider
-    let duration = 300; // 총 시간 (초)
-    let progress = 0;
-
-    const fill = document.getElementById('fill');
-    const slider = document.getElementById('slider');
-    const track = document.getElementById('track');
-
-    const trackWidth = track.offsetWidth;
-    const pencilHalfWidth = slider.offsetWidth / 2;
-
-    const interval = setInterval(() => {
-        progress++;
-
-        const ratio = Math.min(progress / duration, 1);
-
-        const fillWidth = ratio * trackWidth;
-        fill.style.width = `${fillWidth}px`;
-
-        if (fillWidth > 5) {
-            slider.style.opacity = 1;
-        }
-
-        slider.style.left = `${track.offsetLeft + fillWidth - pencilHalfWidth + 45}px`;
-
-        if (progress >= duration) {
-            clearInterval(interval);
-        }
-    }, 1000);
 });
+
+// slider
+let duration = 300; // 총 시간 (초)
+let progress = 0;
+
+const fill = document.getElementById('fill');
+const slider = document.getElementById('slider');
+const track = document.getElementById('track');
+
+const trackWidth = track.offsetWidth;
+const pencilHalfWidth = slider.offsetWidth / 2;
+
+const interval = setInterval(() => {
+    progress++;
+
+    const ratio = Math.min(progress / duration, 1);
+
+    const fillWidth = ratio * trackWidth;
+    fill.style.width = `${fillWidth}px`;
+
+    if (fillWidth > 1) {
+        slider.style.opacity = 1;
+    }
+
+    slider.style.left = `${track.offsetLeft + fillWidth - pencilHalfWidth + 45}px`;
+
+    if (progress >= duration) {
+        clearInterval(interval);
+    }
+}, 1000);
