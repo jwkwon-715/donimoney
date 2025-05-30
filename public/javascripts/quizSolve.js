@@ -1,7 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
     let currentIndex = 0;
-    let userAnswers = []; // 사용자가 선택한 답 저장
+    let userAnswers = [];
     const passScore = 80;
+
+    function updateQuizProgress() {
+        document.getElementById('quiz-progress-text').textContent = 
+            (currentIndex + 1) + '/' + quizzes.length;
+    }
 
     function renderQuiz(index) {
         const quiz = quizzes[index];
@@ -25,6 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.getElementById('check-answer-btn').style.display = 'inline-block';
         document.getElementById('next-btn').style.display = 'none';
+
+        updateQuizProgress();
     }
 
     function checkAnswer() {
@@ -41,13 +48,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const solutionBox = document.getElementById('solution-box');
         const isCorrect = parseInt(selected.value) === answer;
-        // if (parseInt(selected.value) === answer) {
-        //     alert('정답입니다!');
-        // } else {
-        //     alert('오답입니다!');
-        // }
-        solutionBox.textContent = `${solution}`;
-
         solutionBox.innerHTML = `
             <p style="font-weight: 900; color: ${isCorrect ? '#2393F6' : '#D53A3A'};">
                 ${isCorrect ? '정답입니다!' : '오답입니다!'}
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     renderQuiz(currentIndex);
 
-    // slider
+    // slider (타이머)
     let duration = 300; // 총 시간 (초)
     let progress = 0;
 

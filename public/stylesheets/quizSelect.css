@@ -6,7 +6,6 @@
  
 body {
     width: 100%;
-    /* height: 100%; */
     min-height: 82vh;
     background-color: #FFFCF5;
     font-family: 'NanumSquareRound';
@@ -24,6 +23,23 @@ body {
     display: flex;
     flex-direction: column;
     padding: 0;
+    font-size: 32px;
+    font-weight: 900;
+    color: rgba(51, 51, 51, 0.74);
+}
+
+.quiz-card:disabled {
+    background: #eee !important;
+    color: #aaa !important;
+    cursor: not-allowed;
+    border: 1px solid #ddd;
+    opacity: 0.7;
+}
+
+.lock-icon {
+    font-size: 18px;
+    color: #888;
+    margin-left: 8px;
 }
 
 .swiper, .swiper-wrapper, .swiper-slide { overflow: visible !important; }
@@ -34,7 +50,6 @@ h1 { margin: 3% 0 1% 5% }
     width: 100%;
     height: 60%;
     object-fit: cover;
-    /* border-bottom: 1px solid #eee; */
 }
 
 .card-text {
@@ -55,5 +70,4 @@ h1 { margin: 3% 0 1% 5% }
     font-size: 24px;
     font-weight: normal;
     color: #505050;
-    /* margin: 0; */
 }

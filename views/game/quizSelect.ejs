@@ -23,21 +23,33 @@
     <div class="swiper quiz-swiper">
         <h1>일반 모드 퀴즈 선택</h1>
         <div class="swiper-wrapper">
-            <% curriculumList.forEach(curriculum => { %>
+            <% curriculumList.forEach(curriculum => { 
+                // learning_id 기준으로 비교
+                const isLearned = learningProgressList.some(progress => progress.learning_id === curriculum.curriculum_id);
+            %>
             <div class="swiper-slide">
                 <form method="post" action="/game/school/quiz/select">
                     <input type="hidden" name="type" value="general">
                     <input type="hidden" name="curriculumId" value="<%= curriculum.curriculum_id %>">
                     <div class="card-text">
-                        <button class="quiz-card" type="submit"><%= curriculum.curriculum_title %></button>
+                        <button 
+                            class="quiz-card" 
+                            type="submit"
+                            <%= isLearned ? '' : 'disabled' %>
+                        >
+                            <%= curriculum.curriculum_title %>
+                            <% if (!isLearned) { %>
+                                <span class="lock-icon">🔒</span>
+                            <% } %>
+                        </button>
                     </div>
-              </form>
+                </form>
             </div>
-          <% }) %>
+            <% }) %>
         </div>
-      </div>
+    </div>
 
-      <h2>학습 진행 정보</h2>
+    <h2>학습 진행 정보</h2>
     <ul>
     <% if (learningProgressList && learningProgressList.length > 0) { %>
         <% learningProgressList.forEach(function(progress) { %>
@@ -48,21 +60,20 @@
     <% } %>
     </ul>
 
-
-      <script>
+    <script>
         const swiper = new Swiper('.quiz-swiper', {
-          slidesPerView: 2.6,
-          spaceBetween: 88,
-          centeredSlides: true,
-          breakpoints: {
-            768: {
-              slidesPerView: 2.5
-            },
-            1024: {
-              slidesPerView: 3
+            slidesPerView: 2.6,
+            spaceBetween: 88,
+            centeredSlides: true,
+            breakpoints: {
+                768: {
+                    slidesPerView: 2.5
+                },
+                1024: {
+                    slidesPerView: 3
+                }
             }
-          }
         });
-      </script>
+    </script>
 </body>
 </html>
