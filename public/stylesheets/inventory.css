@@ -146,12 +146,12 @@ body, html {
   position: relative;
 }
 
-/* 실제 동작하는 탭(learning-notebook 위에 위치) */
+/* 실제 동작하는 탭(learning-notebook 위에 위치, 살짝 더 위로) */
 .real-tabs {
   display: flex;
   gap: 0;
-  margin-bottom: 0px; /* learning-notebook과 딱 붙게 */
-  margin-left: 20px;   /* 노트북과 좌측 정렬 맞춤, 필요시 조정 */
+  margin-bottom: 0px; /* 하얀 박스와 더 가깝게(기존 -8px → -18px) */
+  margin-left: 20px;
   position: relative;
   z-index: 2;
 }
@@ -239,105 +239,140 @@ body, html {
   margin-right: 8px;
 }
 
-.progress-box-list {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  margin-top: 18px;
+/* 안내문구/상세정보 영역 */
+.item-detail-area {
+  min-height: 110px;
+  margin-bottom: 18px;
+  margin-top: 8px;
+  width: 100%;
 }
 
-.progress-box {
+.item-detail-guide {
+  background: #fffbe9;
+  color: #b89c3a;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(110,130,180,0.10);
+  padding: 20px 24px;
+  font-size: 16px;
+  text-align: center;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  animation: fadeIn 0.18s;
+}
+
+.item-detail {
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  background: #fffbe9;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(110,130,180,0.10);
+  padding: 18px 24px;
+  min-height: 110px;
+  gap: 6px;
+  animation: fadeIn 0.18s;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-8px);}
+  to { opacity: 1; transform: none;}
+}
+.detail-img-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+.detail-img-wrap .item-img {
+  width: 48px;
+  height: 48px;
+}
+.detail-name {
+  font-size: 17px;
+  font-weight: bold;
+  color: #3c4b5a;
+}
+.detail-desc {
+  font-size: 15px;
+  color: #666;
+  margin-top: 2px;
+}
+.detail-price {
+  font-size: 15px;
+  color: #f4a742;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+/* 인벤토리 그리드 */
+.inventory-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px 12px;
+  margin-top: 8px;
+  width: 100%;
+}
+
+.item-slot {
   background: #f5f8ff;
   border-radius: 14px;
   box-shadow: 0 2px 8px rgba(110,130,180,0.08);
-  padding: 18px 22px;
+  padding: 12px 6px 10px 6px;
+  min-height: 140px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 22px;
-  min-width: 250px;
+  position: relative;
+  border: 2px solid #e2e7f2;
+  transition: border 0.18s, background 0.18s;
+  cursor: pointer;
 }
-
-.progress-label {
-  font-weight: bold;
-  font-size: 1.15em;
-  min-width: 54px;
-  text-align: center;
-  border-radius: 8px;
-  padding: 5px 16px;
-}
-
-.learning-box .progress-label {
-  background: #ffe066;
-  color: #4b3d2b;
-}
-
-.quiz-box .progress-label {
-  background: #f4a742;
-  color: #fff;
-}
-
-.story-box .progress-label {
-  background: #7ecbff;
-  color: #fff;
-}
-
-.progress-content {
-  font-size: 1.08em;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.progress-total {
-  color: #888;
-}
-
-.progress-done {
-  color: #86c166;
-  font-weight: bold;
-}
-
-.quiz-box .progress-done {
-  color: #f4a742;
-}
-
-.story-box .progress-done {
-  color: #5b9bd5;
-}
-
-.progress-percent {
-  margin-left: 8px;
-  font-weight: bold;
-  color: #4b3d2b;
-}
-
-.no-character-msg {
+.item-slot:not(.empty):hover {
+  border: 2px solid #ffe066;
   background: #fffbe9;
-  color: #a87d00;
-  border-radius: 12px;
-  padding: 24px 18px;
-  text-align: center;
-  font-size: 1.15em;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  box-shadow: 0 2px 8px rgba(110,130,180,0.06);
 }
-
-/* .start-btn {
-  display: inline-block;
-  margin-top: 18px;
-  padding: 8px 28px;
-  background: #ffe066;
-  color: #4b3d2b;
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: 1em;
-  text-decoration: none;
-  transition: background 0.2s;
-} */
-
-.start-btn:hover {
-  background: #ffd700;
+.item-slot.selected {
+  border: 2.5px solid #ffe066;
+  background: #fffbe9;
+}
+.item-img-wrap {
+  width: 52px;
+  height: 52px;
+  background: #fff;
+  border-radius: 10px;
+  margin-bottom: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1.5px solid #e5eaf1;
+}
+.item-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+.item-name {
+  margin-top: 6px;
+  font-size: 15px;
+  color: #3c4b5a;
+  font-weight: 700;
+  text-align: center;
+  word-break: keep-all;
+}
+.item-slot.empty .item-img { opacity: 0.18; }
+.item-slot.empty .item-name { color: #b5b5b5; font-weight: 400; }
+.item-slot.empty .item-desc { color: #ccc; }
+.item-slot.empty .item-price { color: #ddd; }
+.coin-icon-sm {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  margin-right: 2px;
 }
 
 @media (max-width: 900px) {
@@ -359,24 +394,19 @@ body, html {
     padding: 24px 6vw 24px 6vw;
   }
   .character-img-wrap {
-    width: 90vw;
-    height: 60vw;
-    max-width: 480px;
-    max-height: 350px;
+    width: 70vw;
+    height: 40vw;
+    max-width: 320px;
+    max-height: 320px;
   }
   .character-nickname {
     font-size: 1rem;
     padding: 5px 18px;
     bottom: 5px;
   }
-  .progress-box-list {
-    gap: 10px;
-  }
-  .progress-box {
-    min-width: 0;
-    width: 100%;
-    padding: 14px 10px;
-    font-size: 0.95em;
+  .inventory-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px 8px;
   }
   .bookmark-clip {
     right: 10px;
