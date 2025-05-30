@@ -1,26 +1,97 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-  <title>Inventory Test</title>
+  <meta charset="UTF-8">
+  <title>마이페이지</title>
+  <link rel="stylesheet" href="/stylesheets/inventory.css">
 </head>
 <body>
-  <h1>Inventory 목록</h1>
-
-  <% if (inventory.length === 0) { %>
-    <p>인벤토리에 아이템이 없습니다.</p>
-  <% } else { %>
-    <ul>
-      <% inventory.forEach(item => { %>
-        <li>
-          <strong>수량:</strong> <%= item.quantity %><br>
-          <strong>아이템 이름:</strong> <%= item.Item?.item_name %><br>
-          <strong>아이템 설명:</strong> <%= item.Item?.item_description %><br>
-          <strong>가격:</strong> <%= item.Item?.item_price %><br>
-          <strong>종류:</strong> <%= item.Item?.item_type %><br>
-          <hr>
-        </li>
-      <% }) %>
-    </ul>
-  <% } %>
+  <div class="forest-bg"></div>
+  <a href="/" class="home-btn" title="홈으로">
+    <img src="/images/home.svg" class="home-icon" alt="홈">
+  </a>
+  <a href="/myPage" class="close-btn" title="마이페이지로">
+    <img src="/images/disable.png" class="close-icon" alt="닫기">
+  </a>
+  <div class="mypage-main">
+    <!-- 왼쪽: 캐릭터와 돈 -->
+    <div class="character-area">
+      <% if (character) { %>
+        <div class="money-badge">
+          <img src="/images/coin.png" alt="코인" class="coin-icon">
+          <span><%= character.money || 0 %></span>
+        </div>
+        <div class="character-img-wrap">
+          <img src="/images/todragon_normal.png" alt="캐릭터" class="character-img">
+        </div>
+        <div class="character-nickname"><%= character.nickname %></div>
+      <% } %>
+    </div>
+    <!-- 인벤토리 노트 영역 -->
+    <div class="learning-area">
+      <!-- 실제 동작하는 탭을 learning-notebook 위로 추가 -->
+      <div class="real-tabs real-tabs-outside">
+        <a href="/mypage/character" class="real-tab <%= activeTab === 'character' ? 'active' : '' %>">나의 학습</a>
+        <a href="/mypage/inventory" class="real-tab <%= activeTab === 'inventory' ? 'active' : '' %>">아이템</a>
+      </div>
+      <div class="learning-notebook">
+        <!-- 북마크 아이콘을 노트북 상단에 겹치게 배치 -->
+        <div class="bookmark-clip">
+          <img src="/images/bookmark_icon.png" alt="북마크" class="bookmark-img">
+        </div>
+        <div class="notebook-inner">
+          <div class="notebook-title">
+            <span class="character-name"><%= nickname || '토롱이' %></span>
+            <span>아이템</span>
+          </div>
+          <!-- 안내문구/상세정보 영역 -->
+          <div id="item-detail-area" class="item-detail-area">
+            <div id="item-detail-guide" class="item-detail-guide">
+              아이템을 클릭하면 설명을 볼 수 있어요.
+            </div>
+            <div id="item-detail" class="item-detail" style="display:none;">
+              <div class="detail-img-wrap">
+                <img id="detail-img" src="" alt="" class="item-img">
+                <span id="detail-quantity" class="item-quantity"></span>
+              </div>
+              <div class="detail-name" id="detail-name"></div>
+              <div class="detail-desc" id="detail-desc"></div>
+              <div class="detail-price" id="detail-price"></div>
+            </div>
+          </div>
+          <!-- 인벤토리 그리드 -->
+          <div class="inventory-grid">
+            <% for(let i=0; i<8; i++) { 
+                 const item = inventory[i];
+            %>
+              <div class="item-slot <%= item ? '' : 'empty' %>" 
+                   data-index="<%= i %>"
+                   <% if(item && item.Item) { %>
+                     data-name="<%= item.Item.item_name %>"
+                     data-desc="<%= item.Item.item_description %>"
+                     data-img="<%= item.Item.item_image_url || '/images/object/egg.png' %>"
+                     data-quantity="<%= item.quantity %>"
+                     data-price="<%= item.Item.item_price %>"
+                   <% } %>
+              >
+                <div class="item-img-wrap">
+                  <img src="<%= item && item.Item ? (item.Item.item_image_url || '/images/object/egg.png') : '/images/object/egg.png' %>" 
+                       alt="<%= item && item.Item ? item.Item.item_name : '빈 슬롯' %>" class="item-img">
+                </div>
+                <% if(item && item.Item) { %>
+                  <div class="item-quantity">x<%= item.quantity %></div>
+                  <div class="item-name"><%= item.Item.item_name %></div>
+                <% } else { %>
+                  <div class="item-quantity"></div>
+                  <div class="item-name">빈 슬롯</div>
+                <% } %>
+              </div>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="/javascripts/inventory.js"></script>
 </body>
 </html>

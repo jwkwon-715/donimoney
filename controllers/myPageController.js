@@ -46,15 +46,14 @@ exports.renderCharacter = async (req, res) => {
     const userCharacterId = req.user.user_character_id;
     const character = await UserCharacters.findByPk(userCharacterId);
 
-    // 캐릭터가 없을 때 안내 메시지
     if (!character) {
       return res.render('myCharacter', {
         character: null,
         noCharacterMsg: '캐릭터가 없습니다. 시작하기를 눌러 캐릭터를 먼저 생성해주세요!',
+        activeTab: 'character' // 추가
       });
     }
 
-    // 학습 진도율
     const totalLearning = await Learning.count();
     const passedLearning = await LearningProgress.findAll({
       attributes: [[Sequelize.col('learning_id'), 'learning_id']],
@@ -64,12 +63,10 @@ exports.renderCharacter = async (req, res) => {
     const passedLearningCount = passedLearning.length;
     const percentLearning = totalLearning > 0 ? Math.round((passedLearningCount / totalLearning) * 100) : 0;
 
-    // 퀴즈 진도율 (quiz_id가 없다면 row 개수 기준)
     const totalQuiz = await Curriculum.count();
     const passedQuiz = await QuizProgress.count({ where: { user_character_id: userCharacterId, quiz_pass: true } });
     const percentQuiz = totalQuiz > 0 ? Math.round((passedQuiz / totalQuiz) * 100) : 0;
 
-    // 스토리 진도율 (story_id 기준)
     const totalStory = await Stories.count();
     const passedStory = await StoryProgress.findAll({
       attributes: [[Sequelize.col('story_id'), 'story_id']],
@@ -81,19 +78,17 @@ exports.renderCharacter = async (req, res) => {
 
     res.render('myCharacter', {
       character,
-      // 학습
       totalLearning,
       passedLearningCount,
       percentLearning,
-      // 퀴즈
       totalQuiz,
       passedQuiz,
       percentQuiz,
-      // 스토리
       totalStory,
       passedStoryCount,
       percentStory,
-      noCharacterMsg: null
+      noCharacterMsg: null,
+      activeTab: 'character' // 반드시 추가
     });
   } catch (error) {
     console.error(error);
@@ -101,17 +96,29 @@ exports.renderCharacter = async (req, res) => {
   }
 };
 
-exports.renderInventory = async(req, res) => {
-  const userCharacterId = req.user.user_character_id;
+exports.renderInventory = async (req, res) => {
+  try {
+    const userCharacterId = req.user.user_character_id;
 
-  const inventory = await Inventory.findAll({
-    where: {user_character_id: userCharacterId},
-    include: [{
-      model: Items,
-      require: true
-    }],
-  })
+    // 인벤토리 불러오기
+    const inventory = await Inventory.findAll({
+      where: { user_character_id: userCharacterId },
+      include: [{ model: Items, require: true }],
+    });
 
-  res.render('inventory', {inventory});
+    // 캐릭터 정보 불러오기
+    const character = await UserCharacters.findByPk(userCharacterId);
+    const nickname = character && character.nickname ? character.nickname : '토롱이';
 
-}
+    // 인벤토리 페이지 렌더링
+    res.render('inventory', {
+      inventory,
+      character,
+      nickname,
+      activeTab: 'inventory' // 탭 강조용
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('서버 오류');
+  }
+};

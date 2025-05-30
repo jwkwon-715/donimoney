@@ -24,12 +24,19 @@ body, html {
     max-height: 600px;
     box-sizing: border-box;
     overflow: visible;
-
     background-color: #F5F5F5;
     margin: 10% 69px;
     padding: 30px 50px 0 70px;
     border-radius: 24px;
     box-shadow: 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.quiz-progress {
+    text-align: right;
+    margin-bottom: 8px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #2393F6;
 }
 
 h3 {
@@ -38,36 +45,6 @@ h3 {
     font-weight: 900;
     color: #333;
 } 
-
-/* .quiz-sidebar {
-    flex: 1.2;
-    background-color: #E2EDFF;
-    padding: 30px;
-    border-radius: 20px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.quiz-sidebar h3 {
-    font-size: 28px;
-    font-family: 'Cafe24DongDong';
-    margin: 10px 0;
-}
-
-.quiz-sidebar p {
-    font-size: 32px;
-    font-weight: bold;
-    margin-top: 20px;
-}
-
-.quiz-sidebar .quix-type {
-    font-size: 32px;
-    font-weight: bold;
-    margin-top: 20px;
-} */
 
 #solution-box {
     background-color: #ffffff;
@@ -78,41 +55,6 @@ h3 {
     color: #505050;
 }
 
-/* .answer-wrap {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 16px;
-    font-size: 24px;
-    color: #F5F5F5;
-}
-
-.answer-badge {
-    background-color: #D53A3A;
-    color: #F5F5F5;
-    border-radius: 20px;
-    padding: 6px 16px;
-    font-size: 18px;
-    font-weight: 600;
-} */
-
-/* .solution-wrap {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    margin-top: 12px;
-}
-
-.solution-badge {
-    border: 2px solid #D53A3A;
-    color: #D53A3A;
-    font-weight: bold;
-    border-radius: 20px;
-    padding: 6px 16px;
-    font-size: 18px;
-    white-space: nowrap;
-} */
-
 #check-answer-btn {
     width: 200px;
     height: 80px;
@@ -121,7 +63,6 @@ h3 {
     padding: 12px 24px 20px;
     border: none;
     border-radius: 60px;
-    
     background-color: #F9CF45;
     font-family: 'NanumSquareRound';
     font-size: 28px;
@@ -140,7 +81,6 @@ h3 {
     padding: 12px 24px 20px;
     border: none;
     border-radius: 60px;
-
     background-color: #78C0FF;
     font-family: 'NanumSquareRound';
     font-size: 28px;
