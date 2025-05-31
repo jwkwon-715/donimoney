@@ -77,6 +77,7 @@ function openModal(itemId, itemName, itemPrice, itemImgPath) {
     document.getElementById("modal-item-name").textContent = itemName;
     document.getElementById("modal-item-price").textContent = selectedItemPrice;
     document.getElementById("modal-item-img").src = itemImgPath;
+    document.getElementById("modal-quantity").textContent = selectedQuantity;
 
     document.getElementById("purchase-modal").classList.remove("hidden");
 }
@@ -85,6 +86,7 @@ function changeModalQuantity(amount) {
     selectedQuantity = Math.max(1, selectedQuantity + amount);
     const total = selectedItemPrice * selectedQuantity;
     document.getElementById("modal-item-price").textContent = total;
+    document.getElementById("modal-quantity").textContent = selectedQuantity;
 }
 
 function confirmPurchase() {
@@ -107,7 +109,7 @@ function confirmPurchase() {
     document.getElementById("purchase-modal").classList.add("hidden");
 }
 
-function confirmePurchase() {
+function finishPurchase() {
     let totalCost = buyItems.reduce((sum, item) => sum + item.cost, 0);
 
     fetch("/game/mart/itemList/buy", {
@@ -134,11 +136,6 @@ function confirmePurchase() {
     const userMoneyDisplay = document.getElementById('userMoney');
     const userMoney = parseInt(userMoneyDisplay.textContent, 10);
     const cost = selectedItemPrice * quantity;
-
-    // if (userMoney < cost) {
-    //     alert("돈이 부족해요...");
-    //     return;
-    // }
 
     buyItems.push({itemId: selectedItemId, quantity, cost});
 

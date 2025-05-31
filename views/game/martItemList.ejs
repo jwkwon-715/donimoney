@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <title>Document</title> -->
     <link rel="stylesheet" href="/stylesheets/martItem.css">
-    <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 <body>
     <img class="bg" src="/images/배경.png" alt="">
@@ -56,7 +55,8 @@
           
           <div class="modal-desc">
             <span id="modal-item-name">상품 이름</span>
-            <span>
+            <span id="modal-quantity">1</span>개
+            <span class="coins">
               <img src="/images/coin.png" class="coin-icon">
               <span id="modal-item-price">500</span>
             </span>
@@ -69,7 +69,7 @@
         </div>
       </div>
 
-      <button class="exit-button" onclick="confirmePurchase()">마트 나가기</button>
+      <button class="exit-button" onclick="finishPurchase()">마트 나가기</button>
 
       <script src="/javascripts/martPurchase.js"></script>
 </body>

@@ -1,3 +1,9 @@
+body {
+    font-family: 'Cafe24DongDong';
+    font-size: 28px;
+    color: #333;
+}
+
 .bg {
     position: absolute;
     width: 100%;
@@ -157,13 +163,20 @@ h2 {
 #modal-item-name {
     font-family: 'Cafe24DongDong';
     font-size: 28px;
-    color: #333333;
+    color: #333;
 }
 
 #modal-item-price {
     font-family: 'KCC-DodamdodamR';
     font-size: 28px;
-    color: #333333;
+    color: #333;
+}
+
+#modal-quantity {
+    font-family: 'KCC-DodamDodamR';
+    font-size: 28px;
+    color: #333;
+    margin-right: -17%;
 }
 
 .item-img {
@@ -204,6 +217,10 @@ h2 {
     width: 28px;
     height: 30px;
     vertical-align: middle;
+}
+
+.coins {
+    align-items: center;
 }
   
 .modal-buttons {
