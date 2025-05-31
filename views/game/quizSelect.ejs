@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/stylesheets/quizSelect.css">
-    <link rel="stylesheet" href="/stylesheets/style.css">
 
     <!-- Swiper -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -20,11 +19,10 @@
         </button>
     </div> -->
     
+     <h1>일반 모드 퀴즈 선택</h1>
     <div class="swiper quiz-swiper">
-        <h1>일반 모드 퀴즈 선택</h1>
         <div class="swiper-wrapper">
-            <% curriculumList.forEach(curriculum => { 
-                // learning_id 기준으로 비교
+            <% curriculumList.forEach(curriculum => {
                 const isLearned = learningProgressList.some(progress => progress.learning_id === curriculum.curriculum_id);
             %>
             <div class="swiper-slide">
@@ -32,14 +30,11 @@
                     <input type="hidden" name="type" value="general">
                     <input type="hidden" name="curriculumId" value="<%= curriculum.curriculum_id %>">
                     <div class="card-text">
-                        <button 
-                            class="quiz-card" 
-                            type="submit"
-                            <%= isLearned ? '' : 'disabled' %>
-                        >
+                        <button class="quiz-card" type="submit" <%= isLearned ? '' : 'disabled' %>>
                             <%= curriculum.curriculum_title %>
                             <% if (!isLearned) { %>
-                                <span class="lock-icon">🔒</span>
+                                <!-- <span class="lock-icon">🔒</span> -->
+                                <img class="lock-icon" src="/images/lock_icon.png" alt="">
                             <% } %>
                         </button>
                     </div>
