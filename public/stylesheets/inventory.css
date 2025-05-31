@@ -181,12 +181,22 @@ body, html {
   outline: none;
   box-shadow:inset 0 -2px 8px rgba(110,130,180,0.04);
   cursor: pointer;
+
+  -webkit-user-select:all;
+  -moz-user-select:all;
+  -ms-user-select:all;
+  user-select:all
 }
 .real-tab.active {
   background: #fff;
   color: #357376;
   z-index: 3;
   box-shadow:inset 0 -4px 16px rgba(110,130,180,0.09);
+
+  -webkit-user-select:all;
+  -moz-user-select:all;
+  -ms-user-select:all;
+  user-select:all
 }
 
 .learning-notebook {
