@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/stylesheets/style.css">
   <link rel="stylesheet" href="/stylesheets/learningContent.css">
 </head>
 <body>
@@ -16,8 +15,14 @@
     </button>
   </div> -->
 
+  <div class="indicator" id="indicator">
+    <% contentArr.forEach((_, idx) => { %>
+      <div class="dot <%= idx === 0 ? 'active' : '' %>"></div>
+    <% }) %>
+  </div>
+
   <div class="learning-container">
-    <button class="nav-btn left" id="prevBtn">&#8592;</button>
+    <a class="nav-btn arrow left" id="prevBtn"></a> <!-- &#8592; -->
     <div class="card-section" id="cardSection">
       <% contentArr.forEach(function(card, idx) { %>
         <div class="card" style="display: <%= idx === 0 ? 'block' : 'none' %>;">
@@ -34,7 +39,7 @@
         </div>
       <% }) %>
     </div>
-    <button class="nav-btn right" id="nextBtn">&#8594;</button>
+    <a class="nav-btn arrow right" id="nextBtn"></a> <!-- &#8594; -->
   </div>
   <div class="indicator" id="indicator"></div>
 
