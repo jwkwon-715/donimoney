@@ -17,19 +17,24 @@ body {
 }
 
 .forest-bg {
-  position: absolute;
+  position: fixed;
   width: 100vw;
   height: 100vh;
-  left: 0;
-  top: 0;
   z-index: 0;
   background-image: url('/images/배경.png');
   background-size: cover;
   background-position: center;
+  top: 0;
+  left: 0;
   opacity: 0.95;
 }
 
-.home-btn {
+.nav-buttons {
+  position: absolute;
+  width: 100%;
+}
+
+/* .home-btn {
   position: fixed;
   top: 20px;
   left: 20px;
@@ -56,15 +61,13 @@ body {
   align-items: center;
   z-index: 10;
   background-color: transparent;
-  /* font-size, color 등은 필요 없으니 삭제해도 됨 */
 }
 
 .close-icon {
   width: 40px;
   height: 40px;
   filter: drop-shadow(0px 2px 3px rgba(0, 0, 0, 0.3));
-  /* 필요시 margin, vertical-align 등 추가 */
-}
+} */
 
 .find-container {
   position: relative;
@@ -90,6 +93,7 @@ body {
   margin: 20px 0 0 0;
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 15px;
 }
 

@@ -138,13 +138,13 @@ a {
 .button-group {
   display: flex;
   flex-direction: column; /* 세로 방향 배치 */
-  gap: 15px; /* 버튼 사이 간격 */
+  gap: 18px; /* 버튼 사이 간격 */
   align-items: center; /* 가운데 정렬 */
   margin-top: 30px;
 }
 
 .btn {
-  padding: 12px 40px;
+  padding: 10px 36px;
   border-radius: 32px;
   font-weight: 500;
   font-size: 28px;

@@ -45,7 +45,21 @@ body {
   min-height: 100vh;
   align-items: center;
   justify-content: center;
+
+  /* no drag */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-use-select: none;
+  user-select: none;
 }
+
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+ }
 
 button {
   border: none;

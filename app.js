@@ -105,11 +105,9 @@ app.use((req, res, next) => {
 app.use((req, res, next) => {
   const showBtns = [/^\/game/, /^\/quiz\/start/, /^\/mypage/];
   res.locals.showHomeAndCloseButtons = showBtns.some(pattern => pattern.test(req.originalUrl));
-  console.log("▶️", req.originalUrl, "→ showHomeAndCloseButtons:", res.locals.showHomeAndCloseButtons);
+  // console.log("▶️", req.originalUrl, "→ showHomeAndCloseButtons:", res.locals.showHomeAndCloseButtons);
   next();
 });
-
-
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
