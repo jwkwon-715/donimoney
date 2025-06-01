@@ -90,7 +90,7 @@ router.post("/school/learning/complete", ensureAuthenticated, learningController
   res.redirect('/game/main');
 });
 
-//스토리
+
 router.get(
   "/stories/storyList",
   ensureAuthenticated,
@@ -98,4 +98,6 @@ router.get(
   storyController.hasUnlockItem,
   storyController.renderStoriesList    
 );
+router.post('/stories/complete', ensureAuthenticated, storyController.updateStoryProg);
+
 module.exports = router;

@@ -1,18 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Stories } = require('../models'); // Sequelize models 폴더 import
-
-
-// router.get('/storyList', async (req, res) => {
-//   try {
-//     const storyList = await Stories.findAll({ 
-//       attributes: ['story_id', 'story_title', 'simple_description']
-//     });
-//     res.render('game/storyList', { storyList });
-//   } catch (err) {
-//     res.status(500).send('스토리 목록을 불러올 수 없습니다.');
-//   }
-// });
+const { Stories, UserCharacters } = require('../models'); // Sequelize models 폴더 import
 
 // 전체 스토리 목록 가져오기
 router.get('/', async (req, res) => {
@@ -29,14 +17,35 @@ router.get('/', async (req, res) => {
 router.get('/:storyId', async (req, res) => {
   try {
     const storyId = req.params.storyId;
-    const storyData = await Stories.findOne({ 
-      where: { story_id: storyId } 
+
+    const storyData = await Stories.findOne({ where: { story_id: storyId } });
+    if (!storyData) {
+      return res.status(404).send('스토리를 찾을 수 없습니다.');
+    }
+    const userId = req.user.user_id;
+    
+
+    const character = await UserCharacters.findOne({
+      where: { user_id: userId },
+      attributes: ['nickname']
     });
-    res.render('game/storyScene', { 
+
+    if (!character || !character.nickname) {
+      return res.status(404).send('<script>alert("캐릭터 없음"); history.back();</script>');
+    }
+    
+    const nickname = character.nickname;
+
+    console.log('nickname:', nickname);    
+    
+     res.render('game/storyScene', { 
       storyData,
-      storyId: storyId 
+      storyId,
+      playerName: character.nickname
     });
+
   } catch (err) {
+    console.error(err);
     res.status(500).send('스토리를 불러올 수 없습니다.');
   }
 });
@@ -59,5 +68,6 @@ router.post('/', async (req, res) => {
     res.status(400).json({ error: '스토리 생성 실패', details: err.message });
   }
 });
+
 
 module.exports = router;

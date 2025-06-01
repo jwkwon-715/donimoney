@@ -15,6 +15,33 @@ const storyUnlockItems = {
 }
 
 
+const generalQReward = 800;
+
+
+async function isNewProg(storyId, userCharacterId) {
+    try {
+        const storyProg = await StoryProgress.findOne({
+            where: { user_character_id: userCharacterId, story_id: storyId }
+        });
+        return !storyProg;
+    } catch (err) {
+        console.error(err);
+        return false;
+    }
+}
+
+async function progressState(storyId, userCharacterId) {
+    const progress = await StoryProgress.findOne({
+        where: {
+            user_character_id: userCharacterId,
+            story_id: storyId
+        },
+        attributes: ['story_pass']
+    });
+    return progress ? progress.story_pass : null;
+}
+    
+
 module.exports = {
     // 볼 수 있는 스토리 리스트 보여주기
     showPossibleStoryList: async (req, res, next) => {
@@ -59,7 +86,7 @@ module.exports = {
             res.locals.storyProg = storyProg ? storyProg.story_id : 0;
 
             const storyList = await Stories.findAll({ 
-                attributes: ['story_id', 'story_title', 'simple_description']
+                attributes: ['story_id', 'story_title', 'simple_description', 'curriculum_id']
             });
             res.locals.storyList = storyList;
 
@@ -105,8 +132,56 @@ module.exports = {
             storyList: res.locals.storyList,
             passedBothList: res.locals.passedBothList,
             storyProg: res.locals.storyProg,
-            unlockedStories: res.locals.unlockedStories
+            unlockedStories: res.locals.unlockedStories,
+            storyUnlockItems: storyUnlockItems
         });
-    }
+    },
 
+    updateStoryProg: async (req, res, next) => {
+        const userCharacterId = req.user.user_character_id;
+        const storyId = req.body.storyId;
+
+        try {
+            const progState = await progressState(storyId, userCharacterId);
+
+            if (!progState) {
+                const isNew = await isNewProg(storyId, userCharacterId);
+
+                if (isNew) {
+                    await StoryProgress.create({
+                        user_character_id: userCharacterId,
+                        story_pass: true,
+                        story_id: storyId,
+                    });
+                } else {
+                    await StoryProgress.update(
+                        { story_pass: true },
+                        {
+                            where: {
+                                user_character_id: userCharacterId,
+                                story_id: storyId
+                            }
+                        }
+                    );
+                }
+                // 보상 지급
+                const user = await UserCharacters.findOne({
+                    where: { user_character_id: userCharacterId },
+                    attributes: ['money']
+                });
+                if (!user) throw new Error('User not found');
+                const currentMoney = user.money;
+                await UserCharacters.update(
+                    { money: currentMoney + generalQReward },
+                    {
+                        where: { user_character_id: userCharacterId }
+                    }
+                );
+                console.log(currentMoney);
+            }
+        } catch (err) {
+            console.error('updateStoryProg 에러:', err);
+            next(err);
+        }
+    },
 }

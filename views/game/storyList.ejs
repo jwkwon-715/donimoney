@@ -3,38 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <title>Story List</title>
+  <style>
+    li{
+      background-color: grey;
+      margin:10px 10px;
+    }
+  </style>
+
 </head>
 <body>
   <h1>스토리 목록</h1>
-  <div id="story-buttons">
-    <% storyList.forEach(function(story) { %>
-      <button data-story-id="<%= story.story_id %>" >
-        <%= story.story_id %>
-        <%= story.story_title %>
-        <%= story.simple_description %>
-      </button>
-    <% }); %>
-  </div>
-  <div id="game-container"></div>
-
-  <h1>정보 테스트</h1>
-
-  스토리 해금에 필요한 아이템을 가지고 있는 커리큘럼:
-  <ul>
-    <% unlockedStories.forEach(function(item) { %>
-      <li><%= item %> </li>
+  <% 
+    const storyUnlockMap = storyUnlockItems || {};
+  %>
+    <ul>
+    <% storyList.forEach(story => { 
+      const isUnlockedByItem = unlockedStories.includes(String(story.story_id));
+      const isPassed = passedBothList.some(p => p.curriculum_id == story.curriculum_id);
+      const requiresItem = storyUnlockMap.hasOwnProperty(String(story.story_id));
+      const isAccessible = (requiresItem ? isUnlockedByItem : true) && isPassed;
+    %>
+      <li onclick="<%= isAccessible 
+        ? `location.href='/stories/${story.story_id}'` 
+        : `alert('해금 필요')` %>">
+        <%= story.story_title %> — <%= story.simple_description %>
     <% }) %>
-  </ul>
+    </ul>
 
-  사용자가 퀴즈, 학습 둘 다 통과한 커리큘럼: 
-  <ul>
-    <% passedBothList.forEach(function(item) { %>
-      <li><%= item.curriculum_id %></li>
-    <% }) %>
-  </ul>
+  <script type="module" src="/javascripts/stories.js"></script>
 
-  사용자가 완수한 스토리 단계: <%= storyProg %>
-  
-  <script type="module" src="/javascripts/story.js"></script>
 </body>
 </html>
