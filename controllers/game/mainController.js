@@ -1,46 +1,26 @@
 const db = require("../../models/index"),
-    Item = db.Items,
-    Inventory = db.Inventory;
-
-const userCharacterId = 1; //세션(임시)
+    Item = db.Items;
 
 module.exports = {
-    //crud
+    // 마트 아이템 목록 렌더링
     renderMart: async (req, res, next) => {
-        try{
+        try {
             let items = await Item.findAll();
             res.locals.items = items;
             res.render("game/martItemList");
-        }catch(err){
+        } catch (err) {
             console.log(`error fetching items: ${err}`);
             next(err);
         }
     },
 
-    renderInventory: async (req, res, next) => {
-        let characterId = req.params.character_id;
-        try{
-            let userInventory = await Inventory.findAll({
-                where: { character_id: characterId }
-            });
-            res.locals.userInventory = userInventory;
-            next();
-        }catch(err){
-            console.log(`error fetching inventory: ${err}`);
-            next(err);
-        }
-    },
-
-    //render
+    // 메인/홈/학교 화면 렌더링
     renderMain: (req, res) => {
         res.render("game/main");
     },
     renderHome: (req, res) => {
-        res.render("game/home");
+        res.render("game/storyList");
     },
-    // renderMart: (req, res) => {
-    //     res.render("game/mart");
-    // },
     renderSchool: (req, res) => {
         res.render("game/school");
     }

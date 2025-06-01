@@ -4,28 +4,31 @@
   <meta charset="UTF-8">
   <title>비밀번호 확인</title>
   <link rel="stylesheet" href="/stylesheets/myPage.css">
+  <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 <body>
   <div class="forest-bg"></div>
 
-  <a href="/" class="home-btn">
+  <!-- <a href="/" class="home-btn">
     <img src="/images/home.svg" alt="홈" class="home-icon">
   </a>
   <a href="javascript:history.back()" class="close-btn">
     <img src="/images/disable.png" alt="뒤로가기" class="close-icon">
-  </a>
+  </a> -->
 
-  <div class="info-check-container">
-    <h2>비밀번호 확인</h2>
-    <form class="info-check-form" action="/mypage/check-password" method="POST">
-      <input type="hidden" name="nextUrl" value="<%= nextUrl %>">
-      <label for="password">비밀번호를 입력하세요</label>
-      <input type="password" id="password" name="password" required>
-      <% if (error) { %>
-        <div class="error-msg"><%= error %></div>
-      <% } %>
-      <button type="submit">확인</button>
-    </form>
+  <div class="mypage-wrapper">
+    <div class="info-check-container">
+      <h2>비밀번호 확인</h2>
+      <form class="info-check-form" action="/mypage/check-password" method="POST">
+        <input type="hidden" name="nextUrl" value="<%= nextUrl %>">
+        <label for="password">비밀번호를 입력하세요</label>
+        <input type="password" id="password" name="password" required>
+        <% if (error) { %>
+          <div class="error-msg"><%= error %></div>
+        <% } %>
+        <button type="submit">확인</button>
+      </form>
+    </div>
   </div>
 </body>
 </html>

@@ -1,7 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
     let currentIndex = 0;
-    let userAnswers = []; // 사용자가 선택한 답 저장
-    const passScore = 80; // 서버와 동일하게 맞춰주세요
+    let userAnswers = [];
+    const passScore = 80;
+
+    function updateQuizProgress() {
+        document.getElementById('quiz-progress-text').textContent = 
+            (currentIndex + 1) + '/' + quizzes.length;
+    }
 
     function renderQuiz(index) {
         const quiz = quizzes[index];
@@ -25,6 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.getElementById('check-answer-btn').style.display = 'inline-block';
         document.getElementById('next-btn').style.display = 'none';
+
+        updateQuizProgress();
     }
 
     function checkAnswer() {
@@ -40,13 +47,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const solution = quiz.solution;
 
         const solutionBox = document.getElementById('solution-box');
-
-        if (parseInt(selected.value) === answer) {
-            alert('정답입니다!');
-        } else {
-            alert('오답입니다!');
-        }
-        solutionBox.textContent = `${solution}`;
+        const isCorrect = parseInt(selected.value) === answer;
+        solutionBox.innerHTML = `
+            <p style="font-weight: 900; color: ${isCorrect ? '#2393F6' : '#D53A3A'};">
+                ${isCorrect ? '정답입니다!' : '오답입니다!'}
+            </p>
+            <p>${solution}</p>
+        `;
         solutionBox.style.display = 'block';
 
         document.getElementById('check-answer-btn').style.display = 'none';
@@ -95,34 +102,34 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('next-btn').addEventListener('click', nextQuiz);
 
     renderQuiz(currentIndex);
-
-    // slider
-    let duration = 120; // 총 시간 (초)
-    let progress = 0;
-
-    const fill = document.getElementById('fill');
-    const slider = document.getElementById('slider');
-    const track = document.getElementById('track');
-
-    const trackWidth = track.offsetWidth;
-    const pencilHalfWidth = slider.offsetWidth / 2;
-
-    const interval = setInterval(() => {
-        progress++;
-
-        const ratio = Math.min(progress / duration, 1);
-
-        const fillWidth = ratio * trackWidth;
-        fill.style.width = `${fillWidth}px`;
-
-        if (fillWidth > 5) {
-            slider.style.opacity = 1;
-        }
-
-        slider.style.left = `${track.offsetLeft + fillWidth - pencilHalfWidth + 45}px`;
-
-        if (progress >= duration) {
-            clearInterval(interval);
-        }
-    }, 1000);
 });
+
+// slider
+let duration = 300; // 총 시간 (초)
+let progress = 0;
+
+const fill = document.getElementById('fill');
+const slider = document.getElementById('slider');
+const track = document.getElementById('track');
+
+const trackWidth = track.offsetWidth;
+const pencilHalfWidth = slider.offsetWidth / 2;
+
+const interval = setInterval(() => {
+    progress++;
+
+    const ratio = Math.min(progress / duration, 1);
+
+    const fillWidth = ratio * trackWidth;
+    fill.style.width = `${fillWidth}px`;
+
+    if (fillWidth > 1) {
+        slider.style.opacity = 1;
+    }
+
+    slider.style.left = `${track.offsetLeft + fillWidth - pencilHalfWidth + 45}px`;
+
+    if (progress >= duration) {
+        clearInterval(interval);
+    }
+}, 1000);

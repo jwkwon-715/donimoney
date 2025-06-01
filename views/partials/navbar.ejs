@@ -1,0 +1,24 @@
+<!-- views/partials/navbar.ejs -->
+<link rel="stylesheet" href="/stylesheets/userMoney.css">
+<link rel="stylesheet" href="/stylesheets/style.css">
+
+  <div class="nav-buttons">
+    <% if (typeof showHomeAndCloseButtons !== 'undefined' && showHomeAndCloseButtons) { %>
+    <button class="home-button" id="homeButton" onclick="location.href='/game/main'">
+        <img src="/images/home_icon.png" class="home-icon" alt="">
+    </button>
+
+    <nav class="navbar">
+      <% if (typeof userMoney !== 'undefined') { %>
+        <div class="money-badge" style="position:relative;">
+            <img src="/images/coin.png" alt="코인" class="coin-icon">
+            <span id="userMoney"><%= userMoney %></span>
+        </div>
+      <% } %>
+    </nav>
+
+    <button class="close-button" id="closeButton" onclick="location.href='javascript:history.back()'">
+        <img src="/images/close_icon.png" class="close-icon" alt="">
+    </button>
+    <% } %>
+  </div>

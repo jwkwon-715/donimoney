@@ -1,4 +1,107 @@
-<h1>마트 화면</h1>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <title>Document</title> -->
+    <link rel="stylesheet" href="/stylesheets/martItem.css">
+</head>
+<body>
+    <img class="bg" src="/images/배경.png" alt="">
+
+    <!-- <div class="buttons">
+        <button class="home-button" id="homeButton" onclick="location.href='/game/main'">
+            <img src="/images/home_icon.png" class="home-icon" alt="">
+        </button>
+        <button class="close-button" id="closeButton" onclick="location.href='/game/main'">
+            <img src="/images/close_icon.png" class="close-icon" alt="">
+        </button>
+    </div> -->
+
+    <ul class="item-list">
+        <% items.forEach(item => { %>
+          <li class="item-card">
+            <div class="item-left">
+                <img src="/images/object/egg.png" class="item-img" alt="상품 이미지"> <!-- item_id로 받아오기 -->
+            </div>
+            <div class="item-right">
+                <h3 class="item-title"><%= item.item_name %></h3>
+                <p class="item-desc"><%= item.item_description %></p>
+                <p class="price-tag">
+                    <img src="/images/coin.png" class="coin-icon"> <%= item.item_price %>원
+                </p>
+
+                <button class="purchase-btn" onclick="openModal(
+                '<%= item.item_id %>',
+                '<%= item.item_name %>',
+                '<%= item.item_price %>',
+                '/images/object/egg.png')">구매하기
+                </button>
+            </div>
+          </li>
+        <% }); %>
+      </ul>
+    
+      <div id="purchase-modal" class="modal hidden">
+        <div class="modal-content">
+          <img src="/images/cart_icon.png" class="cart-icon" alt="장바구니 아이콘">
+          <h2>구매하시겠습니까?</h2>
+          
+          <div class="modal-item">
+            <button onclick="changeModalQuantity(-1)" class="qty-btn minus-btn">-</button>
+            <img id="modal-item-img" src="/images/item_placeholder.png" class="item-img"/>
+            <button onclick="changeModalQuantity(1)" class="qty-btn plus-btn">+</button>
+          </div>
+          
+          <div class="modal-desc">
+            <span id="modal-item-name">상품 이름</span>
+            <span id="modal-quantity">1</span>개
+            <span class="coins">
+              <img src="/images/coin.png" class="coin-icon">
+              <span id="modal-item-price">500</span>
+            </span>
+          </div>
+          
+          <div class="modal-buttons">
+            <button onclick="getCart()" class="yes-btn orBtn">장바구니 담기</button>
+            <button onclick="closeModal()" class="no-btn orBtn">아니오</button>
+          </div>
+        </div>
+      </div>
+
+      <button id="toggle-cart-btn">장바구니</button>
+      <div id="cart" class="cart-container hidden">
+        <div class="cart-panel">
+          <h2>장바구니</h2>
+          <table class="cart-table">
+            <thead>
+              <tr>
+                <th>상품 이름</th>
+                <th>수량</th>
+                <th>가격</th>
+              </tr>
+              
+            </thead>
+            <tbody id="cart-body"></tbody>
+            <tfoot>
+              <tr>
+                <div class="separator"></div>
+                <div class="dashed-line"></div>
+                <td colspan="2"><strong>합계</strong></td>
+                <td><span id="cart-total">0</span>원</td>
+              </tr>
+            </tfoot>
+          </table>
+          <button class="exit-button" onclick="finishPurchase()">구매하기</button>
+        </div>
+      </div>
+      
+
+      <script src="/javascripts/martPurchase.js"></script>
+</body>
+</html>
+
+<!-- <h1>마트 화면</h1>
 <ul>
     <% items.forEach(item => { %>
         <li>
@@ -15,6 +118,4 @@
         </li>
     <% }); %>
 </ul>
-<button type="button" onclick="confirmePurchase()">마트 나가기</button>
-
-<script src="/javascripts/martPurchase.js"></script>
+<button type="button" onclick="confirmePurchase()">마트 나가기</button> -->

@@ -1,0 +1,344 @@
+body {
+    font-family: 'Cafe24DongDong';
+    font-size: 28px;
+    color: #333;
+}
+
+.bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    z-index: -2;
+}
+  
+.item-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+    padding: 60px 0 0 0;
+    list-style: none;
+}
+
+.item-card {
+    display: flex;
+    width: 25%;
+    padding: 20px;
+    border-radius: 24px;
+    background: #F6F6F6;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    gap: 20px;
+    align-items: center;
+}
+
+.item-left, .item-img {
+    width: 55%;
+    height: auto;
+}
+
+.item-right {
+    flex: 1;
+    text-align: left;
+}
+
+.purchase-btn {
+    width: 100%;
+    height: 50px;
+    border-radius: 16px;
+    color: #f5f5f5;
+    background-color: #8F9EFF;
+    box-shadow:inset 0 -3.74px 0 0 #7386FF, 0 3px 0 0 rgba(0, 0, 0, 0.1);
+    font-family: 'NanumSquareRound';
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.purchase-btn:hover, .purchase-btn:active {
+    box-shadow: 0 3px 0 0 rgba(0, 0, 0, 0.1);
+}
+  
+.item-title {
+    font-family: 'Cafe24DongDong';
+    font-size: 36px;
+    font-weight: 900;
+    margin: 16px 0 4px;
+}
+  
+.item-desc {
+    font-family: 'NanumSquareRound';
+    font-size: 12px;
+    color: #505050;
+    line-height: 1.4;
+    margin: 10px 0;
+}
+  
+.item-price {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin: 12px 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.price-tag {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'KCC-DodamdodamR';
+    font-size: 24px;
+    color: #333333;
+    margin: 10px 0 20px;
+}
+
+.item-quantity {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 12px 0;
+}
+  
+.buy-button {
+    background-color: #A9BCFF;
+    color: #fff;
+    padding: 10px 24px;
+    border-radius: 12px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+}
+
+.modal {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+  
+.hidden {
+    display: none;
+}
+  
+.modal-content {
+    width: 35%;
+    background: #F6F6F6;
+    border-radius: 24px;
+    padding: 40px;
+    text-align: center;
+    position: relative;
+}
+  
+.cart-icon {
+    width: 60px;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-family: 'Cafe24DongDong';
+    font-size: 64px;
+    color: #333333;
+}
+
+.modal-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+#modal-item-name {
+    font-family: 'Cafe24DongDong';
+    font-size: 28px;
+    color: #333;
+}
+
+#modal-item-price {
+    font-family: 'KCC-DodamdodamR';
+    font-size: 28px;
+    color: #333;
+}
+
+#modal-quantity {
+    font-family: 'KCC-DodamDodamR';
+    font-size: 28px;
+    color: #333;
+    margin-right: -17%;
+}
+
+.item-img {
+    width: 200px;
+    height: 140px;
+    /* background-color: #ccc; */
+}
+  
+.qty-btn {
+    font-size: 28px;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background-color: #A9BCFF;
+    color: #FFFCF5;
+    border: none;
+}
+
+.minus-btn {
+    background-color: #9DA8C1;
+    box-shadow:inset 0 -3.74px 0 0 #94A1BF, 0 3px 0 0 rgba(0, 0, 0, 0.1);
+}
+
+.plus-btn {
+    background-color: #3B9EF7;
+    box-shadow:inset 0 -3.74px 0 0 #2393F6, 0 3px 0 0 rgba(0, 0, 0, 0.1);
+}
+  
+.modal-desc {
+    margin-top: 10px;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+  
+.coin-icon {
+    width: 28px;
+    height: 30px;
+    vertical-align: middle;
+}
+
+.coins {
+    align-items: center;
+}
+  
+.modal-buttons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.orBtn {
+    width: 35%;
+    height: 60px;
+    color: #333333;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 10px;
+    border: none;
+    box-shadow:inset -4px -4px 0 0 rgba(0, 0, 0, 0.06);
+    font-family: 'Cafe24DongDong';
+    font-size: 24px;
+}
+
+.yes-btn {
+    background-color: #78C0FF;
+}
+
+.yes-btn:hover, .yes-btn:active {
+    background-color: #3B9EF7;
+    box-shadow: none;
+}
+  
+.no-btn {
+    background-color: #FE8181;
+}
+
+.no-btn:hover, .no-btn:active {
+    background-color: #ED5757;
+    box-shadow: none;
+}
+
+.cart-container {
+    background-image: url(/images/mart_cartList.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 494px;
+    height: 633px;
+    font-family: 'Cafe24DongDong';
+    position: fixed;
+    top: 200px;
+    left: 69px;
+    z-index: 50;
+}
+
+.cart-panel {
+    position: absolute;
+    top: 100px;
+    left: 60px;
+    width: 340px;
+    padding: 30px;
+    font-family: 'NanumSquareRound';
+}
+
+.cart-table {
+    width: 100%;
+    font-size: 18px;
+    border-collapse: collapse;
+}
+
+.cart-table th, .cart-table td {
+    padding: 8px 4px;
+    text-align: left;
+}
+
+.cart-table tfoot td {
+    font-weight: bold;
+}
+
+#cart-total {
+    font-weight: bold;
+    color: #F9CF45;
+}
+
+.separator {
+    height: 1px;
+    background-color: #ccc;
+    margin: 4px 0;
+}
+
+.dashed-line {
+    border-top: 2px dashed #888;
+    margin: 20px 0;
+}
+
+.exit-button {
+    position: absolute;
+    /* width: 200px;
+    height: 80px; */
+    align-self: flex-end;
+    margin: 30% 5% 15% -5%;
+    padding: 12px 24px 20px;
+    border: none;
+    background-color: #F9CF45;
+    font-size: 24px;
+    font-weight: 900;
+    color: #F5F5F5;
+    cursor: pointer;
+    text-align: center;
+    box-shadow:inset 0 -3.74px 0 0 #F3C83A, 0 3px 0 0 rgba(0, 0, 0, 0.1);
+
+    width: 100%;
+    height: 55px;
+    border-radius: 16px;
+    font-family: 'NanumSquareRound';
+}
+
+.exit-button:hover, .exit-button:active {
+    transform: translateY(4px);
+    color: #E4AF00;
+    box-shadow: 0 3px 0 0 rgba(0, 0, 0, 0.1);
+}

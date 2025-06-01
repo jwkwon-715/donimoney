@@ -2,9 +2,42 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>퀴즈 실패</title>
+  <!-- <title>퀴즈 실패</title> -->
+  <link rel="stylesheet" href="/stylesheets/afterQuiz.css">
+  <link rel="stylesheet" href="/stylesheets//style.css">
 </head>
 <body>
-  <h2 style="text-align:center; margin-top:60px;">퀴즈에 실패했습니다!</h2>
+  <img class="bg" alt="" src="/images/배경.png">
+  <!-- <img class="confetti-bg" src="/images/confetti_bg.png" alt=""> -->
+
+  <!-- <div class="buttons">
+      <button class="home-button" id="homeButton" onclick="location.href='/game/main'">
+          <img src="/images/home_icon.png" class="home-icon" alt="">
+      </button>
+      <button class="close-button" id="closeButton" onclick="location.href='/game/school/quiz/typeList'">
+          <img src="/images/close_icon.png" class="close-icon" alt="">
+      </button>
+    </div> -->
+
+  <div class="wrapper">
+    <div class="quiz-success"> 
+      <div class="quiz-success-child"></div>
+      <div class="rectangle-parent">
+          <div class="post-2 failed"></div>
+          <img class="stickers tear" alt="" src="/images/sticker_tear.png">
+          <img class="stickers darkheart" alt="" src="/images/sticker_darkheart.png">
+          <img class="stickers thumb-down" alt="" src="/images/sticker_thumdown.png">
+          
+          <div class="post-1">
+            <img class="stickers thumb" src="/images/sticker_sadface.png" alt="">
+            <h1 class="text failed-text">실패했어요...</h1>
+            <p>그래도 포기하지 말아요!<br>다시 도전해 볼까요?</p>
+          </div>
+
+          <button class="btn reBtn failedBtn" onclick="location.href='/game/school/quiz/typeList'">다시 하기</button>
+          <button class="btn nxtBtn nxtfailedBtn" onclick="location.href='/game/main'">끝내기</button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

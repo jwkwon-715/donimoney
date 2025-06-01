@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Story List</title>
+  <style>
+    li{
+      background-color: grey;
+      margin:10px 10px;
+    }
+  </style>
+
+</head>
+<body>
+  <h1>스토리 목록</h1>
+  <% 
+    const storyUnlockMap = storyUnlockItems || {};
+  %>
+    <ul>
+    <% storyList.forEach(story => { 
+      const isUnlockedByItem = unlockedStories.includes(String(story.story_id));
+      const isPassed = passedBothList.some(p => p.curriculum_id == story.curriculum_id);
+      const requiresItem = storyUnlockMap.hasOwnProperty(String(story.story_id));
+      const isAccessible = (requiresItem ? isUnlockedByItem : true) && isPassed;
+    %>
+      <li onclick="<%= isAccessible 
+        ? `location.href='/stories/${story.story_id}'` 
+        : `alert('해금 필요')` %>">
+        <%= story.story_title %> — <%= story.simple_description %>
+    <% }) %>
+    </ul>
+
+  <script type="module" src="/javascripts/stories.js"></script>
+
+</body>
+</html>

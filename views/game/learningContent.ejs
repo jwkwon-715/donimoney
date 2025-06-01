@@ -3,43 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/stylesheets/style.css">
-  <link rel="stylesheet" href="/stylesheets/learningCard.css">
+  <link rel="stylesheet" href="/stylesheets/learningContent.css">
 </head>
 <body>
-  <div class="buttons">
+  <!-- <div class="buttons">
     <button class="home-button" id="homeButton" onclick="location.href='/game/school/learning/list'">
         <img src="/images/home_icon.png" class="home-icon" alt="">
     </button>
     <button class="close-button" id="closeButton" onclick="location.href='/game/main'">
         <img src="/images/close_icon.png" class="close-icon" alt="">
     </button>
+  </div> -->
+
+  <div class="indicator" id="indicator">
+    <% contentArr.forEach((_, idx) => { %>
+      <div class="dot <%= idx === 0 ? 'active' : '' %>"></div>
+    <% }) %>
   </div>
 
-  <div class="card-slider">
-    <button class="nav-btn left" id="prevBtn">&#8592;</button>
+  <div class="learning-container">
+    <a class="nav-btn arrow left" id="prevBtn"></a> <!-- &#8592; -->
     <div class="card-section" id="cardSection">
       <% contentArr.forEach(function(card, idx) { %>
         <div class="card" style="display: <%= idx === 0 ? 'block' : 'none' %>;">
-          <div class="card-body"><%- card.replace(/\n/g, "<br>") %></div>
+          <div class="card-body">
+            <% if(card.title) { %>
+              <div class="card-title" style="font-weight:bold; font-size:3em; margin-bottom:10px;">
+                <%= card.title %>
+              </div>
+            <% } %>
+            <%- card.body.replace(/\n/g, "<br>") %>
+            <hr>
+            <img src="/images/learning/<%= learningId %>_<%= idx %>.png" class="img" alt="">
+          </div>
         </div>
       <% }) %>
     </div>
-    <button class="nav-btn right" id="nextBtn">&#8594;</button>
+    <a class="nav-btn arrow right" id="nextBtn"></a> <!-- &#8594; -->
   </div>
   <div class="indicator" id="indicator"></div>
 
   <div style="margin-top:30px; text-align:center;">
-  <!--
-  <% if (learningContent.LearningProgresses && learningContent.LearningProgresses.length > 0) { %>
-    <p>진행 상태: <%= learningContent.LearningProgresses[0].learning_pass ? "완료" : "미완료" %></p>
-  <% } else { %>
-    <p>아직 학습하지 않았습니다.</p>
-  <% } %>
-  -->
-    <!-- 학습 완료 버튼: 마지막 카드에서만 보이게 JS로 제어 -->
     <button type="button" class="complete-btn" id="completeBtn" style="display:none;">학습 완료</button>
     <input type="hidden" id="learningId" value="<%= learningContent.learning_id %>">
+    <input type="hidden" id="learningPass" value="<%= learningPass ? 'true' : 'false' %>">
   </div>
 
   <script>

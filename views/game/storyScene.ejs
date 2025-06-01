@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>스토리 플레이</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      overflow: hidden;
+    }
+  </style>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+
+</head>
+<body>
+  <div id="game-container"></div>
+
+  <script>
+    window.storyId = <%= storyId %>;
+    window.playerName = "<%= playerName %>";
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3.88.2/dist/phaser.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+  <script>
+  WebFont.load({
+    custom: {
+      families: ['Cafe24Dongdong']
+    },
+    active: function() {
+      if (window.startPhaserGame) {
+        window.startPhaserGame();
+      }
+    }
+  });
+  </script>
+
+  <script type="module">
+  import { StoryScene1 } from '/javascripts/story1.js';
+  import { StoryScene2 } from '/javascripts/story2.js';
+
+  const sceneMap = {
+    1: StoryScene1,
+    2: StoryScene2
+  };
+
+  function startPhaserGame() {
+    const storyId = window.storyId;
+    const playerName = window.playerName;
+
+    if ([1, 2].includes(storyId)) {
+      const config = {
+        type: Phaser.AUTO,
+        parent: 'game-container',
+        width: 1920,
+        height: 1080,
+        scale: {
+          mode: Phaser.Scale.FIT,
+          autoCenter: Phaser.Scale.CENTER_BOTH
+        },
+        physics: { default: 'arcade' },
+        backgroundColor: '#000',
+        scene: [sceneMap[storyId]]
+      };
+
+      const game = new Phaser.Game(config);
+      game.scene.start(sceneMap[storyId].name, { 
+        storyId: storyId,
+        playerName: playerName
+      });
+    } else {
+      console.error('Invalid storyId:', storyId);
+    }
+  }
+
+  // 모듈 스코프에서 전역 등록
+  window.startPhaserGame = startPhaserGame;
+</script>
+</body>
+</html>

@@ -6,14 +6,14 @@ const db = require("../../models/index"),
     Sequelize = db.Sequelize;
 
 const learningReward = 500;
-const userCharacterId = 7; // 세션(임시)
 
-async function isNewProg(learningId) {
+// 학습 진행 여부 확인 함수
+async function isNewProg(learningId, userCharacterId) { 
     try {
         const LearningProg = await LearningProgress.findOne({
             where: { learning_id: learningId, user_character_id: userCharacterId }
         });
-        return !LearningProg;  // 없는 경우 true, 있는 경우 false
+        return !LearningProg;
     } catch (err) {
         console.error(err);
         return false;
@@ -23,15 +23,26 @@ async function isNewProg(learningId) {
 module.exports = {
     updateLearningProgress: async (req, res, next) => {
         const learningId = req.body.learningId;
+        const userCharacterId = req.user.user_character_id; 
+
         try {
-            const isNew = await isNewProg(learningId);
+            const isNew = await isNewProg(learningId, userCharacterId); 
             if (isNew) {
                 await LearningProgress.create({
                     learning_id: learningId,
                     learning_pass: true,
-                    user_character_id: userCharacterId
+                    user_character_id: userCharacterId 
                 });
             } else {
+                const prog = await LearningProgress.findOne({
+                    where: {
+                        learning_id: learningId,
+                        user_character_id: userCharacterId 
+                    }
+                });
+                if (prog.learning_pass) {
+                    return res.status(200).json({ result: 'already_passed' });
+                }
                 await LearningProgress.update(
                     { learning_pass: true },
                     {
@@ -57,11 +68,11 @@ module.exports = {
                 }
             );
 
-            next();
+            res.status(200).json({ result: 'success' });
 
         } catch (err) {
             console.log(err);
-            next(err);
+            res.status(500).json({ result: 'fail' });
         }
     },
 
@@ -71,12 +82,14 @@ module.exports = {
             res.render("game/learningList", { learningList });
         } catch (err) {
             console.log(err);
-            next(err);
+            res.status(500).send('서버 오류');
         }
     },
 
     renderLearningContent: async (req, res, next) => {
         const learningId = req.params.learningId;
+        const userCharacterId = req.user.user_character_id;
+
         try {
             const learningContent = await Learning.findOne({
                 where: { learning_id: learningId },
@@ -90,12 +103,24 @@ module.exports = {
                 ]
             });
 
-            // 카드 분리: \n\n로 나눔
-            const contentArr = learningContent.content.split(/\n\n/);
+            // 제목과 본문 분리
+            const [title, ...bodyParts] = learningContent.content.split(/\n\n/);
+            // 카드 배열 생성: 첫 번째 카드만 제목, 나머지는 본문만
+            const contentArr = bodyParts.map((body, idx) => ({
+                title: idx === 0 ? title : '',
+                body
+            }));
+
+            let learningPass = false;
+            if (learningContent.LearningProgresses?.length > 0) {
+                learningPass = !!learningContent.LearningProgresses[0].learning_pass;
+            }
 
             res.render('game/learningContent', {
+                learningId,
                 learningContent,
-                contentArr
+                contentArr,
+                learningPass
             });
         } catch (err) {
             console.log(err);

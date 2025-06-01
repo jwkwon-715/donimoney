@@ -19,18 +19,6 @@ exports.signup = async (req, res) => {
     return res.redirect('/users/signup');
   }
 
-  // 만 14세 미만 체크
-  const today = new Date();
-  const birth = new Date(birthdate);
-  let age = today.getFullYear() - birth.getFullYear();
-  const m = today.getMonth() - birth.getMonth();
-  if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) age--;
-
-  if (age < 14) {
-    req.flash('error', '📌 만 14세 미만은 부모님 인증이 필요합니다.');
-    return res.redirect('/users/signup');
-  }
-
   try {
     const existingId = await Users.findOne({ where: { user_id } });
     if (existingId) {

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/stylesheets/style.css">
+    <!-- <link rel="stylesheet" href="/stylesheets/style.css"> -->
     <link rel="stylesheet" href="/stylesheets/learningList.css">
 
     <!-- Swiper -->
@@ -12,14 +12,14 @@
 </head>
 <body>
     <!-- <h1>학습 파트 고르기</h1> -->
-    <div class="buttons">
+    <!-- <div class="buttons">
         <button class="home-button" id="homeButton" onclick="location.href='/game/school'">
             <img src="/images/home_icon.png" class="home-icon" alt="">
         </button>
         <button class="close-button" id="closeButton" onclick="location.href='/game/main'">
             <img src="/images/close_icon.png" class="close-icon" alt="">
         </button>
-    </div>
+    </div> -->
 
     <div class="swiper learning-swiper">
         <h1>학습</h1>
@@ -60,11 +60,9 @@
             }
           }
         });
-      </script>
-      
+      </script>  
 </body>
 </html>
-
 
 <!-- <% learningList.forEach(learning => { %>
     <form method="get" action="/game/school/learning/content/<%= learning.learning_id %>">

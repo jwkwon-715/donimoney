@@ -8,6 +8,7 @@ const mainController = require("../controllers/game/mainController");
 const martController = require("../controllers/game/martController");
 const learningController = require("../controllers/game/learningController");
 const quizController = require("../controllers/game/quizController");
+const storyController = require("../controllers/game/storyController");
 
 // 로그인 체크 미들웨어
 function ensureAuthenticated(req, res, next) {
@@ -37,7 +38,7 @@ router.get('/start', ensureAuthenticated, async (req, res) => {
   }
 });
 
-// 게임 홈 화면 렌더링 (캐릭터 확인 및 닉네임 전달)
+// 게임 메인  화면 렌더링 (캐릭터 확인 및 닉네임 전달)
 router.get('/main', ensureAuthenticated, async (req, res) => {
   try {
     const userId = req.user.user_id;
@@ -54,11 +55,13 @@ router.get('/main', ensureAuthenticated, async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    res.send('게임 홈 로딩 중 오류가 발생했습니다.');
+    res.send('게임 메인인 로딩 중 오류가 발생했습니다.');
   }
 });
 
-// ----- 마트/학교/퀴즈/학습 라우트 -----
+router.get("/home", mainController.renderHome);
+
+// ----- 마트/학교/퀴즈/학습/스토리 라우트 -----
 
 // 마트
 router.get("/mart/itemList", ensureAuthenticated, mainController.renderMart);
@@ -86,5 +89,15 @@ router.post("/school/learning/complete", ensureAuthenticated, learningController
   // 학습 완료 후 /main으로 이동
   res.redirect('/game/main');
 });
+
+
+router.get(
+  "/stories/storyList",
+  ensureAuthenticated,
+  storyController.showPossibleStoryList,
+  storyController.hasUnlockItem,
+  storyController.renderStoriesList    
+);
+router.post('/stories/complete', ensureAuthenticated, storyController.updateStoryProg);
 
 module.exports = router;

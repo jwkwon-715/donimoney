@@ -3,8 +3,6 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'NanumSquareRound';
-    /* width: 1920px;
-    height: 100vh; */
 }
 
 .learning-card {
@@ -23,13 +21,12 @@ body {
 
 .swiper, .swiper-wrapper, .swiper-slide { overflow: visible !important; }
 
-h1 { margin: 178.71px 0 28.69px 173px; }
+h1 { margin: 5% 0 2% 5% }
 
 .learning-card img {
     width: 100%;
     height: 60%;
     object-fit: cover;
-    /* border-bottom: 1px solid #eee; */
 }
 
 .card-text {
@@ -50,5 +47,9 @@ h1 { margin: 178.71px 0 28.69px 173px; }
     font-size: 24px;
     font-weight: normal;
     color: #505050;
-    /* margin: 0; */
+}
+
+/* 스크롤바 안 보이게 설정 */
+::-webkit-scrollbar {
+    display: none;
 }

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <%- include('partials/navbar') %>
+
+  <%- body %>
+</body>
+</html>
+
+<script>
+    window.showHomeAndCloseButtons = <%= typeof showHomeAndCloseButtons !== 'undefined' && showHomeAndCloseButtons ? showHomeAndCloseButtons : 0 %>;
+    window.userMoney = <%= typeof userMoney !== 'undefined' ? userMoney : 0 %>;
+</script>
