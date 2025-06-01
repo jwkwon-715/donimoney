@@ -27,6 +27,6 @@ router.get('/info', isAuthenticated, myPageController.renderInfo);
 router.get('/character', isAuthenticated, myPageController.renderCharacter);
 
 //인벤토리 보기
-router.get('/inventory', myPageController.renderInventory);
+router.get('/inventory', isAuthenticated, myPageController.renderInventory);
 
 module.exports = router;
