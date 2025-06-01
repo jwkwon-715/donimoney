@@ -89,7 +89,7 @@ function changeModalQuantity(amount) {
     document.getElementById("modal-quantity").textContent = selectedQuantity;
 }
 
-function confirmPurchase() {
+function getCart() {
     const userMoneyDisplay = document.getElementById('userMoney');
     const userMoney = parseInt(userMoneyDisplay.textContent, 10);
     const cost = selectedItemPrice * selectedQuantity;
@@ -99,15 +99,46 @@ function confirmPurchase() {
         return;
     }
 
-    buyItems.push({
-        itemId: selectedItemId,
-        quantity: selectedQuantity,
-        cost: cost
-    });
-
-    userMoneyDisplay.textContent = userMoney - cost;
+    const existing = buyItems.find(item => item.itemId === selectedItemId);
+    if (existing) {
+        existing.quantity += selectedQuantity;
+        existing.cost += cost;
+    } else {
+        buyItems.push({
+            itemId: selectedItemId,
+            name: document.getElementById("modal-item-name").textContent,
+            quantity: selectedQuantity,
+            cost: cost
+        });
+    }
+    
     document.getElementById("purchase-modal").classList.add("hidden");
+    updateCartUI();
 }
+
+function updateCartUI() {
+    const cartBody = document.getElementById('cart-body');
+    cartBody.innerHTML = '';
+
+    let total = 0;
+    buyItems.forEach(item => {
+        total += item.cost;
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${item.name}</td>
+            <td>${item.quantity}</td>
+            <td><img src="/images/coin.png" class="coin-icon"> ${item.cost}</td>
+        `;
+        cartBody.appendChild(row);
+    });
+    document.getElementById('cart-total').textContent = total;
+}
+
+document.getElementById('toggle-cart-btn').addEventListener('click', () => {
+    const cart = document.getElementById('cart');
+    cart.classList.toggle('hidden');
+  });
 
 function finishPurchase() {
     let totalCost = buyItems.reduce((sum, item) => sum + item.cost, 0);
@@ -139,7 +170,7 @@ function finishPurchase() {
 
     buyItems.push({itemId: selectedItemId, quantity, cost});
 
-    userMoneyDisplay.textContent = userMoney - cost;
+    userMoneyDisplay.textContent = userMoney - totalCost;
 }
 
 function closeModal() {

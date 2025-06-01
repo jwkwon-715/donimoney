@@ -47,10 +47,10 @@ body {
   justify-content: center;
 
   /* no drag */
-  -webkit-user-select: none;
+  /* -webkit-user-select: none;
   -moz-user-select: none;
   -ms-use-select: none;
-  user-select: none;
+  user-select: none; */
 }
 
 img {
@@ -58,8 +58,7 @@ img {
   -khtml-user-drag: none;
   -moz-user-drag: none;
   -o-user-drag: none;
-  user-drag: none;
- }
+}
 
 button {
   border: none;

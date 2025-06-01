@@ -63,13 +63,39 @@
           </div>
           
           <div class="modal-buttons">
-            <button onclick="confirmPurchase()" class="yes-btn orBtn">장바구니 담기</button>
+            <button onclick="getCart()" class="yes-btn orBtn">장바구니 담기</button>
             <button onclick="closeModal()" class="no-btn orBtn">아니오</button>
           </div>
         </div>
       </div>
 
-      <button class="exit-button" onclick="finishPurchase()">마트 나가기</button>
+      <button id="toggle-cart-btn">장바구니</button>
+      <div id="cart" class="cart-container hidden">
+        <div class="cart-panel">
+          <h2>장바구니</h2>
+          <table class="cart-table">
+            <thead>
+              <tr>
+                <th>상품 이름</th>
+                <th>수량</th>
+                <th>가격</th>
+              </tr>
+              
+            </thead>
+            <tbody id="cart-body"></tbody>
+            <tfoot>
+              <tr>
+                <div class="separator"></div>
+                <div class="dashed-line"></div>
+                <td colspan="2"><strong>합계</strong></td>
+                <td><span id="cart-total">0</span>원</td>
+              </tr>
+            </tfoot>
+          </table>
+          <button class="exit-button" onclick="finishPurchase()">구매하기</button>
+        </div>
+      </div>
+      
 
       <script src="/javascripts/martPurchase.js"></script>
 </body>

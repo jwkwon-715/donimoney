@@ -1,5 +1,69 @@
-<h1>메인 게임 화면</h1>
-<hr>
-<a href="/game/stories/storyList"><button>집</button></a>
-<a href="/game/mart/itemList"><button>마트</button></a>
-<a href="/game/school"><button>학교</button></a>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>스토리 플레이</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      overflow: hidden;
+    }
+  </style>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+  
+<!--<a href="/game/home"><button>집</button></a>-->
+<!--<a href="/game/mart/itemList"><button>마트</button></a>-->
+<!--<a href="/game/school"><button>학교</button></a>-->
+
+  <!-- 게임이 렌더링될 컨테이너 -->
+  <div id="game-container"></div>
+
+  <!--  JS 변수로 설정 -->
+  <script>
+    window.user = {
+      userId: <%= JSON.stringify(user.user_id) %>,
+      nickname: <%= JSON.stringify(nickname) %>
+    };
+  </script>
+
+  <!-- Phaser 라이브러리 -->
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3.88.2/dist/phaser.js"></script>
+
+  <!-- 게임 초기화 스크립트 -->
+  <script type="module">
+    import { GameScene } from '/javascripts/gameScene.js';
+
+    // Phaser 게임 설정
+    const config = {
+      type: Phaser.AUTO,
+      width: 1920,
+      height: 1080,
+      scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH, // 중앙 정렬
+      },
+      physics: {
+        default: 'arcade',
+        arcade: {
+          debug: false
+        }
+      },
+      scene: [ GameScene, ],
+    };
+
+    const game = new Phaser.Game(config);
+  </script>
+</body>
+</html>
+
+
+<!--<a href="/game/home"><button>집</button></a>-->
+<!--<a href="/game/mart/itemList"><button>마트</button></a>-->
+<!--<a href="/game/school"><button>학교</button></a>-->
+
