@@ -19,7 +19,7 @@
         </button>
     </div> -->
     
-     <h1>일반 모드 퀴즈 선택</h1>
+    <h1>일반 모드 퀴즈 선택</h1>
     <div class="swiper quiz-swiper">
         <div class="swiper-wrapper">
             <% curriculumList.forEach(curriculum => {
@@ -42,6 +42,8 @@
             </div>
             <% }) %>
         </div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
     </div>
 
     <h2>학습 진행 정보</h2>
@@ -60,6 +62,10 @@
             slidesPerView: 2.6,
             spaceBetween: 88,
             centeredSlides: true,
+              navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+              },
             breakpoints: {
                 768: {
                     slidesPerView: 2.5
