@@ -103,7 +103,7 @@ app.use((req, res, next) => {
 });
 
 app.use((req, res, next) => {
-  const showBtns = [/^\/game/, /^\/quiz\/start/, /^\/mypage/];
+  const showBtns = [/^\/game/, /^\/quiz\/start/];
   res.locals.showHomeAndCloseButtons = showBtns.some(pattern => pattern.test(req.originalUrl));
   // console.log("▶️", req.originalUrl, "→ showHomeAndCloseButtons:", res.locals.showHomeAndCloseButtons);
   next();

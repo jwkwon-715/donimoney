@@ -1,10 +1,21 @@
+:root {
+    --gray-light: #9A9FA9;
+    --gray-dark: #333;
+
+    --swiper-navigation-size: 36px !important;
+    --swiper-navigation-top-offset: 50%;
+    --swiper-navigation-sides-offset: 69px;
+    --swiper-navigation-color: var(--gray-dark);
+}
+
 body {
     background-color: #FFFCF5;
     margin: 0;
     padding: 0;
     font-family: 'NanumSquareRound';
-
 }
+
+h1 { margin: 3% 0 1% 5% }
 
 .quiz-card {
     width: 572px;
@@ -21,6 +32,7 @@ body {
     font-size: 32px;
     font-weight: 900;
     color: rgba(51, 51, 51, 0.74);
+    justify-content: center;
 }
 
 .quiz-card:disabled {
@@ -33,27 +45,6 @@ body {
     justify-content: center;
     align-items: center;
 }
-
-.lock-icon {
-    font-size: 18px;
-    color: #888;
-    /* margin-left: 8px; */
-}
-
-.swiper, .swiper-wrapper, .swiper-slide { overflow: visible !important; }
-
-.swiper-slide {
-    flex-shrink: 0;
-    width: 572px;
-    display: flex;
-    justify-content: center;
-}
-
-.swiper-wrapper {
-    display: flex;
-}
-
-h1 { margin: 3% 0 1% 5% }
 
 .quiz-card img {
     width: 10%;
@@ -79,4 +70,50 @@ h1 { margin: 3% 0 1% 5% }
     font-size: 24px;
     font-weight: normal;
     color: #505050;
+}
+
+.lock-icon {
+    font-size: 18px;
+    color: #888;
+    /* margin-left: 8px; */
+}
+
+/* swiper 속성 */
+.swiper, .swiper-wrapper, .swiper-slide { overflow: visible !important; }
+
+.swiper-slide {
+    flex-shrink: 0;
+    width: 572px;
+    display: flex;
+    justify-content: center;
+}
+
+.swiper-wrapper {
+    display: flex;
+}
+
+.swiper-button-prev, .swiper-button-next {
+    width: 64px !important;
+    height: 64px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0 7px 18.9px 4px rgba(0, 0, 0, 0.1);
+    font-weight: 900;
+}
+
+.swiper-button-prev::after, .swiper-button-next::after {
+  display: block;
+  position: static;
+}
+
+.swiper-button-next::after {
+    margin: 10px 0 10px 7px;
+}
+
+.swiper-button-prev::after {
+    margin: 10px 5px 10px 0;
 }

@@ -86,9 +86,8 @@
         "char": "streetbird_basic",
         "type": "question",
         "question": "그래서, 모자를 사겠니?",
-        "answerCount": 2,  
         "answer0": "구매한다",
-        "answer1": "구매하지 않는다"
+        "answerSkip1": "구매하지 않는다"
       },
       {
         "name": "streetbird",
@@ -317,59 +316,6 @@
         "char": "todragon_worried",
         "type": "line",
         "line": "(자연스럽게 수업을 시작하네...)"
-      }
-    ]
-  },
-  {
-    "id": 10,  
-    "background": "colorbg", 
-    "dialogs": [
-      {
-        "char": "dony",
-        "type": "line",
-        "line": "현명한 소비를 하기 위한 첫번째 단계는 지출 계획을 세우는 거야!"
-      },
-      {
-        "char": "todragon",
-        "type": "line",
-        "line": "지출계획이 뭐야?"
-      },
-      {
-        "char": "dony",
-        "type": "line",
-        "line": "지출계획은 말 그대로 앞으로 돈을 어떻게 쓸 건지 계획하는 거야!\n어떤 곳에 얼만큼의 돈을 사용할지 미리 정리하는 거지."
-      },
-      {
-        "char": "dony",
-        "type": "conditional",
-        "conditions": {
-          "good": [
-            {
-              "char": "dony",
-              "type": "line",
-              "line": "정말 잘했어! 꼭 필요한 물건도 고민하고 남은 돈으로는 저축까지 했네. 이게 바로 현명한 소비야!"
-            }
-          ],
-          "replay1": [
-            {
-              "char": "dony",
-              "type": "line",
-              "line": "에잇 장난감만 사면 어떡해-! 이렇게 되면 돈이 부족해서 지우개를 살 돈이 모자라!"
-            }
-          ],
-          "replay2": [
-            {
-              "char": "dony",
-              "type": "line",
-              "line": "저축을 이렇게나 많이 하다니 대단한데?\n하지만 필요한 물건을 살 돈 정도는 남겨둬야지!"
-            }
-          ]
-        }
-      },
-      {
-        "char": "dony",
-        "type": "line",
-        "line": "{이름}, 이제 어떤 유혹이 닥쳐도 현명한 소비를 할 수 있겠지?\n자, 앞으로도 같이 힘내보자!"
       }
     ]
   }

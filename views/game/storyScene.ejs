@@ -38,44 +38,33 @@
   </script>
 
   <script type="module">
-  import { StoryScene1 } from '/javascripts/story1.js';
-  import { StoryScene2 } from '/javascripts/story2.js';
-
-  const sceneMap = {
-    1: StoryScene1,
-    2: StoryScene2
-  };
+  import { StoryScene } from '/javascripts/story.js';
 
   function startPhaserGame() {
     const storyId = window.storyId;
     const playerName = window.playerName;
 
-    if ([1, 2].includes(storyId)) {
-      const config = {
-        type: Phaser.AUTO,
-        parent: 'game-container',
-        width: 1920,
-        height: 1080,
-        scale: {
-          mode: Phaser.Scale.FIT,
-          autoCenter: Phaser.Scale.CENTER_BOTH
-        },
-        physics: { default: 'arcade' },
-        backgroundColor: '#000',
-        scene: [sceneMap[storyId]]
-      };
+   const config = {
+     type: Phaser.AUTO,
+     parent: 'game-container',
+     width: 1920,
+     height: 1080,
+     scale: {
+       mode: Phaser.Scale.FIT,
+       autoCenter: Phaser.Scale.CENTER_BOTH
+     },
+     physics: { default: 'arcade' },
+     backgroundColor: '#000',
+     scene: [StoryScene]
+   };
+   const game = new Phaser.Game(config);
+   game.scene.start('StoryScene', { 
+     storyId: storyId,
+     playerName: playerName
+   });
 
-      const game = new Phaser.Game(config);
-      game.scene.start(sceneMap[storyId].name, { 
-        storyId: storyId,
-        playerName: playerName
-      });
-    } else {
-      console.error('Invalid storyId:', storyId);
-    }
   }
 
-  // 모듈 스코프에서 전역 등록
   window.startPhaserGame = startPhaserGame;
 </script>
 </body>

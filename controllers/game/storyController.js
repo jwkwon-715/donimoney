@@ -14,9 +14,7 @@ const storyUnlockItems = {
     2: 1 //실제 아이템 아이디로 변경 필요
 }
 
-
 const generalQReward = 800;
-
 
 async function isNewProg(storyId, userCharacterId) {
     try {
@@ -41,7 +39,6 @@ async function progressState(storyId, userCharacterId) {
     return progress ? progress.story_pass : null;
 }
     
-
 module.exports = {
     // 볼 수 있는 스토리 리스트 보여주기
     showPossibleStoryList: async (req, res, next) => {
