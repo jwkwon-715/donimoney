@@ -5,22 +5,24 @@ const imagesMap = {
 4: ['bg_main', 'dony_basic', 'dony_worried', 'todragon_happy', 'todragon_embrrassed'],
 5: ['bg_home', 'mom_basic', 'todragon_basic', 'dony_basic', 'todragon_worried'],
 6: ['bg_main', 'dony_surprised', 'todragon_worried', 'todragon_surprised', 'streetbird_basic', 'todragon_basic'],
-7: ['bg_mart', 'todragon_hat', 'dony_smile', 'todragon_hat_worried', 'dony_basic', 'todragon_hat_embrrassed', 'mart_basic', 'todragon_hat_surprised', 'dony_surprised', 'dony_worried', 'dony_angry'],
-8: ['bg_mart', 'dony_smile', 'todragon_worried', 'dony_basic', 'todragon_basic', 'mart_basic', 'todragon_happy'],
+7: ['bg_mart', 'todragon_hat', 'dony_smile', 'todragon_hat_worried', 'dony_basic', 'todragon_hat_embrrassed', 'todragon_hat_surprised', 'dony_surprised', 'dony_worried', 'dony_angry', 'manager_basic'],
+8: ['bg_mart', 'dony_smile', 'todragon_worried', 'dony_basic', 'todragon_basic', 'todragon_happy', 'manager_basic'],
 9: ['bg_home', 'todragon_worried', 'dony_basic', 'dony_surprised', 'todragon_basic', 'todragon_happy', 'dony_happy', 'dony_smile'],
 success: ['sticker_smile', 'sticker_blueHeart', 'sticker_confetti', 'sticker_heart', 'sticker_star', 'sticker_thumb', 'home_icon', 'close_icon' ],
 fail: [ 'sticker_tear', 'sticker_thumdown', 'sticker_darkheart', 'sticker_sadface', 'home_icon', 'close_icon' ]
 };
 
-export class StoryScene1 extends Phaser.Scene {
+
+export class StoryScene extends Phaser.Scene {
   constructor() {
-    super({ key: 'StoryScene1' });
+    super({ key: 'StoryScene' });
   }
 
   init(data) {
     this.storyId = data.storyId;
-    this.sceneId = data.sceneId ?? 1;
     this.playerName = data.playerName;
+    if (this.storyId === 1) this.sceneId = 1;
+    else if (this.storyId === 2) this.sceneId = 5;
   }
 
   preload() {
@@ -28,19 +30,20 @@ export class StoryScene1 extends Phaser.Scene {
       'todragon_chat', 'nabi_chat', 'choco_chat', 'dony_chat','extra_chat',
     ];
     etcImageKeys.forEach(key => this.load.image(key, `/images/etc/${key}.png`));
-    this.load.json('dialogData', 'http://localhost:3000/jsonFiles/dialog1.json');
+    const dialogJsonPath = `http://localhost:3000/jsonFiles/dialog${this.storyId}.json`;
+    this.load.json('dialogData', dialogJsonPath);
+
   }
 
-  create() {
+ create() {
     this.charNameMap = {
-      'todragon': '토드래곤',
       'choco': '초코',
       'nabi': '나비',
       'dony': '도니',
       'teacher': '선생님',
       'mart_owner': '마트 주인',
       'mom': '엄마',
-      'noname': ''
+      'streetbird': '상인'
     };
 
     this.nameBgColors = {
@@ -51,7 +54,7 @@ export class StoryScene1 extends Phaser.Scene {
       'teacher': 0x09537A,
       'mart_owner': 0x09537A,
       'mom': 0x09537A,
-      'noname': 0x09537A
+      'streetbird': 0x09537A
     };
 
     // 캐시에서 데이터 가져오기 전에 존재 여부 확인
@@ -59,6 +62,7 @@ export class StoryScene1 extends Phaser.Scene {
       console.error('dialogData가 로드되지 않았습니다');
       return;
     }
+
     const response = this.cache.json.get('dialogData');
     const allScenes = response.data.json_content;
     this.storyData = allScenes.find(scene => scene.id === this.sceneId);
@@ -68,7 +72,6 @@ export class StoryScene1 extends Phaser.Scene {
     }
 
     this.dialogs = this.storyData.dialogs;
-
     this.loadImagesForId(this.sceneId, () => {
         this.setBackground(this.storyData.background);
         this.dialogIndex = 0;
@@ -81,14 +84,19 @@ export class StoryScene1 extends Phaser.Scene {
   }
 
   goToNextScene() {
+    if (this.sceneId === 7) {
+        return false;
+    }
     const nextId = this.sceneId + 1;
     const response = this.cache.json.get('dialogData');
     const allScenes = response.data.json_content;
     const nextSceneData = allScenes.find(scene => scene.id === nextId);
 
     if (!nextSceneData) {
-      this.updateProg();
-      this.showSuccessPopup();
+      this.updateProg();  
+      this.loadImagesForId('success', () => {
+        this.showResultPopup('success');
+      });
       return false;
     }
 
@@ -107,14 +115,22 @@ export class StoryScene1 extends Phaser.Scene {
     const lineData = this.getCurrentLineData();
 
     if (!lineData) {
-      if (this.goToNextScene()) {
-        this.showNextLine();
+      if (this.sceneId === 7) {   
+        this.loadImagesForId('fail', () => {
+            this.showResultPopup('fail');
+        });
+        return;
       }
+      if (this.goToNextScene()) this.showNextLine();
       return;
     }
 
     const text = lineData.line?.replace('{이름}', this.playerName);
-
+    // nextId가 있으면, 해당 id로 바로 이동
+    if (lineData.nextId) {
+        this.goToSceneById(Number(lineData.nextId));
+        return;
+    }
     switch (lineData.type) {
       case 'line':
         this.showDialogue(lineData.char, text);
@@ -128,6 +144,27 @@ export class StoryScene1 extends Phaser.Scene {
     }
   }
 
+  goToSceneById(nextId) {
+    const response = this.cache.json.get('dialogData');
+    const allScenes = response.data.json_content;
+    const nextSceneData = allScenes.find(scene => scene.id === nextId);
+
+    if (!nextSceneData) {
+        console.log('scene not found');
+        return false;
+    }
+
+    this.sceneId = nextId;
+    this.storyData = nextSceneData;
+    this.dialogs = nextSceneData.dialogs;
+    this.loadImagesForId(nextId, () => {
+      this.setBackground(nextSceneData.background);
+      this.showNextLine();
+    });
+    this.dialogIndex = 0;
+    return true;
+  }
+    
   showDialogue(char, text, noClick = false) {
     const lineData = this.getCurrentLineData();
     const name = lineData.name;
@@ -143,6 +180,7 @@ export class StoryScene1 extends Phaser.Scene {
         this.showNextLine();
       }
     });
+    
   }
 
   showMoneyHistory() {
@@ -182,7 +220,7 @@ export class StoryScene1 extends Phaser.Scene {
         const pos = positions[currentIndex] || positions[positions.length - 1];
         const image = this.add.image(pos.x, pos.y, data.image).setScale(1).setDepth(1);
         
-        //애니메이션션
+        //애니메이션
         this.tweens.add({
           targets: image,
           scale: 1.1, // 원래 크기의 1.2배
@@ -200,7 +238,6 @@ export class StoryScene1 extends Phaser.Scene {
         const char = data.char;
         const text = lines[lineIndex];
 
-        
         const centerX = this.scale.width / 2;
         const centerY = this.scale.height * 0.87;
 
@@ -221,24 +258,23 @@ export class StoryScene1 extends Phaser.Scene {
         showCharacterImages: false
         });
       };
-
       showLine();
     };
-
     showNextEvent();
   }
 
+
   showQuestion(questionText, lineData) {
-    const answers = [];
-    for (let i = 0; i < lineData.answerCount; i++) {
-      answers.push({
-        text: lineData[`answer${i}`],
-        type: `answer${i}`
-      });
-    }
+    const answers = Object.keys(lineData)
+    .filter(key => key.startsWith('answer'))
+    .map(key => ({
+        text: lineData[key],
+        type: key
+    }));
 
     this.showDialogue(lineData.char, questionText, true);
     this.answerButtons = [];
+
     
     this.questionBg = this.add.rectangle(
       this.scale.width / 2,
@@ -253,7 +289,7 @@ export class StoryScene1 extends Phaser.Scene {
     const maxLineWidth = this.scale.width - 100;
     const lineHeight = 150;
 
-    const paddingX = 50;
+    const paddingX = 150;
     const fontSize = 64;
     const fontStyle = {
       fontSize: `${fontSize}px`,
@@ -324,24 +360,29 @@ export class StoryScene1 extends Phaser.Scene {
           new Phaser.Geom.Rectangle(x - width / 2, y - height / 2, width, height),
           Phaser.Geom.Rectangle.Contains
         )
-        .on("pointerdown", () => {
-          this.destroyUI();
+      .on('pointerdown', () => {
+        this.destroyUI();
+        if (answer.type === 'answerSkip1') {
+          this.dialogIndex += 3;
+          this.showNextLine();
+        } else {
           this.dialogIndex++;
           this.showNextLine();
-        })
-        .on("pointerover", () => {
-          this.input.manager.canvas.style.cursor = "pointer";
-        })
-        .on("pointerout", () => {
-          this.input.manager.canvas.style.cursor = "default";
-        });
-
-        this.answerButtons.push(btnBg, btnText);
-        startX += width + paddingX;
+        }
+      })
+      .on('pointerover', () => {
+        this.input.manager.canvas.style.cursor = 'pointer';
+      })
+      .on('pointerout', () => {
+        this.input.manager.canvas.style.cursor = 'default';
+      })
+      .setDepth(11);
+    
+      this.answerButtons.push(btnBg, btnText);
+      startX += width + paddingX;
       });
     });
   }
-
 
   renderDialogueLine({ name, char, text, noClick = false, onClick = null, showCharacterImages = true }) {
     this.destroyUI();
@@ -361,7 +402,8 @@ export class StoryScene1 extends Phaser.Scene {
       }
 
       if (name !== 'todragon' && characterImageKey) {
-        this.todragonImage = this.add.image(centerX - 500, centerY - 300, 'todragon_basic').setScale(1.3).setDepth(1);
+        const todragonImgKey = (this.sceneId === 7) ? 'todragon_hat' : 'todragon_basic';
+        this.todragonImage = this.add.image(centerX - 500, centerY - 300, todragonImgKey).setScale(1.3).setDepth(1);
         this.speakingCharImage = this.add.image(centerX + 500, centerY - 300, characterImageKey).setScale(1.3).setDepth(1);
       }
     }
@@ -396,13 +438,12 @@ export class StoryScene1 extends Phaser.Scene {
     }).setDepth(3);
 
     if (!noClick) {
-      this.dialogBox.setInteractive();
+      this.dialogBox.setInteractive({ cursor: 'pointer' });
       this.dialogBox.once('pointerdown', () => {
         if (onClick) onClick();
       });
     }
   }
-
 
   setBackground(background) {
     if (this.bg) this.bg.destroy();
@@ -424,17 +465,15 @@ export class StoryScene1 extends Phaser.Scene {
         this[key] = null;
       }
     });
-
     if (this.answerButtons) {
       this.answerButtons.forEach(btn => btn?.destroy?.());
       this.answerButtons = null;
     }
     if (this.questionBg ) {
-      this.questionBg .destroy();
-      this.questionBg  = null;
+      this.questionBg.destroy();
+      this.questionBg = null;
     }
   }
-
 
   loadImagesForId(id, onComplete) {
     const images = imagesMap[id] || [];
@@ -455,7 +494,7 @@ export class StoryScene1 extends Phaser.Scene {
         url = `/images/background/${key}.png`;
       } 
       // 2. 스티커 & 아이콘
-      else if (key.startsWith('sticker') || key === 'homeIcon' || key === 'closeIcon') {
+      else if (key.startsWith('sticker_') || key === 'home_icon' || key === 'close_icon') {
         url = `/images/${key}.png`;
       } 
       // 3. 캐릭터 이미지
@@ -476,121 +515,110 @@ export class StoryScene1 extends Phaser.Scene {
     this.load.start();
   }
 
-
-  //성공 팝업
-  showSuccessPopup() {
+  showResultPopup(type) {
     const cam = this.cameras.main;
-    this.add.image(cam.centerX, cam.centerY - 350, 'sticker_thumb').setScale(0.6).setDepth(104);
-    this.add.image(cam.centerX - 500, cam.centerY - 100, 'sticker_heart').setScale(0.6).setDepth(101);
-    this.add.image(cam.centerX - 450, cam.centerY + 150, 'sticker_star').setScale(0.6).setDepth(101);
-    this.add.image(cam.centerX + 450, cam.centerY - 150, 'sticker_Smile').setScale(0.6).setDepth(101);
-    this.add.image(cam.centerX + 450, cam.centerY + 180, 'sticker_blue_heart').setScale(0.6).setDepth(100);
-    this.add.image(cam.centerX + 450, cam.centerY + 300, 'sticker_confetti').setScale(0.6).setDepth(101);
 
-    //배경 검정 처리
-    this.popupOverlay = this.add.rectangle(
-      cam.centerX, cam.centerY,
-      cam.width, cam.height,
-      0x000000, 0.5 
-    ).setDepth(99);
-
-    // 팝업 박스 (흰 배경 )
-    this.popupBox = this.add.rectangle(
-      this.cameras.main.centerX, this.cameras.main.centerY,
-      800, 600, 0xFFFFFF, 1
-    ).setDepth(102);
-
-    // 노란배경
-    this.popupBg = this.add.rectangle(
-      this.cameras.main.centerX+50, this.cameras.main.centerY+50,
-      800, 600, 0xFFD700, 1
-    ).setDepth(100);
-
-    this.add.text(
-      this.cameras.main.centerX, this.cameras.main.centerY - 20,
-      "참 잘했어요!", {
-        fontSize: '96px',
-        color: '#333333',
-        fontFamily: 'Cafe24Dongdong'
+    const popupData = {
+      success: {
+        images: [
+          { key: 'sticker_thumb', x: cam.centerX, y: cam.centerY - 350 },
+          { key: 'sticker_heart', x: cam.centerX - 500, y: cam.centerY - 100 },
+          { key: 'sticker_star', x: cam.centerX - 450, y: cam.centerY + 150 },
+          { key: 'sticker_Smile', x: cam.centerX + 450, y: cam.centerY - 150 },
+          { key: 'sticker_blue_heart', x: cam.centerX + 450, y: cam.centerY + 180 },
+          { key: 'sticker_confetti', x: cam.centerX + 450, y: cam.centerY + 300 },
+        ],
+        message: '참 잘했어요!',
+        messageColor: '#333333',
+        bgColor: 0xFFD700,
+        retryBg: '#FFE180',
+        nextBg: '#F9CF45'
+      },
+      fail: {
+        images: [
+          { key: 'sticker_sadface', x: cam.centerX, y: cam.centerY - 300 },
+          { key: 'sticker_darkheart', x: cam.centerX - 480, y: cam.centerY - 50 },
+          { key: 'sticker_tear', x: cam.centerX + 470, y: cam.centerY - 120 },
+          { key: 'sticker_thumdown', x: cam.centerX + 480, y: cam.centerY + 160 },
+        ],
+        message: '다시 도전해 보세요!',
+        messageColor: '#333333',
+        bgColor: 0x929292,
+        retryBg: '#D2D2D2',
+        nextBg: '#787878'
       }
-    ).setOrigin(0.5).setDepth(102);
+    };
 
-    // "다시 하기" 버튼
-    this.retryBtn = this.add.text(
-      this.cameras.main.centerX - 160, this.cameras.main.centerY + 150,
-      " 다시 하기 ", {
-        fontSize: '48px',
-        backgroundColor: '#FFE180',
-        color: '#333',
-        padding: { x: 20, y: 10 },
-        fontFamily: 'Cafe24Dongdong',
-        align: 'center'
-      }
-    ).setOrigin(0.5).setInteractive({ cursor: 'pointer' }).setDepth(103)
-    .on('pointerdown', () => {
-      window.location.href = `/stories/${this.storyId}`;
+    const data = popupData[type];
+
+    data.images.forEach(img => {
+      this.add.image(img.x, img.y, img.key).setScale(0.6).setDepth(101);
     });
 
-    this.nextBtn = this.add.text(
-      this.cameras.main.centerX + 160, this.cameras.main.centerY + 150,
-      "스토리 목록", {
-        fontSize: '48px',
-        backgroundColor: '#F9CF45',
-        color: '#333',
-        padding: { x: 20, y: 10 },
-        fontFamily: 'Cafe24Dongdong',
-        align: 'center'
-      }
-    ).setOrigin(0.5).setInteractive({ cursor: 'pointer' }).setDepth(103)
-    .on('pointerdown', () => {
-      window.location.href = '/game/stories/storyList';
-    });
+    this.popupOverlay = this.add.rectangle(cam.centerX, cam.centerY, cam.width, cam.height, 0x000000, 0.5).setDepth(99);
+    this.popupBox = this.add.rectangle(cam.centerX, cam.centerY, 800, 600, 0xFFFFFF, 1).setDepth(102);
+    this.popupBg = this.add.rectangle(cam.centerX + 50, cam.centerY + 50, 800, 600, data.bgColor, 1).setDepth(100);
 
-    //홈 아이콘 배경 (좌측 상단)
-    const homeBgSize = 100; // 정사각형 한 변의 길이 (픽셀)
-    const homeBgX = cam.width * 0.07;
-    const homeBgY = cam.height * 0.08;
-    const homeBgRadius = 18; // 둥근 모서리 반지름
+    // 텍스트
+    this.add.text(cam.centerX, cam.centerY - 20, data.message, {
+      fontSize: '96px',
+      color: data.messageColor,
+      fontFamily: 'Cafe24Dongdong'
+    }).setOrigin(0.5).setDepth(102);
 
-    const homeBg = this.add.graphics().setDepth(102);
-    homeBg.fillStyle(0x3B9EF7, 1); // #3B9EF7
-    homeBg.fillRoundedRect(
-      homeBgX - homeBgSize / 2, // 좌상단 X
-      homeBgY - homeBgSize / 2, // 좌상단 Y
-      homeBgSize, homeBgSize,
-      homeBgRadius // 둥근 모서리
-    );
-
-    // 홈 아이콘 (정중앙에 배치)
-    this.homeBtn = this.add.image(homeBgX, homeBgY, 'home_icon')
-      .setInteractive({ cursor: 'pointer' }).setDepth(103).setScale(0.6)
+    // 다시 하기 버튼
+    this.retryBtn = this.add.text(cam.centerX - 160, cam.centerY + 150, ' 다시 하기 ', {
+      fontSize: '48px',
+      backgroundColor: data.retryBg,
+      color: '#333',
+      padding: { x: 20, y: 10 },
+      fontFamily: 'Cafe24Dongdong',
+      align: 'center'
+    }).setOrigin(0.5).setInteractive({ cursor: 'pointer' }).setDepth(103)
       .on('pointerdown', () => {
-        window.location.href = '/game/main';
+        window.location.href = `/stories/${this.storyId}`;
       });
 
-    // 닫기 아이콘 배경 (우측 상단)
-    const closeBgSize = 100;
-    const closeBgX = cam.width * 0.93;
-    const closeBgY = cam.height * 0.08;
-    const closeBgRadius = 18;
-
-    const closeBg = this.add.graphics().setDepth(102);
-    closeBg.fillStyle(0xEF5454, 1);
-    closeBg.fillRoundedRect(
-      closeBgX - closeBgSize / 2,
-      closeBgY - closeBgSize / 2,
-      closeBgSize, closeBgSize,
-      closeBgRadius
-    );
-
-    // 닫기 아이콘 (정중앙에 배치)
-    this.closeBtn = this.add.image(closeBgX, closeBgY, 'close_icon')
-      .setInteractive({ cursor: 'pointer' }).setDepth(103).setScale(0.6)
+    // 스토리 목록 버튼
+    this.nextBtn = this.add.text(cam.centerX + 160, cam.centerY + 150, '스토리 목록', {
+      fontSize: '48px',
+      backgroundColor: data.nextBg,
+      color: '#333',
+      padding: { x: 20, y: 10 },
+      fontFamily: 'Cafe24Dongdong',
+      align: 'center'
+    }).setOrigin(0.5).setInteractive({ cursor: 'pointer' }).setDepth(103)
       .on('pointerdown', () => {
         window.location.href = '/game/stories/storyList';
+      });
+
+    // 홈, 닫기 아이콘
+    const iconSettings = [
+      {
+        x: cam.width * 0.07, y: cam.height * 0.08,
+        color: 0x3B9EF7, key: 'home_icon',
+        onClick: () => window.location.href = '/game/main'
+      },
+      {
+        x: cam.width * 0.93, y: cam.height * 0.08,
+        color: 0xEF5454, key: 'close_icon',
+        onClick: () => window.location.href = '/game/stories/storyList'
+      }
+    ];
+
+    iconSettings.forEach(icon => {
+      const size = 100, radius = 18;
+      const bg = this.add.graphics().setDepth(102);
+      bg.fillStyle(icon.color, 1);
+      bg.fillRoundedRect(icon.x - size / 2, icon.y - size / 2, size, size, radius);
+
+      this.add.image(icon.x, icon.y, icon.key)
+        .setInteractive({ cursor: 'pointer' }).setDepth(103).setScale(0.6)
+        .on('pointerdown', icon.onClick);
     });
   }
 
+  //스토리 프로그래스 업데이트
   updateProg(){
     fetch('/game/stories/complete', {
     method: 'POST',
@@ -598,7 +626,7 @@ export class StoryScene1 extends Phaser.Scene {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      storyId: 1
+      storyId: this.storyId 
     })
   })
   .then(response => {
@@ -608,5 +636,3 @@ export class StoryScene1 extends Phaser.Scene {
   .catch(err => console.error(err));
   }
 }
-
-

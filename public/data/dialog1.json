@@ -241,7 +241,6 @@
         "char": "dony_basic",
         "type": "question",
         "question": "돈은 왜 필요할까?",
-        "answerCount": 3,   
         "answer0": "맛있는걸 사먹기 위해서",
         "answer1": "아픈 곳을 낫게 하기 위해서",
         "answer2": "여행을 가기 위해서"

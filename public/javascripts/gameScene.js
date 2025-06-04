@@ -139,10 +139,10 @@ export class GameScene extends Phaser.Scene {
     if (Phaser.Input.Keyboard.JustDown(this.spaceKey)) {
       if (Phaser.Geom.Intersects.RectangleToRectangle(todragonBounds, homeBounds)) {
         window.location.href = '/game/stories/storyList/';
-      } else if (Phaser.Geom.Intersects.RectangleToRectangle(todragonBounds, martBounds)) {
-        console.log('martBounds');
       } else if (Phaser.Geom.Intersects.RectangleToRectangle(todragonBounds, schoolBounds)) {
-        console.log('schoolBounds');
+        window.location.href = '/game/school';
+      } else if (Phaser.Geom.Intersects.RectangleToRectangle(todragonBounds, martBounds)) {
+        window.location.href = '/game/mart/ItemList';
       } else {
         console.log('접촉된 건물 없음');
       }
