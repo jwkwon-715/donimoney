@@ -60,9 +60,7 @@ body {
     cursor: pointer;
 }
 
-.purchase-btn:hover, .purchase-btn:active {
-    box-shadow: 0 3px 0 0 rgba(0, 0, 0, 0.1);
-}
+.purchase-btn:hover, .purchase-btn:active { box-shadow: 0 3px 0 0 rgba(0, 0, 0, 0.1); }
   
 .item-title {
     font-family: 'Cafe24DongDong';
@@ -128,9 +126,7 @@ body {
     z-index: 1000;
 }
   
-.hidden {
-    display: none;
-}
+.hidden { display: none; }
   
 .modal-content {
     width: 35%;
@@ -140,16 +136,27 @@ body {
     text-align: center;
     position: relative;
 }
-  
+
+#toggle-cart-btn {
+    background: none;
+    margin-left: 69px;
+}
+
 .cart-icon {
     width: 60px;
-    margin-bottom: 10px;
 }
 
 h2 {
     font-family: 'Cafe24DongDong';
     font-size: 64px;
     color: #333333;
+    display: flex;
+    justify-content: center;
+}
+
+h3 {
+    font-family: 'Cafe24DongDong';
+    font-size: 20px;
 }
 
 .modal-item {
@@ -182,7 +189,7 @@ h2 {
 .item-img {
     width: 200px;
     height: 140px;
-    /* background-color: #ccc; */
+    object-fit: contain;
 }
   
 .qty-btn {
@@ -219,9 +226,7 @@ h2 {
     vertical-align: middle;
 }
 
-.coins {
-    align-items: center;
-}
+.coins { align-items: center; }
   
 .modal-buttons {
     display: flex;
@@ -243,18 +248,14 @@ h2 {
     font-size: 24px;
 }
 
-.yes-btn {
-    background-color: #78C0FF;
-}
+.yes-btn { background-color: #78C0FF; }
 
 .yes-btn:hover, .yes-btn:active {
     background-color: #3B9EF7;
     box-shadow: none;
 }
   
-.no-btn {
-    background-color: #FE8181;
-}
+.no-btn { background-color: #FE8181; }
 
 .no-btn:hover, .no-btn:active {
     background-color: #ED5757;
@@ -277,10 +278,10 @@ h2 {
 
 .cart-panel {
     position: absolute;
-    top: 100px;
+    top: 80px;
     left: 60px;
     width: 340px;
-    padding: 30px;
+    /* padding: 30px; */
     font-family: 'NanumSquareRound';
 }
 
@@ -291,36 +292,38 @@ h2 {
 }
 
 .cart-table th, .cart-table td {
-    padding: 8px 4px;
+    padding: 20px 4px;
     text-align: left;
 }
 
-.cart-table tfoot td {
-    font-weight: bold;
+.cart-table th {
+    color: rgba(51, 51, 51, 0.6);
+    font-family: 'Cafe24Dongdong';
+    font-size: 16px;
+    font-weight: 500;
 }
+
+.cart-table tfoot td { font-weight: bold; }
 
 #cart-total {
     font-weight: bold;
     color: #F9CF45;
 }
 
-.separator {
-    height: 1px;
-    background-color: #ccc;
-    margin: 4px 0;
+.separator { 
+    border-bottom: 1px solid rgba(51, 51, 51, 0.4);
 }
 
-.dashed-line {
-    border-top: 2px dashed #888;
-    margin: 20px 0;
-}
+.td-option { padding: 0 !important; }
+
+.dashed-line { border-bottom: 1.5px dashed rgba(51, 51, 51, 0.4); }
+
+.name { margin-bottom: 20px; }
 
 .exit-button {
     position: absolute;
-    /* width: 200px;
-    height: 80px; */
     align-self: flex-end;
-    margin: 30% 5% 15% -5%;
+    margin: 30% 5% 15% 5%;
     padding: 12px 24px 20px;
     border: none;
     background-color: #F9CF45;
