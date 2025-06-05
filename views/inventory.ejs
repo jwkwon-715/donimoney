@@ -62,6 +62,15 @@
             </div>
           </div>
           <!-- 인벤토리 그리드 -->
+          <% // ----------- [추가] imageMap 선언 ----------- %>
+          <% const imageMap = {
+            1: "moneyJournal",
+            2: "pencil",
+            3: "milk",
+            4: "eraser",
+            5: "egg",
+            6: "cowboyHat"
+          }; %>
           <div class="inventory-grid">
             <% for(let i=0; i<8; i++) { 
                  const item = inventory[i];
@@ -71,13 +80,15 @@
                    <% if(item && item.Item) { %>
                      data-name="<%= item.Item.item_name %>"
                      data-desc="<%= item.Item.item_description %>"
-                     data-img="<%= item.Item.item_image_url || '/images/object/egg.png' %>"
+                     <% // ----------- [수정] 이미지 매핑 ----------- %>
+                     data-img="/images/object/<%= imageMap[item.Item.item_id] || 'egg' %>.png"
                      data-quantity="<%= item.quantity %>"
                      data-price="<%= item.Item.item_price %>"
                    <% } %>
               >
                 <div class="item-img-wrap">
-                  <img src="<%= item && item.Item ? (item.Item.item_image_url || '/images/object/egg.png') : '/images/object/egg.png' %>" 
+                  <% // ----------- [수정] 이미지 매핑 ----------- %>
+                  <img src="<%= item && item.Item ? ('/images/object/' + (imageMap[item.Item.item_id] || 'egg') + '.png') : '/images/object/egg.png' %>" 
                        alt="<%= item && item.Item ? item.Item.item_name : '빈 슬롯' %>" class="item-img">
                 </div>
                 <% if(item && item.Item) { %>
