@@ -20,11 +20,9 @@
 <body>
   <div id="game-container"></div>
 
-  <!-- Phaser & WebFont -->
   <script src="https://cdn.jsdelivr.net/npm/phaser@3.88.2/dist/phaser.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
 
-  <!-- 서버 데이터 -->
   <script>
     window.gameData = {
       storyId: <%= storyId %>,
@@ -32,7 +30,6 @@
     };
   </script>
 
-  <!-- 게임 로직 통합 -->
   <script type="module">
     import { StoryScene } from '/javascripts/story.js';
 
@@ -57,7 +54,6 @@
       game.scene.start('StoryScene', { storyId, playerName });
     }
 
-    // WebFont 로드 후 바로 게임 시작
     WebFont.load({
       custom: {
         families: ['Cafe24Dongdong']
