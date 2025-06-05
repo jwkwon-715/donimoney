@@ -11,20 +11,12 @@
       overflow: hidden;
     }
 
-    .nav-buttons {
-      padding: 0;
-    }
   </style>
   <!-- <link rel="stylesheet" href="/stylesheets/style.css"> -->
 
 </head>
 <body>
   <div id="game-container"></div>
-
-  <script>
-    window.storyId = <%= storyId %>;
-    window.playerName = "<%= playerName %>";
-  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/phaser@3.88.2/dist/phaser.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
@@ -41,12 +33,18 @@
   });
   </script>
 
+  <script type="text/javascript">
+    window.gameData = {
+      storyId: <%= storyId %>,
+      playerName: "<%= playerName %>"
+    };
+  </script>
+  
   <script type="module">
   import { StoryScene } from '/javascripts/story.js';
+  const { storyId, playerName } = window.gameData;
 
   function startPhaserGame() {
-    const storyId = window.storyId;
-    const playerName = window.playerName;
 
    const config = {
      type: Phaser.AUTO,
@@ -62,10 +60,7 @@
      scene: [StoryScene]
    };
    const game = new Phaser.Game(config);
-   game.scene.start('StoryScene', { 
-     storyId: storyId,
-     playerName: playerName
-   });
+   game.scene.start('StoryScene', { storyId, playerName });
 
   }
 
