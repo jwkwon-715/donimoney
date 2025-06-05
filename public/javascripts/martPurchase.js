@@ -155,9 +155,14 @@ function finishPurchase() {
     })
     .then(res => res.text())
     .then(html => {
-        document.open();
-        document.write(html);
-        document.close();
+        document.getElementById("complete-modal").classList.remove("hidden");
+        setTimeout(() => {
+            location.href = "/game/main";
+        }, 2000);
+    })
+    .catch(err => {
+        console.error("구매 처리 오류:", err);
+        alert("구매 실패");
     })
     .catch(err => {
         console.error("구매 처리 오류:", err);
