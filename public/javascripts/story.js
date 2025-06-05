@@ -552,7 +552,8 @@ export class StoryScene extends Phaser.Scene {
     const data = popupData[type];
 
     data.images.forEach(img => {
-      this.add.image(img.x, img.y, img.key).setScale(0.6).setDepth(101);
+      const depth = (img.key === 'sticker_thumb' || img.key === 'sticker_thumdown') ? 104 : 101;
+      this.add.image(img.x, img.y, img.key).setScale(0.6).setDepth(depth);
     });
 
     this.popupOverlay = this.add.rectangle(cam.centerX, cam.centerY, cam.width, cam.height, 0x000000, 0.5).setDepth(99);
