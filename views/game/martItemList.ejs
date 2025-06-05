@@ -19,10 +19,20 @@
     </div> -->
 
     <ul class="item-list">
+      <% const imageMap = {
+        1: "moneyJournal",
+        2: "pencil",
+        3: "milk",
+        4: "eraser",
+        5: "egg",
+        6: "cowboyHat"
+      }; %>
+
         <% items.forEach(item => { %>
+          <!-- <% const imageFileName = imageMap[item.item_id] || "default"; %> -->
           <li class="item-card">
             <div class="item-left">
-                <img src="/images/object/egg.png" class="item-img" alt="상품 이미지"> <!-- item_id로 받아오기 -->
+                <img src="/images/object/<%= imageMap[item.item_id]%>.png" class="item-img" alt="상품 이미지">
             </div>
             <div class="item-right">
                 <h3 class="item-title"><%= item.item_name %></h3>
@@ -35,7 +45,7 @@
                 '<%= item.item_id %>',
                 '<%= item.item_name %>',
                 '<%= item.item_price %>',
-                '/images/object/egg.png')">구매하기
+                '/images/object/<%= imageMap[item.item_id]%>.png')">선택하기
                 </button>
             </div>
           </li>
@@ -49,7 +59,7 @@
           
           <div class="modal-item">
             <button onclick="changeModalQuantity(-1)" class="qty-btn minus-btn">-</button>
-            <img id="modal-item-img" src="/images/item_placeholder.png" class="item-img"/>
+            <img id="modal-item-img" src="/images/todragon_transparent.png" class="item-img"/>
             <button onclick="changeModalQuantity(1)" class="qty-btn plus-btn">+</button>
           </div>
           
@@ -69,24 +79,31 @@
         </div>
       </div>
 
-      <button id="toggle-cart-btn">장바구니</button>
+      <button id="toggle-cart-btn">
+        <img src="/images/cart_icon.png" class="cart-icon" alt="">
+        <h3>장바구니</h3>
+      </button>
       <div id="cart" class="cart-container hidden">
         <div class="cart-panel">
-          <h2>장바구니</h2>
+          <h2 class="cart-title">장바구니</h2>
           <table class="cart-table">
             <thead>
-              <tr>
-                <th>상품 이름</th>
-                <th>수량</th>
-                <th>가격</th>
+              <tr class="cart-header-row">
+                <th class="name">상품 이름</th>
+                <th class="name">수량</th>
+                <th class="name">가격</th>
+                <tr class="separator">
+                  <td class="td-option" colspan="3"></td>
+                </tr>
               </tr>
-              
             </thead>
-            <tbody id="cart-body"></tbody>
+            <tbody id="cart-body">
+            </tbody>
             <tfoot>
-              <tr>
-                <div class="separator"></div>
-                <div class="dashed-line"></div>
+              <tr class="dashed-line">
+                <td class="td-option" colspan="3"></td>
+              </tr>
+              <tr class="cart-total-row">
                 <td colspan="2"><strong>합계</strong></td>
                 <td><span id="cart-total">0</span>원</td>
               </tr>
@@ -95,8 +112,6 @@
           <button class="exit-button" onclick="finishPurchase()">구매하기</button>
         </div>
       </div>
-      
-
       <script src="/javascripts/martPurchase.js"></script>
 </body>
 </html>

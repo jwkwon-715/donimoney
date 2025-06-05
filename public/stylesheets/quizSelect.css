@@ -117,3 +117,7 @@ h1 { margin: 3% 0 1% 5% }
 .swiper-button-prev::after {
     margin: 10px 5px 10px 0;
 }
+
+::-webkit-scrollbar {
+    display: none;
+}
