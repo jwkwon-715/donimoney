@@ -524,8 +524,8 @@ export class StoryScene extends Phaser.Scene {
           { key: 'sticker_thumb', x: cam.centerX, y: cam.centerY - 350 },
           { key: 'sticker_heart', x: cam.centerX - 500, y: cam.centerY - 100 },
           { key: 'sticker_star', x: cam.centerX - 450, y: cam.centerY + 150 },
-          { key: 'sticker_Smile', x: cam.centerX + 450, y: cam.centerY - 150 },
-          { key: 'sticker_blue_heart', x: cam.centerX + 450, y: cam.centerY + 180 },
+          { key: 'sticker_smile', x: cam.centerX + 450, y: cam.centerY - 150 },
+          { key: 'sticker_blueHeart', x: cam.centerX + 450, y: cam.centerY + 180 },
           { key: 'sticker_confetti', x: cam.centerX + 450, y: cam.centerY + 300 },
         ],
         message: '참 잘했어요!',
@@ -552,7 +552,8 @@ export class StoryScene extends Phaser.Scene {
     const data = popupData[type];
 
     data.images.forEach(img => {
-      this.add.image(img.x, img.y, img.key).setScale(0.6).setDepth(101);
+      const depth = (img.key === 'sticker_thumb' || img.key === 'sticker_thumdown') ? 104 : 101;
+      this.add.image(img.x, img.y, img.key).setScale(0.6).setDepth(depth);
     });
 
     this.popupOverlay = this.add.rectangle(cam.centerX, cam.centerY, cam.width, cam.height, 0x000000, 0.5).setDepth(99);
