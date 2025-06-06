@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <title>Document</title> -->
     <link rel="stylesheet" href="/stylesheets/martItem.css">
+    <link rel="stylesheet" href="/stylesheets/afterQuiz.css">
 </head>
 <body>
     <img class="bg" src="/images/background/bg_mart.png" alt="">
@@ -32,7 +33,7 @@
           <!-- <% const imageFileName = imageMap[item.item_id] || "default"; %> -->
           <li class="item-card">
             <div class="item-left">
-                <img src="/images/object/<%= imageMap[item.item_id]%>.png" class="item-img" alt="상품 이미지">
+                <img src="/images/object/<%= imageMap[item.item_id] %>.png" class="item-img" alt="상품 이미지">
             </div>
             <div class="item-right">
                 <h3 class="item-title"><%= item.item_name %></h3>
@@ -45,7 +46,7 @@
                 '<%= item.item_id %>',
                 '<%= item.item_name %>',
                 '<%= item.item_price %>',
-                '/images/object/<%= imageMap[item.item_id]%>.png')">선택하기
+                '/images/object/<%= imageMap[item.item_id] %>.png')">선택하기
                 </button>
             </div>
           </li>
@@ -75,6 +76,26 @@
           <div class="modal-buttons">
             <button onclick="getCart()" class="yes-btn orBtn">장바구니 담기</button>
             <button onclick="closeModal()" class="no-btn orBtn">아니오</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="complete-modal" class="quiz-success hidden">
+        <div class="modal-blur-background"></div>
+        <div class="quiz-success-child"></div>
+        <div class="rectangle-parent">
+          <div class="post-2"></div>
+          
+          <img class="stickers smile" alt="" src="/images/sticker_smile.png">
+          <img class="stickers blueHeart" alt="" src="/images/sticker_blueHeart.png">
+          <img class="stickers confetti" alt="" src="/images/sticker_confetti.png">
+          <img class="stickers heart" alt="" src="/images/sticker_heart.png">
+          <img class="stickers star" alt="" src="/images/sticker_star.png">
+      
+          <div class="post-1">
+            <h1 class="text">구매 완료!</h1>
+            <img class="stickers thumb" src="/images/sticker_thumb.png" alt="">
+            <p>메인 화면으로 이동합니다...</p>
           </div>
         </div>
       </div>
