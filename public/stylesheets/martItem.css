@@ -14,7 +14,7 @@ body {
     object-fit: cover;
     z-index: -2;
 }
-  
+
 .item-list {
     display: flex;
     flex-wrap: wrap;
@@ -142,9 +142,7 @@ body {
     margin: 8% 0 8% 69px;
 }
 
-.cart-icon {
-    width: 60px;
-}
+.cart-icon { width: 60px; }
 
 h2 {
     font-family: 'Cafe24DongDong';

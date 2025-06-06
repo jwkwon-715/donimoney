@@ -1,7 +1,9 @@
 @font-face {
   font-family: 'Cafe24Dongdong';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Dongdong.woff') format('woff');
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Dongdong.woff') format('woff'),
+  url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Dongdong.woff') format('woff');
   font-weight: normal; font-style: normal;
+  font-display: swap;
 }
 
 @font-face { font-family: 'GangwonEduHyeonokT_OTFMediumA';
@@ -45,6 +47,7 @@ body {
   min-height: 100vh;
   align-items: center;
   justify-content: center;
+  font-family: 'Cafe24Dongdong', 'KCC-DodamdodamR', 'NanumSquareRound', sans-serif;
 
   /* no drag */
   /* -webkit-user-select: none;
