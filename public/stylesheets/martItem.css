@@ -14,7 +14,7 @@ body {
     object-fit: cover;
     z-index: -2;
 }
-  
+
 .item-list {
     display: flex;
     flex-wrap: wrap;
@@ -139,12 +139,10 @@ body {
 
 #toggle-cart-btn {
     background: none;
-    margin-left: 69px;
+    margin: 8% 0 8% 69px;
 }
 
-.cart-icon {
-    width: 60px;
-}
+.cart-icon { width: 60px; }
 
 h2 {
     font-family: 'Cafe24DongDong';
@@ -273,7 +271,7 @@ h3 {
     position: fixed;
     top: 200px;
     left: 69px;
-    z-index: 50;
+    z-index: 1;
 }
 
 .cart-panel {
@@ -320,6 +318,59 @@ h3 {
 
 .name { margin-bottom: 20px; }
 
+.rectangle-parent {
+    position: fixed !important;
+    left: 50% !important;
+    top: 65%;
+    transform: translate(-50%, -55%);
+    z-index: 999;
+}
+
+.post-1 {
+    width: 50% !important;
+    height: 65% !important;
+    top: 6% !important;
+}
+
+.post-2 {
+    width: 50% !important;
+    height: 65% !important;
+}
+
+.thumb {
+    width: 30% !important;
+    height: 45% !important;
+    object-fit: contain !important;
+}
+
+.smile, .blueHeart {
+    width: 15% !important;
+    left: 68% !important;
+}
+
+.blueHeart { top: 45% !important; }
+
+.confetti {
+    width: 23% !important;
+    top: 52% !important;
+    left: 63% !important;
+}
+
+.heart { left: 12% !important; }
+
+.star {
+    left: 13% !important;
+    top: 60% !important;
+}
+
+.modal-blur-background {
+    position: fixed;
+    inset: 0;
+    backdrop-filter: blur(10px);
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 51;
+}
+
 .exit-button {
     position: absolute;
     align-self: flex-end;
@@ -344,4 +395,10 @@ h3 {
     transform: translateY(4px);
     color: #E4AF00;
     box-shadow: 0 3px 0 0 rgba(0, 0, 0, 0.1);
+}
+
+@media screen and (max-height: 1000px) {
+    #toggle-cart-btn {
+        margin: 3% 0 0 69px;
+    }
 }

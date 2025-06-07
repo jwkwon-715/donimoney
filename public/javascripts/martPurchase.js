@@ -155,9 +155,11 @@ function finishPurchase() {
     })
     .then(res => res.text())
     .then(html => {
-        document.open();
-        document.write(html);
-        document.close();
+        document.getElementById('cart').classList.add('hidden'); // 장바구니 모달 닫히도록
+        document.getElementById("complete-modal").classList.remove("hidden");
+        setTimeout(() => {
+            location.href = 'javascript:history.back()';
+        }, 3000);
     })
     .catch(err => {
         console.error("구매 처리 오류:", err);
@@ -166,9 +168,9 @@ function finishPurchase() {
 
     const userMoneyDisplay = document.getElementById('userMoney');
     const userMoney = parseInt(userMoneyDisplay.textContent, 10);
-    const cost = selectedItemPrice * quantity;
+    const cost = selectedItemPrice * selectedQuantity;
 
-    buyItems.push({itemId: selectedItemId, quantity, cost});
+    buyItems.push({itemId: selectedItemId, quantity: selectedQuantity, cost});
 
     userMoneyDisplay.textContent = userMoney - totalCost;
 }
