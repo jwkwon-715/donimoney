@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>도니머니 퀴즈 풀기</title>
+    <!-- <%- include('../partials/header') %> -->
+
     <link rel="stylesheet" href="/stylesheets/quizSelect.css">
 
     <!-- Swiper -->
@@ -33,7 +36,7 @@
                         <button class="quiz-card" type="submit" <%= isLearned ? '' : 'disabled' %>>
                             <%= curriculum.curriculum_title %>
                             <% if (!isLearned) { %>
-                                <!-- <span class="lock-icon">🔒</span> -->
+                                // <!-- <span class="lock-icon">🔒</span> -->
                                 <img class="lock-icon" src="/images/lock_icon.png" alt="">
                             <% } %>
                         </button>
@@ -46,16 +49,20 @@
         <div class="swiper-button-next"></div>
     </div>
 
-    <h2>학습 진행 정보</h2>
+    <!--
+        <% <h2>학습 진행 정보</h2>
     <ul>
     <% if (learningProgressList && learningProgressList.length > 0) { %>
         <% learningProgressList.forEach(function(progress) { %>
-        <li>learning_id: <%= progress.learning_id %></li>
-        <% }); %>
-    <% } else { %>
-        <li>학습 진행 기록이 없습니다.</li>
-    <% } %>
-    </ul>
+        <% <li>learning_id: <%#= progress.learning_id %></li>
+        <#% }); %>
+    <%# } else { %>
+        <%# <li>학습 진행 기록이 없습니다.</li>
+    <%# } %>
+    </ul> %>
+        -->
+    <%# 주석 처리 %>
+    
 
     <script>
         const swiper = new Swiper('.quiz-swiper', {

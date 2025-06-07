@@ -110,19 +110,6 @@ db.LearningProgress.belongsTo(db.UserCharacters, {
 db.Stories.hasMany(db.StoryProgress, {
   foreignKey: "story_id",
 });
-db.Stories.hasMany(db.Scenes, {
-  foreignKey: "story_id",
-});
-db.Scenes.belongsTo(db.Stories, {
-  foreignKey: "story_id",
-});
-
-db.Appear.belongsTo(db.Scenes, {
-  foreignKey: "scene_id",
-});
-db.Appear.belongsTo(db.StoryCharacter, {
-  foreignKey: "character_id",
-});
 
 db.StoryProgress.belongsTo(db.UserCharacters, {
   foreignKey: 'user_character_id'
@@ -143,38 +130,6 @@ db.Curriculum.hasOne(db.Learning, {
 });
 db.Curriculum.hasOne(db.Stories, {
   foreignKey: 'curriculum_id'
-});
-
-db.Scenes.belongsTo(db.Stories, {
-  foreignKey: 'story_id'
-});
-db.Stories.hasMany(db.Scenes, {
-  foreignKey: 'story_id'
-});
-
-db.Scenes.hasMany(db.Dialogues, {
-  foreignKey: 'scene_id'
-});
-db.Dialogues.belongsTo(db.Scenes, {
-  foreignKey: 'scene_id'
-})
-
-db.Scenes.hasMany(db.Choices, {
-  foreignKey: 'scene_id'
-});
-db.Choices.belongsTo(db.Scenes, {
-  foreignKey: 'scene_id'
-});
-
-db.StoryCharacter.belongsToMany(db.Scenes, {
-  through: db.Appear,
-  foreignKey: 'character_id',
-  otherKey: 'scene_id'
-});
-db.Scenes.belongsToMany(db.StoryCharacter, {
-  through: db.Appear,
-  foreignKey: 'scene_id',
-  otherKey: 'character_id'
 });
 
 
