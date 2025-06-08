@@ -485,13 +485,16 @@ a {
 .parent1 {
   position: relative;
   width: 100%;
-  height: 220px;
+  max-width: 500px; /* 기존과 비슷한 크기 유지 */
+  aspect-ratio: 16 / 9; /* 16:9 비율 고정 */
+  overflow: hidden;
 }
 
 .icon {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
 
 .characters {
