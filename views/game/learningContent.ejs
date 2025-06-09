@@ -36,7 +36,8 @@
             <% } %>
             <%- card.body.replace(/\n/g, "<br>") %>
             <hr>
-            <img src="/images/learning/<%= learningId %>_<%= idx %>.png" class="img" alt="">
+            <img src="/images/learning/<%= learningId %>_<%= idx %>.png" class="img" alt=""
+            onerror="this.onerror=null; this.src='/images/learning/1_0.png';">
           </div>
         </div>
       <% }) %>
