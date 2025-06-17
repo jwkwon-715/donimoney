@@ -14,14 +14,12 @@
     .nav-buttons {
       position: absolute;
       width: 100%;
-      /* padding: 50px; */
     }
 
     .money-badge, .coin-icon {
       display: none;
     }
 
-    /* 노란색 버튼: 왼쪽 중앙 */
     .root-button {
       position: absolute;
       left: 69px;
@@ -53,22 +51,14 @@
     .root-icon {
       width: 40px;
       height: 40px;
-      /* 필요시 margin, vertical-align 등 추가 조정 가능 */
     }
   </style>
-<!--  <link rel="stylesheet" href="/stylesheets/style.css">-->
 </head>
 <body>
-  <!---- <div class="nav-buttons">
-    파란색, 빨간색 네비게이션 버튼들은 이 안에 이미 있다고 가정
-  </div> -->
-  
-  <!-- 노란색 버튼: 이미지(home.png) 사용 -->
   <button class="root-button" onclick="location.href='/'" title="루트로 이동">
     <img src="/images/root_icon.png" alt="홈" class="root-icon">
   </button>
 
-  <!-- 게임이 렌더링될 컨테이너 -->
   <div id="game-container"></div>
 
   <script>

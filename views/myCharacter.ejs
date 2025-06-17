@@ -16,7 +16,6 @@
   </a>
   
   <div class="mypage-main">
-    <!-- 왼쪽: 캐릭터와 돈 -->
     <div class="character-area">
       <% if (character) { %>
         <div class="money-badge">
@@ -29,15 +28,12 @@
         <div class="character-nickname"><%= character.nickname %></div>
       <% } %>
     </div>
-    <!-- 오른쪽: 학습/퀴즈/스토리 진행도 박스 또는 안내 메시지 -->
     <div class="learning-area">
-      <!-- 실제 동작하는 탭을 learning-notebook 위로 이동 -->
       <div class="real-tabs real-tabs-outside">
         <a href="/mypage/character" class="real-tab <%= activeTab === 'character' ? 'active' : '' %>">나의 학습</a>
         <a href="/mypage/inventory" class="real-tab <%= activeTab === 'inventory' ? 'active' : '' %>">아이템</a>
       </div>
       <div class="learning-notebook">
-        <!-- 북마크 이미지만 상단 오른쪽에, 위쪽 절반만 보이게 -->
         <div class="bookmark-clip">
           <img src="/images/bookmark_icon.png" alt="북마크" class="bookmark-img">
         </div>

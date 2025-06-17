@@ -4,22 +4,21 @@ const { Curriculum, Learning, LearningProgress, QuizProgress, StoryProgress,
 const { Sequelize, where } = require('sequelize');
 
 
-// 마이페이지 메인
 exports.renderMain = (req, res) => {
   res.render('myPage', { user: req.user });
 };
 
-// 내 정보 확인 - 비밀번호 입력 폼
+// 내 정보 확인 비밀번호 입력
 exports.renderInfoCheck = (req, res) => {
   res.render('infoCheck', { error: null, nextUrl: '/mypage/info' });
 };
 
-// 아이디/비밀번호 변경 - 비밀번호 입력 폼
+// 아이디/비밀번호 변경 비밀번호 입력
 exports.renderChangeAccountCheck = (req, res) => {
   res.render('infoCheck', { error: null, nextUrl: '/users/find' });
 };
 
-// 공통 비밀번호 검사
+// 비밀번호 검사
 exports.checkPassword = async (req, res) => {
   const { password, nextUrl } = req.body;
   const user = req.user;
@@ -35,12 +34,10 @@ exports.checkPassword = async (req, res) => {
   }
 };
 
-// 내 정보 표시
 exports.renderInfo = (req, res) => {
   res.render('info', { user: req.user });
 };
 
-// 마이캐릭터 페이지
 exports.renderCharacter = async (req, res) => {
   try {
     const userCharacterId = req.user.user_character_id;
@@ -50,7 +47,7 @@ exports.renderCharacter = async (req, res) => {
       return res.render('myCharacter', {
         character: null,
         noCharacterMsg: '캐릭터가 없습니다. 시작하기를 눌러 캐릭터를 먼저 생성해주세요!',
-        activeTab: 'character' // 추가
+        activeTab: 'character'
       });
     }
 
@@ -88,7 +85,7 @@ exports.renderCharacter = async (req, res) => {
       passedStoryCount,
       percentStory,
       noCharacterMsg: null,
-      activeTab: 'character' // 반드시 추가
+      activeTab: 'character'
     });
   } catch (error) {
     console.error(error);
@@ -100,22 +97,19 @@ exports.renderInventory = async (req, res) => {
   try {
     const userCharacterId = req.user.user_character_id;
 
-    // 인벤토리 불러오기
     const inventory = await Inventory.findAll({
       where: { user_character_id: userCharacterId },
       include: [{ model: Items, require: true }],
     });
 
-    // 캐릭터 정보 불러오기
     const character = await UserCharacters.findByPk(userCharacterId);
     const nickname = character && character.nickname ? character.nickname : '토롱이';
 
-    // 인벤토리 페이지 렌더링
     res.render('inventory', {
       inventory,
       character,
       nickname,
-      activeTab: 'inventory' // 탭 강조용
+      activeTab: 'inventory'
     });
   } catch (error) {
     console.error(error);

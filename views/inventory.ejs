@@ -16,7 +16,6 @@
   </a>
 
   <div class="mypage-main">
-    <!-- 왼쪽: 캐릭터와 돈 -->
     <div class="character-area">
       <% if (character) { %>
         <div class="money-badge">
@@ -29,15 +28,12 @@
         <div class="character-nickname"><%= character.nickname %></div>
       <% } %>
     </div>
-    <!-- 인벤토리 노트 영역 -->
     <div class="learning-area">
-      <!-- 실제 동작하는 탭을 learning-notebook 위로 추가 -->
       <div class="real-tabs real-tabs-outside">
         <a href="/mypage/character" class="real-tab <%= activeTab === 'character' ? 'active' : '' %>">나의 학습</a>
         <a href="/mypage/inventory" class="real-tab <%= activeTab === 'inventory' ? 'active' : '' %>">아이템</a>
       </div>
       <div class="learning-notebook">
-        <!-- 북마크 아이콘을 노트북 상단에 겹치게 배치 -->
         <div class="bookmark-clip">
           <img src="/images/bookmark_icon.png" alt="북마크" class="bookmark-img">
         </div>
@@ -46,7 +42,6 @@
             <span class="character-name"><%= nickname || '토롱이' %></span>
             <span>아이템</span>
           </div>
-          <!-- 안내문구/상세정보 영역 -->
           <div id="item-detail-area" class="item-detail-area">
             <div id="item-detail-guide" class="item-detail-guide">
               아이템을 클릭하면 설명을 볼 수 있어요.
@@ -61,7 +56,7 @@
               <div class="detail-price" id="detail-price"></div>
             </div>
           </div>
-          <!-- 인벤토리 그리드 -->
+
           <% // ----------- [추가] imageMap 선언 ----------- %>
           <% const imageMap = {
             1: "moneyJournal",
