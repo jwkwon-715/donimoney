@@ -9,7 +9,7 @@ exports.signup = async (req, res) => {
   const { user_id, password, password2, phone, email, birthdate } = req.body;
 
   if (password !== password2) {
-    req.flash('error', '❌ 비밀번호가 일치하지 않습니다.');
+    req.flash('error', '비밀번호가 일치하지 않습니다.');
     return res.redirect('/users/signup');
   }
 
@@ -21,20 +21,20 @@ exports.signup = async (req, res) => {
   try {
     const existingId = await Users.findOne({ where: { user_id } });
     if (existingId) {
-      req.flash('error', '❌ 이미 존재하는 사용자 ID입니다.');
+      req.flash('error', '이미 존재하는 사용자 ID입니다.');
       return res.redirect('/users/signup');
     }
 
     const existingPhone = await Users.findOne({ where: { phone } });
     if (existingPhone) {
-      req.flash('error', '❌ 이미 등록된 전화번호입니다.');
+      req.flash('error', '이미 등록된 전화번호입니다.');
       return res.redirect('/users/signup');
     }
 
     if (email) {
       const existingEmail = await Users.findOne({ where: { email } });
       if (existingEmail) {
-        req.flash('error', '❌ 이미 등록된 이메일입니다.');
+        req.flash('error', '이미 등록된 이메일입니다.');
         return res.redirect('/users/signup');
       }
     }
@@ -49,7 +49,7 @@ exports.signup = async (req, res) => {
       birthdate,
     });
 
-    req.flash('success', '🎉 회원가입이 완료되었습니다!');
+    req.flash('success', '회원가입이 완료되었습니다!');
     res.redirect('/users/login');
 
   } catch (error) {
@@ -94,13 +94,13 @@ exports.findId = async (req, res) => {
   try {
     const user = await Users.findOne({ where: { email } });
     if (!user) {
-      req.flash('error', '❌ 등록된 이메일이 없습니다');
+      req.flash('error', '등록된 이메일이 없습니다');
       return res.redirect('/users/find?mode=id');
     }
     await sendEmail(email, '🔎 아이디 찾기 결과', 
       `<p>회원님의 아이디는 <strong>${user.user_id}</strong> 입니다</p>`
     );
-    req.flash('success', '✅ 아이디가 이메일로 발송되었습니다');
+    req.flash('success', '아이디가 이메일로 발송되었습니다');
     res.redirect('/users/find?mode=id');
   } catch (error) {
     console.error(error);
@@ -114,7 +114,7 @@ exports.findPw = async (req, res) => {
   try {
     const user = await Users.findOne({ where: { user_id, email } });
     if (!user) {
-      req.flash('error', '❌ 일치하는 회원 정보가 없습니다');
+      req.flash('error', '일치하는 회원 정보가 없습니다');
       return res.redirect('/users/find?mode=password');
     }
 
@@ -128,7 +128,7 @@ exports.findPw = async (req, res) => {
        <a href="${resetLink}">비밀번호 재설정하기</a>`
     );
 
-    req.flash('success', '✅ 재설정 링크가 발송되었습니다');
+    req.flash('success', '재설정 링크가 발송되었습니다');
     res.redirect('/users/find?mode=password');
   } catch (error) {
     console.error(error);
@@ -146,7 +146,7 @@ exports.getResetPassword = async (req, res) => {
     });
 
     if (!tokenData || isExpired(tokenData.created_at)) {
-      req.flash('error', '⚠️ 유효하지 않은 링크입니다');
+      req.flash('error', '유효하지 않은 링크입니다');
       return res.redirect('/users/find?mode=password');
     }
 
@@ -176,7 +176,7 @@ exports.resetPassword = async (req, res) => {
     await Users.update({ password: hashed }, { where: { user_id } });
     await Token.destroy({ where: { user_id } });
 
-    req.flash('success', '🎉 비밀번호 변경 성공! 로그인 해주세요');
+    req.flash('success', '비밀번호 변경 성공! 로그인 해주세요');
     res.redirect('/users/login');
   } catch (error) {
     console.error(error);

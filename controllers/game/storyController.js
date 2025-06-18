@@ -16,6 +16,7 @@ const storyUnlockItems = {
 
 const generalQReward = 800;
 
+//스토리 프로그레스 기록 확인
 async function isNewProg(storyId, userCharacterId) {
     try {
         const storyProg = await StoryProgress.findOne({
@@ -28,6 +29,7 @@ async function isNewProg(storyId, userCharacterId) {
     }
 }
 
+//스토리 완료 여부 확인
 async function progressState(storyId, userCharacterId) {
     const progress = await StoryProgress.findOne({
         where: {
@@ -40,7 +42,7 @@ async function progressState(storyId, userCharacterId) {
 }
     
 module.exports = {
-    // 볼 수 있는 스토리 리스트 보여주기
+    // 진행 가능한 스토리 리스트 보여주기
     showPossibleStoryList: async (req, res, next) => {
         try {
             const userCharacterId = req.user.user_character_id;
@@ -95,6 +97,7 @@ module.exports = {
         }
     },
 
+    //스토리 진행에 필요한 아이템 보유중인지 확인
     hasUnlockItem: async (req, res, next) => {
         try {
             const userCharacterId = req.user.user_character_id;
@@ -124,6 +127,7 @@ module.exports = {
         }
     },
 
+    //스토리 리스트 렌더링
     renderStoriesList: async (req, res, next) => {
         res.render("game/storyList", {
             storyList: res.locals.storyList,
