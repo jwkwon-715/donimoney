@@ -8,8 +8,8 @@ const imagesMap = {
 7: ['bg_mart', 'todragon_hat', 'dony_smile', 'todragon_hat_worried', 'dony_basic', 'todragon_hat_embrrassed', 'todragon_hat_surprised', 'dony_surprised', 'dony_worried', 'dony_angry', 'manager_basic'],
 8: ['bg_mart', 'dony_smile', 'todragon_worried', 'dony_basic', 'todragon_basic', 'todragon_happy', 'manager_basic'],
 9: ['bg_home', 'todragon_worried', 'dony_basic', 'dony_surprised', 'todragon_basic', 'todragon_happy', 'dony_happy', 'dony_smile'],
-success: ['sticker_smile', 'sticker_blueHeart', 'sticker_confetti', 'sticker_heart', 'sticker_star', 'sticker_thumb', 'home_icon', 'close_icon' ],
-fail: [ 'sticker_tear', 'sticker_thumdown', 'sticker_darkheart', 'sticker_sadface', 'home_icon', 'close_icon' ]
+success: ['sticker_smile', 'sticker_blueHeart', 'sticker_confetti', 'sticker_heart', 'sticker_star', 'sticker_thumb', 'home_button', 'close_button' ],
+fail: [ 'sticker_tear', 'sticker_thumdown', 'sticker_darkheart', 'sticker_sadface', 'home_button', 'close_button' ]
 };
 
 
@@ -494,7 +494,7 @@ export class StoryScene extends Phaser.Scene {
         url = `/images/background/${key}.png`;
       } 
       // 2. 스티커 & 아이콘
-      else if (key.startsWith('sticker_') || key === 'home_icon' || key === 'close_icon') {
+      else if (key.startsWith('sticker_') || key === 'home_button' || key === 'close_button') {
         url = `/images/${key}.png`;
       } 
       // 3. 캐릭터 이미지
@@ -524,8 +524,8 @@ export class StoryScene extends Phaser.Scene {
           { key: 'sticker_thumb', x: cam.centerX, y: cam.centerY - 350 },
           { key: 'sticker_heart', x: cam.centerX - 500, y: cam.centerY - 100 },
           { key: 'sticker_star', x: cam.centerX - 450, y: cam.centerY + 150 },
-          { key: 'sticker_Smile', x: cam.centerX + 450, y: cam.centerY - 150 },
-          { key: 'sticker_blue_heart', x: cam.centerX + 450, y: cam.centerY + 180 },
+          { key: 'sticker_smile', x: cam.centerX + 450, y: cam.centerY - 150 },
+          { key: 'sticker_blueHeart', x: cam.centerX + 450, y: cam.centerY + 180 },
           { key: 'sticker_confetti', x: cam.centerX + 450, y: cam.centerY + 300 },
         ],
         message: '참 잘했어요!',
@@ -552,7 +552,8 @@ export class StoryScene extends Phaser.Scene {
     const data = popupData[type];
 
     data.images.forEach(img => {
-      this.add.image(img.x, img.y, img.key).setScale(0.6).setDepth(101);
+      const depth = (img.key === 'sticker_thumb' || img.key === 'sticker_sadface') ? 104 : 101;
+      this.add.image(img.x, img.y, img.key).setScale(0.6).setDepth(depth);
     });
 
     this.popupOverlay = this.add.rectangle(cam.centerX, cam.centerY, cam.width, cam.height, 0x000000, 0.5).setDepth(99);
@@ -595,23 +596,18 @@ export class StoryScene extends Phaser.Scene {
     // 홈, 닫기 아이콘
     const iconSettings = [
       {
-        x: cam.width * 0.07, y: cam.height * 0.08,
-        color: 0x3B9EF7, key: 'home_icon',
+        x: cam.width * 0.07, y: cam.height * 0.09,
+        color: 0x3B9EF7, key: 'home_button',
         onClick: () => window.location.href = '/game/main'
       },
       {
-        x: cam.width * 0.93, y: cam.height * 0.08,
-        color: 0xEF5454, key: 'close_icon',
+        x: cam.width * 0.93, y: cam.height * 0.09,
+        color: 0xEF5454, key: 'close_button',
         onClick: () => window.location.href = '/game/stories/storyList'
       }
     ];
 
     iconSettings.forEach(icon => {
-      const size = 100, radius = 18;
-      const bg = this.add.graphics().setDepth(102);
-      bg.fillStyle(icon.color, 1);
-      bg.fillRoundedRect(icon.x - size / 2, icon.y - size / 2, size, size, radius);
-
       this.add.image(icon.x, icon.y, icon.key)
         .setInteractive({ cursor: 'pointer' }).setDepth(103).setScale(0.6)
         .on('pointerdown', icon.onClick);

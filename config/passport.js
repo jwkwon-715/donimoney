@@ -6,7 +6,7 @@ module.exports = (passport) => {
   passport.use(
     new LocalStrategy(
       {
-        usernameField: 'user_id', // 이메일로 로그인
+        usernameField: 'user_id',
         passwordField: 'password',
       },
       async (user_id, password, done) => {
@@ -21,10 +21,9 @@ module.exports = (passport) => {
             return done(null, false, { message: '비밀번호가 일치하지 않습니다.' });
           }
 
-          // 유저 캐릭터 찾기 (user_id 기준)
+          // 유저 캐릭터 찾기
           const userCharacter = await UserCharacters.findOne({ where: { user_id: user.user_id } });
 
-          // user 객체에 user_character_id를 추가해서 넘김
           const userWithCharacter = {
             ...user.get({ plain: true }),
             user_character_id: userCharacter ? userCharacter.user_character_id : null
@@ -38,7 +37,6 @@ module.exports = (passport) => {
     )
   );
 
-  // user_id와 user_character_id를 객체로 세션에 저장
   passport.serializeUser((user, done) => {
     done(null, {
       user_id: user.user_id,
@@ -46,13 +44,11 @@ module.exports = (passport) => {
     });
   });
 
-  // 세션에서 꺼낼 때 user와 user_character_id를 함께 req.user에 할당
   passport.deserializeUser(async (sessionUser, done) => {
     try {
       const user = await Users.findByPk(sessionUser.user_id);
       if (!user) return done(null, false);
 
-      // req.user에 user_character_id도 함께 넣음
       const userWithCharacter = {
         ...user.get({ plain: true }),
         user_character_id: sessionUser.user_character_id

@@ -7,9 +7,12 @@
   <link rel="stylesheet" href="/stylesheets/index.css">
   <link rel="stylesheet" href="/stylesheets/style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
 </head>
 <body>
-  <!-- 1. Header 영역 -->
   <header class="header">
     <div class="header-container">
       <div class="logo">
@@ -29,7 +32,6 @@
     </div>
   </header>
 
-  <!-- 2. Main 영역 -->
   <main>
     <!-- 첫 번째 섹션: 인트로 화면 -->
     <section class="intro-section">
@@ -55,49 +57,45 @@
     <section id="stats-section" class="stats-section">
       <div class="content-container">
         <h2 class="section-title">
-          우리 아이들 경제교육,<br>
-          이대로 괜찮을까요?
+          우리 아이들 경제교육,<br>이대로 괜찮을까요?
         </h2>
         <p class="section-desc">
           최근 스마트폰과 태블릿을 활용한 간편 결제가 보편화되고 있습니다.<br>
-          아이들이 돈의 가치를 체감할 기회가 줄어들고, 아이들의 금전 감각이 마비되는 사례가 늘어나고 있습니다.
+          아이들이 <strong>돈의 가치를 체감할 기회가 줄어들고</strong>, <strong>아이들의 금전 감각이 마비되는 사례</strong>가 늘어나고 있습니다.
         </p>
-        
-        <div class="stats-slider-container">
-          <div class="stats-slider">
-            <div class="stats-card yellow">
+
+        <div class="swiper stats-slider">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide stats-card yellow">
               <div class="stats-card-content">
-                <p class="stats-card-title">"학교의 경제교육 강화가 필요하다"고<br>응답한 교사의 비율</p>
+                <p class="stats-card-title"><strong>'학교의 경제교육 강화가 필요하다'</strong>고<br>응답한 교사의 비율</p>
                 <div class="stats-date">응답자 수(N) = 1,266</div>
                 <p class="stats-percent">97.1%</p>
-                
               </div>
-              <!-- <div class="slider-button next"></div> -->
             </div>
-            
-            <div class="stats-card blue">
+
+            <div class="swiper-slide stats-card blue">
               <div class="stats-card-content">
-                <p class="stats-card-title">적절한 경제 교육<br>시작 시기</p>
-                <div class="stats-graph">
-                  <!-- 그래프 요소들 -->
+                <p class="stats-card-title">적절한 <strong>경제 교육<br>시작 시기</strong></p>
+                <div class="stats-graph stats-image-wrapper">
+                  <img class="stats-overlay-image" src="/images/main_table.png" alt="도표 이미지">
                 </div>
-                <div class="stats-date">설문자료: 2024</div>
+                <div class="stats-date">응답자 수(N) = 1,266</div>
               </div>
-              <!-- <div class="slider-button next"></div> -->
             </div>
-            
-            <div class="stats-card pink">
+
+            <div class="swiper-slide stats-card pink">
               <div class="stats-card-content">
-                <p class="stats-card-title">강의식 교육보다<br>체험형 교육 방식에 더 선호</p>
-                <!-- 내용 추가 예정 -->
+                <p class="stats-card-title">강의식 교육보다<br><strong>체험형 교육 방식</strong>에 더 선호</p>
               </div>
-              <!-- <div class="slider-button next"></div> -->
             </div>
-            
-            <div class="stats-card green">
+
+            <div class="swiper-slide stats-card green">
               <div class="stats-card-content">
-                <p class="stats-card-title">생활 밀착형 금융 교육<br>필요성 대두</p>
-                <!-- 내용 추가 예정 -->
+                <p class="stats-card-title"><strong>생활 밀착형 금융 교육</strong><br>필요성 대두</p>
+                <div class="stats-image-wrapper">
+                  <img class="stats-overlay-image" src="/images/main_star.png" alt="별 이미지">
+                </div>
               </div>
             </div>
           </div>
@@ -135,46 +133,17 @@
             </div>
           </div>
           
-          <!-- 스토리 모드 탭 콘텐츠 -->
           <div class="tab-content" id="story-tab">
             <div class="content-section">
               <div class="main3-inner">
                 <div class="parent1">
-                  <img class="icon" alt="배경" src="/images/배경.png">
-                  <!-- 
-                  <div class="characters">
-                    <img class="icon1" alt="강아지" src="/images/초코_기본.png">
-                    <img class="icon2" alt="토끼" src="/images/토끼_웃음.png">
-                  </div>
-                  <div class="chattodragon-select">
-                    <div class="chattodragon-select-child"></div>
-                    <div class="chattodragon-select-item"></div>
-                    <div class="chattodragon-select-inner"></div>
-                    <div class="chattodragon-select-child1"></div>
-                    <div class="div17">토룡이</div>
-                    <b class="b9">돈은 왜 필요할까?</b>
-                  </div>
-                  -->
+                  <img class="icon" alt="배경" src="/images/localhost_3000_stories_1.png">
                 </div>
               </div>
               
               <div class="main3-inner1">
                 <div class="parent1">
-                  <img class="icon" alt="배경" src="/images/배경.png">
-                  <!--
-                  <div class="characters">
-                    <img class="icon1" alt="강아지" src="/images/초코_기본.png">
-                    <img class="icon2" alt="토끼" src="/images/토끼_웃음.png">
-                  </div>
-                  <div class="chattodragon-select">
-                    <div class="chattodragon-select-child"></div>
-                    <div class="chattodragon-select-item"></div>
-                    <div class="chattodragon-select-inner"></div>
-                    <div class="chattodragon-select-child1"></div>
-                    <div class="div17">토룡이</div>
-                    <b class="b9">돈은 왜 필요할까?</b>
-                  </div>
-                  -->
+                  <img class="icon" alt="배경" src="/images/localhost_3000_stories_2.png">
                 </div>
               </div>
             </div>
@@ -189,13 +158,17 @@
             </div>
           </div>
           
-          <!-- 학습 모드 탭 콘텐츠 -->
           <div class="tab-content" id="learn-tab" style="display: none;">
             <div class="content-section">
-              <div class="main3-inner full-width">
-                <div class="tab-placeholder">
-                  <h3>학습 모드입니다</h3>
-                  <p>여기에 학습 모드 관련 콘텐츠가 표시됩니다.</p>
+              <div class="main3-inner">
+                <div class="parent1">
+                  <img class="icon" alt="배경" src="/images/localhost_3000_game_school_learning_content_2_.png">
+                </div>
+              </div>
+              
+              <div class="main3-inner1">
+                <div class="parent1">
+                  <img class="icon" alt="배경" src="/images/localhost_3000_game_school_learning_content_9_.png">
                 </div>
               </div>
             </div>
@@ -210,13 +183,17 @@
             </div>
           </div>
           
-          <!-- 학습 퀴즈 탭 콘텐츠 -->
           <div class="tab-content" id="quiz-tab" style="display: none;">
             <div class="content-section">
-              <div class="main3-inner full-width">
-                <div class="tab-placeholder">
-                  <h3>학습 퀴즈입니다</h3>
-                  <p>여기에 학습 퀴즈 관련 콘텐츠가 표시됩니다.</p>
+              <div class="main3-inner">
+                <div class="parent1">
+                  <img class="icon" alt="배경" src="/images/localhost_3000_game_school_quiz_select.png">
+                </div>
+              </div>
+              
+              <div class="main3-inner1">
+                <div class="parent1">
+                  <img class="icon" alt="배경" src="/images/localhost_3000_game_school_quiz_select_random.png">
                 </div>
               </div>
             </div>
@@ -231,13 +208,17 @@
             </div>
           </div>
           
-          <!-- 마이페이지 탭 콘텐츠 -->
           <div class="tab-content" id="mypage-tab" style="display: none;">
             <div class="content-section">
-              <div class="main3-inner full-width">
-                <div class="tab-placeholder">
-                  <h3>마이페이지입니다</h3>
-                  <p>여기에 마이페이지 관련 콘텐츠가 표시됩니다.</p>
+              <div class="main3-inner">
+                <div class="parent1">
+                  <img class="icon" alt="배경" src="/images/localhost_3000_mypage_character.png">
+                </div>
+              </div>
+              
+              <div class="main3-inner1">
+                <div class="parent1">
+                  <img class="icon" alt="배경" src="/images/localhost_3000_mypage_inventory.png">
                 </div>
               </div>
             </div>
@@ -271,7 +252,6 @@
         </div>
         
         <div class="play-guide">
-          <!-- 집 내용 -->
           <div class="location-content active" id="home-content">
             <div class="parent4">
               <div class="div22">
@@ -289,7 +269,6 @@
             </div>
           </div>
           
-          <!-- 마트 내용 -->
           <div class="location-content" id="market-content" style="display: none;">
             <div class="parent4">
               <div class="div22">
@@ -307,7 +286,6 @@
             </div>
           </div>
           
-          <!-- 학교 내용 -->
           <div class="location-content" id="school-content" style="display: none;">
             <div class="parent4">
               <div class="div22">
@@ -329,12 +307,11 @@
     </section>
   </main>
 
-  <!-- 3. Footer 영역 -->
   <footer class="footer">
     <div class="footer-container">
       <div class="footer-logo">도니머니</div>
       <div class="footer-info">
-        © 2024 도니머니 All Rights Reserved.<br>
+        © 2025 도니머니 All Rights Reserved.<br>
         경제 개념이 낯설거나 금융에 대해 이해가 부족한 초등학생을 대상을 위한<br>
         스토리, 학습 퀴즈와 같은 게임으로 쉽게 배우는 경제 금융 교육
       </div>
@@ -358,7 +335,21 @@
     </div>
   </footer>
 
-  <!-- 외부 JavaScript 파일 참조 -->
   <script src="/javascripts/index.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const swiper = new Swiper('.stats-slider', {
+        slidesPerView: 3,
+        spaceBetween: 60,
+        loop: true,
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false,
+        },
+        observer: true,
+        observeParents: true
+      });
+    });
+  </script>
 </body>
 </html>

@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/stylesheets/learningContent.css">
+  <title>도니머니 학습하기</title>
+  <!-- <%- include('../partials/header') %> -->
 </head>
 <body>
   <!-- <div class="buttons">
@@ -25,7 +27,7 @@
     <a class="nav-btn arrow left" id="prevBtn"></a> <!-- &#8592; -->
     <div class="card-section" id="cardSection">
       <% contentArr.forEach(function(card, idx) { %>
-        <div class="card" style="display: <%= idx === 0 ? 'block' : 'none' %>;">
+        <div class="card" style="display: <%= idx === 0 ? 'block' : 'none' %>">
           <div class="card-body">
             <% if(card.title) { %>
               <div class="card-title" style="font-weight:bold; font-size:3em; margin-bottom:10px;">
@@ -34,7 +36,8 @@
             <% } %>
             <%- card.body.replace(/\n/g, "<br>") %>
             <hr>
-            <img src="/images/learning/<%= learningId %>_<%= idx %>.png" class="img" alt="">
+            <img src="/images/learning/<%= learningId %>_<%= idx %>.png" class="img" alt=""
+            onerror="this.onerror=null; this.src='/images/learning/1_0.png';">
           </div>
         </div>
       <% }) %>
@@ -44,7 +47,7 @@
   <div class="indicator" id="indicator"></div>
 
   <div style="margin-top:30px; text-align:center;">
-    <button type="button" class="complete-btn" id="completeBtn" style="display:none;">학습 완료</button>
+    <button type="button" id="completeBtn" style="display:none;">학습 완료</button>
     <input type="hidden" id="learningId" value="<%= learningContent.learning_id %>">
     <input type="hidden" id="learningPass" value="<%= learningPass ? 'true' : 'false' %>">
   </div>

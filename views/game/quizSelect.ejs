@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>도니머니 퀴즈 풀기</title>
+    <!-- <%- include('../partials/header') %> -->
+
     <link rel="stylesheet" href="/stylesheets/quizSelect.css">
 
     <!-- Swiper -->
@@ -45,18 +48,7 @@
         <div class="swiper-button-prev"></div>
         <div class="swiper-button-next"></div>
     </div>
-
-    <h2>학습 진행 정보</h2>
-    <ul>
-    <% if (learningProgressList && learningProgressList.length > 0) { %>
-        <% learningProgressList.forEach(function(progress) { %>
-        <li>learning_id: <%= progress.learning_id %></li>
-        <% }); %>
-    <% } else { %>
-        <li>학습 진행 기록이 없습니다.</li>
-    <% } %>
-    </ul>
-
+    
     <script>
         const swiper = new Swiper('.quiz-swiper', {
             slidesPerView: 2.6,

@@ -246,15 +246,15 @@ a {
   display: flex;
   gap: 20px;
   width: 100%;
-  overflow-x: auto;
+  /* overflow-x: auto; */
   padding: 10px 0;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
 }
 
 .stats-card {
-  width: 30%;
-  height: 200px;
+  width: 30% !important;
+  height: 200px !important;
   border-radius: 15px;
   padding: 20px;
   position: relative;
@@ -283,9 +283,10 @@ a {
 
 .stats-card-title {
   font-size: 20px;
-  font-weight: 900;
+  font-weight: 500;
   line-height: 1.3;
   text-align: left;
+  color: #333;
 }
 
 .stats-percent {
@@ -314,6 +315,42 @@ a {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
+
+/* .stats-image-wrapper {
+  position: relative;
+  width: 10%;
+  height: 120px;
+  margin: -40px -100px 1000px -185px;
+}
+
+.stats-overlay-image {
+  position: absolute;
+  width: 600px;
+  height: 150px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+} */
+
+.stats-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: auto;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.stats-overlay-image {
+  object-fit: contain;
+  position: absolute;
+  top: -30px;
+  left: 60%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: auto;
 }
 
 .slider-button::after {
@@ -448,13 +485,16 @@ a {
 .parent1 {
   position: relative;
   width: 100%;
-  height: 220px;
+  max-width: 500px; /* 기존과 비슷한 크기 유지 */
+  aspect-ratio: 16 / 9; /* 16:9 비율 고정 */
+  overflow: hidden;
 }
 
 .icon {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
 
 .characters {

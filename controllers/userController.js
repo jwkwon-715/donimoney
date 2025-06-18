@@ -13,7 +13,6 @@ exports.signup = async (req, res) => {
     return res.redirect('/users/signup');
   }
 
-  // 생년월일 필수 체크
   if (!birthdate) {
     req.flash('error', '생년월일을 입력해 주세요.');
     return res.redirect('/users/signup');
@@ -60,8 +59,6 @@ exports.signup = async (req, res) => {
   }
 };
 
-
-// 로그인 처리
 exports.login = (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
     if (err) return next(err);
@@ -77,7 +74,6 @@ exports.login = (req, res, next) => {
   })(req, res, next);
 };
 
-// 로그아웃 처리
 exports.logout = (req, res, next) => {
   req.logout(function(err) {
     if (err) return next(err);
@@ -85,7 +81,6 @@ exports.logout = (req, res, next) => {
   });
 };
 
-// 아이디/비밀번호 찾기 페이지 렌더
 exports.getFindPage = (req, res) => {
   res.render('findAccount', {
     error: req.flash('error'),
@@ -94,7 +89,6 @@ exports.getFindPage = (req, res) => {
   });
 };
 
-// 아이디 찾기 처리
 exports.findId = async (req, res) => {
   const { email } = req.body;
   try {
@@ -115,7 +109,6 @@ exports.findId = async (req, res) => {
   }
 };
 
-// 비밀번호 재설정 요청
 exports.findPw = async (req, res) => {
   const { user_id, email } = req.body;
   try {
@@ -144,7 +137,6 @@ exports.findPw = async (req, res) => {
   }
 };
 
-// 비밀번호 재설정 페이지 렌더
 exports.getResetPassword = async (req, res) => {
   const { user_id, token } = req.params;
   try {
@@ -170,7 +162,6 @@ exports.getResetPassword = async (req, res) => {
   }
 };
 
-// 비밀번호 재설정 처리
 exports.resetPassword = async (req, res) => {
   const { user_id, token } = req.params;
   const { password } = req.body;
@@ -194,7 +185,6 @@ exports.resetPassword = async (req, res) => {
   }
 };
 
-// 토큰 만료 확인 (1시간)
 function isExpired(createdAt) {
   return Date.now() - new Date(createdAt).getTime() > 3600000;
 }
