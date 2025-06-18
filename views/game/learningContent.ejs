@@ -5,18 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/stylesheets/learningContent.css">
   <title>도니머니 학습하기</title>
-  <!-- <%- include('../partials/header') %> -->
 </head>
 <body>
-  <!-- <div class="buttons">
-    <button class="home-button" id="homeButton" onclick="location.href='/game/school/learning/list'">
-        <img src="/images/home_icon.png" class="home-icon" alt="">
-    </button>
-    <button class="close-button" id="closeButton" onclick="location.href='/game/main'">
-        <img src="/images/close_icon.png" class="close-icon" alt="">
-    </button>
-  </div> -->
-
   <div class="indicator" id="indicator">
     <% contentArr.forEach((_, idx) => { %>
       <div class="dot <%= idx === 0 ? 'active' : '' %>"></div>
@@ -24,7 +14,7 @@
   </div>
 
   <div class="learning-container">
-    <a class="nav-btn arrow left" id="prevBtn"></a> <!-- &#8592; -->
+    <a class="nav-btn arrow left" id="prevBtn"></a>
     <div class="card-section" id="cardSection">
       <% contentArr.forEach(function(card, idx) { %>
         <div class="card" style="display: <%= idx === 0 ? 'block' : 'none' %>">
@@ -42,7 +32,7 @@
         </div>
       <% }) %>
     </div>
-    <a class="nav-btn arrow right" id="nextBtn"></a> <!-- &#8594; -->
+    <a class="nav-btn arrow right" id="nextBtn"></a>
   </div>
   <div class="indicator" id="indicator"></div>
 
