@@ -1,0 +1,463 @@
+body, html {
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: 'Pretendard', 'Noto Sans KR', Arial, sans-serif;
+  /* background: #b3b3b3; */
+  overflow: hidden;
+  position: relative;
+}
+
+.forest-bg {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  background-image: url('/images/배경.png');
+  background-size: cover;
+  background-position: center;
+  top: 0;
+  left: 0;
+}
+.home-button, .close-button {
+  position: fixed;
+  top: 81.33px;
+  z-index: 9999;
+  left: auto; right: auto; /* 둘 다 초기화 */
+  width: 75.33px;
+  height: 73.02px;
+  border: none;
+  border-radius: 23.18px;
+  background: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  vertical-align: middle;
+  line-height: normal;
+}
+
+.home-button {
+  left: 69px;
+  background-color: #78C0FF;
+  box-shadow: inset 0 -3.74px 0 0 #2393F6, 0 3px 0 0 rgba(0, 0, 0, 0.1);
+}
+
+.close-button {
+  right: 69px;
+  background-color: #FF6565;
+  box-shadow: inset 0 -3.74px 0 0 #EF5454, 0 3px 0 0 rgba(0, 0, 0, 0.1);
+}
+
+.home-button:hover, .home-button:active,
+.close-button:hover, .close-button:active {
+  transform: translateY(4px);
+  box-shadow: 0 3px 0 0 rgba(0,0,0,0.1);
+}
+
+.home-icon {
+  width: 40.39px;
+  height: 42px;
+  display: block;
+}
+
+.close-icon {
+  width: 34px;
+  height: 34px;
+  display: block;
+}
+
+
+
+.nav-buttons {
+  display: none !important;
+}
+
+
+.mypage-main {
+  position: relative;
+  z-index: 2;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+}
+
+.character-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 350px;
+  position: relative;
+}
+
+.money-badge {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  min-width: 90px;
+  padding: 8px 18px;
+  top: 20px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  background: rgba(60,60,60,0.8);
+  color: #fffbe9;
+  border-radius: 32px;
+  font-family: 'KCC-DodamDodamR';
+  font-size: 28px;
+  font-weight: 700;
+  box-shadow: 2px 4px 8px rgba(0,0,0,0.08);
+  z-index: 3;
+}
+
+.coin-icon {
+  width: 28px;
+  height: 30px;
+  margin-right: 12px;
+  vertical-align: middle;
+}
+
+.character-img-wrap {
+  margin-top: 20px;
+  width: 500px;
+  height: 600px;
+  background: none;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  position: relative;
+}
+
+.character-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.12));
+  display: block;
+}
+
+.character-nickname {
+  position: absolute;
+  left: 50%;
+  bottom: 15px;
+  transform: translateX(-50%);
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+  letter-spacing: 2px;
+  background: rgba(60,60,60,0.8);
+  padding: 6px 28px 6px 28px;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  z-index: 4;
+  margin: 0;
+}
+
+.learning-area {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  min-width: 470px;
+  flex-direction: column;
+  position: relative;
+}
+
+/* 실제 동작하는 탭(learning-notebook 위에 위치, 살짝 더 위로) */
+.real-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 0px; /* 하얀 박스와 더 가깝게(기존 -8px → -18px) */
+  margin-left: 20px;
+  position: relative;
+  z-index: 2;
+}
+.real-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+  height: 38px;
+  padding: 0 32px;
+  font-size: 20px;
+  font-weight: 700;
+  border-radius: 14px 14px 0 0;
+  background: #e6e7e8;
+  color: #b0b0b0;
+  text-decoration: none;
+  position: relative;
+  margin-right: 4px;
+  transition: background 0.18s, color 0.18s;
+  border: none;
+  outline: none;
+  box-shadow:inset 0 -2px 8px rgba(110,130,180,0.04);
+  cursor: pointer;
+
+  -webkit-user-select:all;
+  -moz-user-select:all;
+  -ms-user-select:all;
+  user-select:all
+}
+.real-tab.active {
+  background: #fff;
+  color: #357376;
+  z-index: 3;
+  box-shadow:inset 0 -4px 16px rgba(110,130,180,0.09);
+
+  -webkit-user-select:all;
+  -moz-user-select:all;
+  -ms-user-select:all;
+  user-select:all
+}
+
+.learning-notebook {
+  background: #f9fafc;
+  border-radius: 24px;
+  box-shadow: 8px 12px 0 #e2e7f2;
+  width: 470px;
+  min-height: 370px;
+  padding: 36px 36px 32px 36px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  z-index: 1;
+}
+
+/* 북마크 이미지를 오른쪽 상단에, 위쪽 절반만 보이게 */
+.bookmark-clip {
+  position: absolute;
+  top: -48px;    /* 이미지 높이의 절반만큼 위로 */
+  right: 32px;   /* 노트북 오른쪽 끝에서 살짝 안쪽 */
+  width: 96px;
+  height: 48px;  /* 절반만 보이게 */
+  overflow: hidden;
+  z-index: 10;
+  pointer-events: none;
+}
+.bookmark-img {
+  width: 96px;
+  height: 96px;
+  display: block;
+}
+
+.notebook-inner {
+  width: 100%;
+  margin-top: 12px;
+}
+
+.notebook-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #4b3d2b;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.character-name {
+  background: #ffe066;
+  color: #4b3d2b;
+  font-weight: bold;
+  border-radius: 12px;
+  padding: 4px 16px;
+  font-size: 1.1rem;
+  margin-right: 8px;
+}
+
+/* 안내문구/상세정보 영역 */
+.item-detail-area {
+  min-height: 110px;
+  margin-bottom: 18px;
+  margin-top: 8px;
+  width: 100%;
+}
+
+.item-detail-guide {
+  background: #fffbe9;
+  color: #b89c3a;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(110,130,180,0.10);
+  padding: 20px 24px;
+  font-size: 16px;
+  text-align: center;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  animation: fadeIn 0.18s;
+}
+
+.item-detail {
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  background: #fffbe9;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(110,130,180,0.10);
+  padding: 18px 24px;
+  min-height: 110px;
+  gap: 6px;
+  animation: fadeIn 0.18s;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-8px);}
+  to { opacity: 1; transform: none;}
+}
+.detail-img-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+.detail-img-wrap .item-img {
+  width: 48px;
+  height: 48px;
+}
+.detail-name {
+  font-size: 17px;
+  font-weight: bold;
+  color: #3c4b5a;
+}
+.detail-desc {
+  font-size: 15px;
+  color: #666;
+  margin-top: 2px;
+}
+.detail-price {
+  font-size: 15px;
+  color: #f4a742;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+/* 인벤토리 그리드 */
+.inventory-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px 12px;
+  margin-top: 8px;
+  width: 100%;
+}
+
+.item-slot {
+  background: #f5f8ff;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(110,130,180,0.08);
+  padding: 12px 6px 10px 6px;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  border: 2px solid #e2e7f2;
+  transition: border 0.18s, background 0.18s;
+  cursor: pointer;
+}
+.item-slot:not(.empty):hover {
+  border: 2px solid #ffe066;
+  background: #fffbe9;
+}
+.item-slot.selected {
+  border: 2.5px solid #ffe066;
+  background: #fffbe9;
+}
+.item-img-wrap {
+  width: 52px;
+  height: 52px;
+  background: #fff;
+  border-radius: 10px;
+  margin-bottom: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1.5px solid #e5eaf1;
+}
+.item-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+.item-name {
+  margin-top: 6px;
+  font-size: 15px;
+  color: #3c4b5a;
+  font-weight: 700;
+  text-align: center;
+  word-break: keep-all;
+}
+.item-slot.empty .item-img { opacity: 0.18; }
+.item-slot.empty .item-name { color: #b5b5b5; font-weight: 400; }
+.item-slot.empty .item-desc { color: #ccc; }
+.item-slot.empty .item-price { color: #ddd; }
+.coin-icon-sm {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  margin-right: 2px;
+}
+
+@media (max-width: 900px) {
+  .mypage-main {
+    flex-direction: column;
+    gap: 36px;
+    height: auto;
+    padding: 60px 0;
+  }
+  .character-area, .learning-area {
+    min-width: 0;
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+  }
+  .learning-notebook {
+    width: 96vw;
+    min-width: 0;
+    padding: 24px 6vw 24px 6vw;
+  }
+  .character-img-wrap {
+    width: 70vw;
+    height: 40vw;
+    max-width: 320px;
+    max-height: 320px;
+  }
+  .character-nickname {
+    font-size: 1rem;
+    padding: 5px 18px;
+    bottom: 5px;
+  }
+  .inventory-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px 8px;
+  }
+  .bookmark-clip {
+    right: 10px;
+    width: 64px;
+    height: 32px;
+    top: -32px;
+  }
+  .bookmark-img {
+    width: 64px;
+    height: 64px;
+  }
+  .real-tab {
+    min-width: 80px;
+    height: 32px;
+    font-size: 16px;
+    padding: 0 16px;
+  }
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      overflow: hidden;
+    }
+    .nav-buttons {
+      padding: 0;
+    }
+
+  </style>
+  <!-- <link rel="stylesheet" href="/stylesheets/style.css"> -->
+
+</head>
+<body>
+  <div id="game-container"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3.88.2/dist/phaser.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+
+  <script>
+    window.gameData = {
+      storyId: <%= storyId %>,
+      playerName: "<%= playerName %>"
+    };
+  </script>
+
+  <script type="module">
+    import { StoryScene } from '/javascripts/story.js';
+
+    const { storyId, playerName } = window.gameData;
+
+    function startPhaserGame() {
+      const config = {
+        type: Phaser.AUTO,
+        parent: 'game-container',
+        width: 1920,
+        height: 1080,
+        scale: {
+          mode: Phaser.Scale.FIT,
+          autoCenter: Phaser.Scale.CENTER_BOTH
+        },
+        physics: { default: 'arcade' },
+        backgroundColor: '#000',
+        scene: [StoryScene]
+      };
+
+      const game = new Phaser.Game(config);
+      game.scene.start('StoryScene', { storyId, playerName });
+    }
+
+    WebFont.load({
+      custom: {
+        families: ['Cafe24Dongdong']
+      },
+      active: startPhaserGame
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+:root {
+    /* 스와이퍼의 기본 설정 대신 사용되도록 */
+    --gray-light: #9A9FA9;
+    --gray-dark: #333;
+
+    --swiper-navigation-size: 36px !important;
+    --swiper-navigation-top-offset: 50%;
+    --swiper-navigation-sides-offset: 69px;
+    --swiper-navigation-color: var(--gray-dark);
+}
+
+body {
+    background-color: #FFFCF5;
+    margin: 0;
+    padding: 0;
+    font-family: 'NanumSquareRound';
+}
+
+h1 { margin: 3% 0 1% 5% }
+
+.quiz-card {
+    width: 572px;
+    height: 451px;
+    border-radius: 20px;
+    overflow: hidden;
+    border: none;
+    cursor: pointer;
+    background-color: #ffe3e3; /* disabled한 상태와 비교되도록 연핑크색 */
+    box-shadow: 4px 7px 18.9px 4px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    font-size: 32px;
+    font-weight: 900;
+    color: rgba(51, 51, 51, 0.74);
+    justify-content: center;
+}
+
+.quiz-card:disabled {
+    background: rgba(202, 210, 226, 0.5) !important;
+    color: #9DA8C1 !important;
+    cursor: not-allowed;
+    border: 1px solid #ddd;
+    opacity: 0.8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.quiz-card img {
+    width: 10%;
+    height: 20%;
+    object-fit: cover;
+}
+
+.card-text {
+    padding: 12px;
+    text-align: left;
+    margin: 30.74px 0 30.74px 27.11px;
+}
+
+.card-text h3 {
+    font-family: 'NanumSquareRound';
+    font-size: 32px;
+    font-weight: 900;
+    color: rgba(51, 51, 51, 0.74);
+    margin: 0 0 4px 0;
+}
+
+.card-text p {
+    font-size: 24px;
+    font-weight: normal;
+    color: #505050;
+}
+
+.lock-icon {
+    font-size: 18px;
+    color: #888;
+}
+
+/* swiper 속성 */
+.swiper, .swiper-wrapper, .swiper-slide { overflow: visible !important; }
+
+.swiper-slide {
+    flex-shrink: 0;
+    width: 572px;
+    display: flex;
+    justify-content: center;
+}
+
+.swiper-wrapper { display: flex; }
+
+.swiper-button-prev, .swiper-button-next {
+    width: 64px !important;
+    height: 64px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0 7px 18.9px 4px rgba(0, 0, 0, 0.1);
+    font-weight: 900;
+}
+
+.swiper-button-prev::after, .swiper-button-next::after {
+  display: block;
+  position: static;
+}
+
+.swiper-button-next::after { margin: 10px 0 10px 7px; }
+
+.swiper-button-prev::after { margin: 10px 5px 10px 0; }
+
+/* 스크롤바 안 보이게 설정 */
+::-webkit-scrollbar { display: none; }

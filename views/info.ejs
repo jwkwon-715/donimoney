@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>내 정보</title>
+  <link rel="stylesheet" href="/stylesheets/myPage.css">
+</head>
+<body>
+  <div class="forest-bg"></div>
+
+  <a href="/" class="home-button">
+    <img src="/images/home_icon.png" class="home-icon" alt="">
+  </a>
+  <a href="javascript:history.back()" class="close-button">
+    <img src="/images/close_icon.png" class="close-icon" alt="">
+  </a>
+
+  <div class="mypage-container">
+    <h2>내 정보</h2>
+    <ul class="info-list">
+      <li><strong>아이디:</strong> <%= user.user_id %></li>
+      <li><strong>이메일:</strong> <%= user.email %></li>
+      <li><strong>전화번호:</strong> <%= user.phone %></li>
+    </ul>
+  </div>
+</body>
+</html>

@@ -1,0 +1,168 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+body, html {
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.forest-bg {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  background-image: url('/images/배경.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.nav-buttons {
+  display: none !important;
+}
+
+.home-button, .close-button {
+  position: fixed;
+  top: 81.33px;
+  z-index: 9999;
+  left: auto; right: auto; /* 둘 다 초기화 */
+  width: 75.33px;
+  height: 73.02px;
+  border: none;
+  border-radius: 23.18px;
+  background: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  vertical-align: middle;
+  line-height: normal;
+}
+
+.home-button {
+  left: 69px;
+  background-color: #78C0FF;
+  box-shadow: inset 0 -3.74px 0 0 #2393F6, 0 3px 0 0 rgba(0, 0, 0, 0.1);
+}
+
+.close-button {
+  right: 69px;
+  background-color: #FF6565;
+  box-shadow: inset 0 -3.74px 0 0 #EF5454, 0 3px 0 0 rgba(0, 0, 0, 0.1);
+}
+
+.home-button:hover, .home-button:active,
+.close-button:hover, .close-button:active {
+  transform: translateY(4px);
+  box-shadow: 0 3px 0 0 rgba(0,0,0,0.1);
+}
+
+.home-icon {
+  width: 40.39px;
+  height: 42px;
+  display: block;
+}
+
+.close-icon {
+  width: 34px;
+  height: 34px;
+  display: block;
+}
+
+.center-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.character-box {
+  background: #fffbe9;
+  border-radius: 28px;
+  box-shadow: 4px 8px 0 #e2d2b7;
+  width: 700px;                /* 박스 더 크게 */
+  max-width: 98vw;
+  padding: 64px 48px 64px 48px; /* 패딩 더 크게 */
+  min-height: 250px;           /* 높이 더 크게 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;     /* 세로 가운데 정렬 */
+}
+
+.character-box .label {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #4b3d2b;
+  margin-bottom: 48px;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+.input-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;     /* 가로 가운데 정렬 */
+  gap: 8px;
+  width: 100%;
+}
+
+.input-label {
+  font-size: 1.2rem;
+  color: #4b3d2b;
+  margin: 0 4px;
+}
+
+.dashed-box {
+  border: 3px dashed #a88b6a;
+  border-radius: 14px;
+  padding: 4px 0;             /* 높이 더 얇게 */
+  width: 260px;               /* 가로 더 길게 */
+  background: #fff;
+  font-size: 1.3rem;
+  color: #4b3d2b;
+  text-align: center;
+  letter-spacing: 3px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.dashed-box:focus {
+  border-color: #5c4432;
+}
+
+.submit-btn {
+  margin-left: 18px;
+  background: #a88b6a;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 2px 4px 0 #d6c3a2;
+  transition: background 0.2s;
+}
+.submit-btn:hover {
+  background: #876e53;
+}
+
+@media (max-width: 900px) {
+  .character-box { width: 98vw; padding: 24px 2vw; min-height: 180px; }
+  .dashed-box { width: 60vw; }
+}

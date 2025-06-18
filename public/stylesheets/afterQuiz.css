@@ -1,0 +1,280 @@
+/* 퀴즈 풀고 난 후 성공/실패 보여주는 화면 */
+
+.buttons { z-index: 200; }
+
+body { overflow: hidden; }
+
+.wrapper {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: visible;
+    transform: scale(0.8);
+}
+
+.bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    z-index: -2;
+}
+
+/* 성공 시 콘페티 화면 */
+.confetti-bg {
+    position: absolute;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 90%;
+}
+
+.rectangle-parent {
+    position: absolute;
+    left: calc(50% - 596.22px);
+    width: 1092.7px;
+    height: 784.3px;
+}
+
+.quiz-success-child {
+    position: absolute;
+    top: 372.02px;
+    left: calc(50% - 414.29px);
+    box-shadow: 0px 9px 11.2px rgba(0, 0, 0, 0.1);
+    border-radius: 36px;
+    background-color: #ffdb65;
+    width: 871.1px;
+    height: 491.7px;
+    transform:  rotate(0.4deg);
+    transform-origin: 0 0;
+    display: none;
+}
+
+.post-1 {
+    position: absolute;
+    top: 0px;
+    left: calc(50% - 317.21px);
+    box-shadow: 5px 9px 11.2px rgba(0, 0, 0, 0.1);
+    background-color: #f6f6f6;
+    width: 64%;
+    height: 82%;
+}
+
+.post-2 {
+    position: absolute;
+    top: 21.22px;
+    left: calc(100% / 4.3);
+    box-shadow: 9px 9px 11.2px rgba(0, 0, 0, 0.1);
+    background-color: #ffdb65;
+    width: 64%;
+    height: 82%;
+    transform:  rotate(0.8deg);
+    transform-origin: 0 0;
+}
+
+.failed { background-color: #929292; }
+
+/* 스티커들 */
+.stickers {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 3304px;
+    height: 1080px;
+    object-fit: cover;
+}
+
+.heart {
+    position: absolute;
+    height: 15.22%;
+    width: 11.75%;
+    top: 16.8%;
+    right: 88.25%;
+    bottom: 67.98%;
+    left: 7%;
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.blueHeart {
+    position: absolute;
+    height: 24.53%;
+    width: 19.05%;
+    top: 51.1%;
+    right: 0%;
+    bottom: 24.37%;
+    left: 80.95%;
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.smile {
+    position: absolute;
+    height: 23.55%;
+    width: 16.9%;
+    top: 8.94%;
+    right: 3.01%;
+    bottom: 67.51%;
+    left: 80.08%;
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.star {
+    position: absolute;
+    top: 60%;
+    left: 10%;
+    width: 156.8px;
+    height: 163.2px;
+    object-fit: cover;
+}
+
+.thumb {
+    position: absolute;
+    align-items: center;
+    width: 200px;
+    height: 210px;
+    margin: -13% 36% 0;
+    transform: rotate(8deg);
+}
+
+.div {
+    position: absolute;
+    top: 221.51px;
+    left: calc(50% - 212.21px);
+}
+
+.confetti {
+    position: absolute;
+    top: 57%;
+    left: 70%;
+    width: 30%;
+    height: 40%;
+    object-fit: contain;
+}
+
+.tear {
+    position: absolute;
+    height: 23.55%;
+    width: 16.9%;
+    top: 8.94%;
+    right: 3.01%;
+    bottom: 67.51%;
+    left: 82%;
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.darkheart {
+    position: absolute;
+    height: 25%;
+    width: 17%;
+    top: 16.8%;
+    left: 8%;
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.thumb-down {
+    position: absolute;
+    top: 45%;
+    left: 82%;
+    width: 20%;
+    height: 30%;
+    object-fit: contain;
+}
+
+.quiz-success-item {
+    position: absolute;
+    top: 715.16px;
+    left: 641.06px;
+    box-shadow: -4px -4px 0px rgba(0, 0, 0, 0.06) inset;
+    border-radius: 10px;
+    background-color: #f9cf45;
+    width: 286.5px;
+    height: 86.1px;
+}
+
+.quiz-success-inner {
+    position: absolute;
+    top: 715.16px;
+    left: 958.31px;
+    box-shadow: -4px -4px 0px rgba(0, 0, 0, 0.06) inset;
+    border-radius: 10px;
+    background-color: #f9cf45;
+    width: 286.5px;
+    height: 86.1px;
+}
+
+.quiz-success {
+    position: relative;
+    width: 100%;
+    height: 1080px;
+    overflow: visible;
+    text-align: center;
+    z-index: 1;
+
+    font-size: 40px;
+    color: #333;
+    font-family: 'Cafe24DongDong', 'KCC-DodamdodamR' !important;
+}
+
+.text {
+    font-size: 96px;
+    z-index: 1;
+    margin-top: 36%;
+    font-family: 'Cafe24DongDong', 'KCC-DodamdodamR';
+}
+
+.failed-text {
+    margin-top: 28%;
+    font-family: 'Cafe24DongDong', 'KCC-DodamdodamR';
+}
+
+p {
+    font-size: 28px;
+    text-align: center;
+    margin-top: 6%;
+    font-family: 'Cafe24DongDong', 'KCC-DodamdodamR';
+}
+
+.btn {
+    position: absolute;
+    width: 25%;
+    height: 10%;
+    top: 65%;
+    left: 25%;
+    box-shadow: -4px -4px 0px rgba(0, 0, 0, 0.06) inset;
+    border-radius: 10px;
+    background-color: #f9cf45;
+    
+    font-family: 'Cafe24DongDong';
+    font-size: 32px;
+}
+
+.btn:hover { box-shadow: none; }
+
+.successBtn { background-color: #FFE180; }
+
+.failedBtn { background-color: #D2D2D2; }
+
+.nxtBtn { left: 55%; }
+
+.nxtfailedBtn {
+    color: #f5f5f5;
+    background-color: #787878;
+}

@@ -1,0 +1,194 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(to bottom, #6a8d92, #4a6d72);
+  overflow: hidden;
+  position: relative;
+}
+
+.forest-bg {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  background-image: url('/images/배경.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.nav-buttons {
+  display: none !important;
+}
+
+
+.home-button, .close-button {
+  position: absolute;
+  top: 81.33px;
+  z-index: 9999;
+  left: auto; right: auto; /* 둘 다 초기화 */
+  width: 75.33px;
+  height: 73.02px;
+  border: none;
+  border-radius: 23.18px;
+  background: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  vertical-align: middle;
+  line-height: normal;
+}
+
+.home-button {
+  left: 69px;
+  background-color: #78C0FF;
+  box-shadow: inset 0 -3.74px 0 0 #2393F6, 0 3px 0 0 rgba(0, 0, 0, 0.1);
+}
+
+.close-button {
+  right: 69px;
+  background-color: #FF6565;
+  box-shadow: inset 0 -3.74px 0 0 #EF5454, 0 3px 0 0 rgba(0, 0, 0, 0.1);
+}
+
+.home-button:hover, .home-button:active,
+.close-button:hover, .close-button:active {
+  transform: translateY(4px);
+  box-shadow: 0 3px 0 0 rgba(0,0,0,0.1);
+}
+
+.home-icon {
+  width: 40.39px;
+  height: 42px;
+  display: block;
+}
+
+.close-icon {
+  width: 34px;
+  height: 34px;
+  display: block;
+}
+
+
+.login-center {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-container {
+  position: relative;
+  z-index: 5;
+  width: 340px;
+  background-color: white;
+  border-radius: 20px;
+  padding: 40px 24px 30px 24px; /* 80px → 100px (위 패딩 늘려서 겹침 더 많게) */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  margin-top: 60px;
+}
+
+.logo-img-wrap {
+  position: absolute;
+  left: 50%;
+  top: -30px;           /* -60px → -30px (더 아래로) */
+  transform: translateX(-50%);
+  z-index: 10;
+  width: 170px;         /* 120px → 170px (더 크게) */
+  height: 110px;        /* 80px → 110px (더 크게) */
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.logo-img {
+  width: 200px;         /* 120px → 170px (더 크게) */
+  height: auto;
+  display: block;
+  filter: drop-shadow(0px 2px 8px rgba(0,0,0,0.10));
+}
+
+.message {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.success {
+  color: green;
+  background-color: rgba(0, 255, 0, 0.1);
+}
+
+.note {
+  color: orange;
+  background-color: rgba(255, 165, 0, 0.1);
+}
+
+.error {
+  color: red;
+  background-color: rgba(255, 0, 0, 0.1);
+}
+
+.input-group {
+  margin: 20px 0;
+}
+
+.input-field {
+  width: 100%;
+  padding: 15px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 16px;
+  outline: none;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 15px;
+  background-color: #a0b4c8;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  margin: 20px 0;
+}
+
+.login-options {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #666;
+}
+
+.login-options a {
+  color: #666;
+  text-decoration: none;
+  margin: 0 5px;
+}
+
+@media (max-width: 500px) {
+  .login-container {
+    width: 98vw;
+    padding: 80px 6vw 30px 6vw;
+  }
+  .logo-img-wrap, .logo-img {
+    width: 80px;
+    height: auto;
+  }
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/solveQuiz.css">
+    <title>도니머니 퀴즈 풀기</title>
+</head>
+<body>
+    <div class="progress-wrapper">
+        <img src="/images/slider_background.png" class="progress-bar-container">
+        <img src="/images/clock_icon.png" class="clock-icon" alt="">
+        <div class="progress-track" id="track">
+            <div class="progress-fill" id="fill"></div>
+        </div>
+        <img src="/images/pencil_icon.png" class="progress-slider" id="slider" alt="">
+    </div>
+    <div id="quiz-wrapper">
+        <div class="quiz-box">
+            <div class="quiz-progress">
+                <span id="quiz-progress-text">1/10</span>
+            </div>
+            <div id="quiz-container"></div>
+            <div id="solution-box"></div>
+            <button id="check-answer-btn">정답 확인</button>
+            <button id="next-btn" style="display:none;">다음 문제</button>
+        </div>
+    </div>
+    <script>
+        const quizzes = <%- JSON.stringify(quizzes) %>;
+        const quizType = "<%= quizType %>";
+        const selectedCurriculumId = <%= (typeof curriculumId !== 'undefined' && curriculumId !== null) ? curriculumId : 'null' %>;
+    </script>
+    <script src="/javascripts/quizSolve.js"></script>
+</body>
+</html>

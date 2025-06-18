@@ -1,0 +1,322 @@
+[
+  {
+  "id": 5,
+  "background": "bg_home",
+  "dialogs": [
+    {
+      "name": "mom",
+      "char": "mom_basic",
+      "type": "line",
+      "line": "{이름}, 마트 가서 우유랑 달걀 좀 사다 줄래?\n남은 돈으로 원하는 것도 사렴."
+    },
+    {
+      "name": "todragon",
+      "char": "todragon_basic",
+      "type": "line",
+      "line": "네, 갔다올게요!"
+    },
+    {
+      "name": "dony",
+      "char": "dony_basic",
+      "type": "line",
+      "line": "잠깐, 나도 같이 가! 심부름 하는 거 도와줄게!"
+    },
+    {
+      "name": "todragon",
+      "char": "todragon_worried",
+      "type": "line",
+      "line": "나 참... 내가 애도 아니고 심부름도 못할까봐?"
+    }
+  ]
+  },
+  {
+    "id": 6, 
+    "background": "bg_main",
+    "dialogs": [
+      {
+        "name": "dony",
+        "char": "dony_surprised",
+        "type": "line",
+        "line": "*띠리링*"
+      },
+      {
+        "name": "dony",
+        "char": "dony_surprised",
+        "type": "line",
+        "line": "앗, 갑자기 요정 나라에서 급한 연락이! {이름}, 먼저 가고 있어!"
+      },
+      {
+        "name": "todragon",
+        "char": "todragon_worried",
+        "type": "line",
+        "line": "심부름 하는 거 봐준다고 큰소리 치더니만..."
+      },
+      {
+        "name": "todragon",
+        "char": "todragon_surprised",
+        "type": "line",
+        "line": "헉, 저건 요즘 제일 유행하는 캐치 카우팡의 카우보이 모자잖아!\n나비가 엄청 자랑해서 부러웠는데..."
+      },
+      {
+        "name": "streetbird",
+        "char": "streetbird_basic",
+        "type": "line",
+        "line": "오, 운이 좋은 걸! 지금 딱 한 개 남았거든!"
+      },
+      {
+        "name": "todragon",
+        "char": "todragon_basic",
+        "type": "line",
+        "line": "하, 한 개? 으음... 그래도 다음에 또 들어오겠죠...?"
+      },
+      {
+        "name": "streetbird",
+        "char": "streetbird_basic",
+        "type": "line",
+        "line": "글쎄, 언제 다시 입고될 지는 모르겠구나. 워낙 인기가 많아서 물량이 많이 모자라거든."
+      },
+      {
+        "name": "todragon",
+        "char": "todragon_basic",
+        "type": "line",
+        "line": "(지금 사지 않으면 영영 못 구할지도 몰라...\n심부름 하려고 받은 돈이 조금 여유있긴 한데, 어쩌지?)"
+      },
+      {
+        "name": "streetbird",
+        "char": "streetbird_basic",
+        "type": "question",
+        "question": "그래서, 모자를 사겠니?",
+        "answer0": "구매한다",
+        "answerSkip1": "구매하지 않는다"
+      },
+      {
+        "name": "streetbird",
+        "char": "streetbird_basic",
+        "type": "line",
+        "line": "고맙다, 잘 쓰고 다니렴!"
+      },
+      {
+        "nextId": 7
+      },
+      {
+        "name": "streetbird",
+        "char": "streetbird_basic",
+        "type": "line",
+        "line": "아쉽게 됐구나, 그럼 조심히 가렴!"
+      },
+      {
+        "nextId": 8
+      }
+    ]
+  },
+  {
+    "id": 7,  
+    "background": "bg_mart", 
+    "dialogs": [
+      {
+        "name": "todragon",
+        "char": "todragon_hat",
+        "type": "line",
+        "line": "헤헤, 모자 정말 맘에 든다. 사길 정말 잘 했어!!"
+      },
+      {
+        "name": "dony",
+        "char": "dony_smile",
+        "type": "line",
+        "line": "{이름}, 나 왔어!!"
+      },
+      {
+        "name": "todragon",
+        "char": "todragon_hat_worried",
+        "type": "line",
+        "line": "정말이지, 갑자기 가버리면 어떡해~"
+      },
+      {
+        "name": "dony",
+        "char": "dony_basic",
+        "type": "line",
+        "line": "헤헤 미안. 응? 그런데 그 모자는 갑자기 어디서 난 거야?"
+      },
+      {
+        "name": "todragon",
+        "char": "todragon_hat_embrrassed",
+        "type": "line",
+        "line": "그, 그냥 이 근처에서 받았어!"
+      },
+      {
+        "name": "todragon",
+        "char": "todragon_hat",
+        "type": "line",
+        "line": "아참! 아저씨, 담은거 계산해주세요!"
+      },
+      {
+        "name": "mart_owner",
+        "char": "manager_basic",
+        "type": "line",
+        "line": "다 해서 총 7000원 입니다."
+      },
+      {
+        "name": "todragon",
+        "char": "todragon_hat_surprised",
+        "type": "line",
+        "line": "7000원... 으앗, 돈이 부족하잖아?!"
+      },
+      {
+        "name": "dony",
+        "char": "dony_surprised",
+        "type": "line",
+        "line": "왜 돈이 모자라?! 아까 엄마가 돈 여유있게 주시는 것 같.."
+      },
+      {
+        "name": "dony",
+        "char": "dony_worried",
+        "type": "line",
+        "line": "너 설마.. 그 모자 심부름비로 산 거야..?"
+      },
+      {
+        "name": "todragon",
+        "char": "todragon_hat_worried",
+        "type": "line",
+        "line": "아니... 딱 한 개 남았다길래..."
+      },
+      {
+        "name": "dony",
+        "char": "dony_angry",
+        "type": "line",
+        "line": "으이구 내가 못 살아~!\n내가 잠깐 자리 비운 사이에 돈을 다 써버리면 어떡해!"
+      },
+      {
+        "name": "dony",
+        "char": "dony_angry",
+        "type": "line",
+        "line": "안 되겠어, 지금 당장 현명한 소비 특훈이다!"
+      }
+    ]
+  },
+  {
+    "id": 8, 
+    "background": "bg_mart", 
+    "dialogs": [
+      {
+        "name": "dony",
+        "char": "dony_smile",
+        "type": "line",
+        "line": "{이름}, 나 왔어!!"
+      },
+      {
+        "name": "todragon",
+        "char": "todragon_worried",
+        "type": "line",
+        "line": "정말이지, 갑자기 가버리면 어떡해~"
+      },
+      {
+        "name": "dony",
+        "char": "dony_basic",
+        "type": "line",
+        "line": "헤헤 미안. 얼른 계산하고 가자!"
+      },
+      {
+        "name": "todragon",
+        "char": "todragon_basic",
+        "type": "line",
+        "line": "아참! 아저씨, 담은거 계산해주세요!"
+      },
+      {
+        "name": "mart_owner",
+        "char": "manager_basic",
+        "type": "line",
+        "line": "다 해서 총 7000원 입니다."
+      },
+      {
+        "name": "todragon",
+        "char": "todragon_basic",
+        "type": "line",
+        "line": "여기요!"
+      },
+      {
+        "name": "mart_owner",
+        "char": "manager_basic",
+        "type": "line",
+        "line": "감사합니다. 또 오세요~!"
+      },
+      {
+        "name": "dony",
+        "char": "dony_smile",
+        "type": "line",
+        "line": "심부름도 순조롭게 잘 하네. 대견한걸!"
+      },
+      {
+        "name": "todragon",
+        "char": "todragon_happy",
+        "type": "line",
+        "line": "히힛!"
+      }
+    ]
+  },
+  {
+    "id": 9, 
+    "background": "bg_home", 
+    "dialogs": [
+      {    
+        "name": "todragon",
+        "char": "todragon_worried",
+        "type": "line",
+        "line": "에휴..."
+      },
+      {
+        "name": "dony",
+        "char": "dony_basic",
+        "type": "line",
+        "line": "심부름도 잘 끝냈는데 웬 한숨이야?"
+      },
+      {
+        "name": "todragon",
+        "char": "todragon_worried",
+        "type": "line",
+        "line": "사실 아까 갖고 싶은 모자가 있었는데 심부름에 돈이 모자랄까봐 안 샀거든.\n오는 길에 보니까 이미 팔렸는지 안 보이더라구..."
+      },
+      {
+        "name": "dony",
+        "char": "dony_surprised",
+        "type": "line",
+        "line": "뭣! 갖고 싶은 물건이 있었는데도 꾹 참았다고?!\n이런 기특한 일을 하다니!!"
+      },
+      {
+        "name": "todragon",
+        "char": "todragon_basic",
+        "type": "line",
+        "line": "하지만 그 모자는 더 이상 팔지 않을 수도 있댔어. 그냥 사버릴걸 그랬나?"
+      },
+      {
+        "name": "dony",
+        "char": "dony_basic",
+        "type": "line",
+        "line": "하지만 그랬다면 심부름비가 모자라서 정작 필요한 물건은 못 샀을 거야.\n현명한 선택을 한 거라구!"
+      },
+      {
+        "name": "todragon",
+        "char": "todragon_happy",
+        "type": "line",
+        "line": "하긴 그렇지? 나도 처음에는 아쉬웠지만 지금은 뿌듯해!"
+      },
+      {
+        "name": "dony",
+        "char": "dony_happy",
+        "type": "line",
+        "line": "좋아, 아주 좋은 마음가짐이야!"
+      },
+      {
+        "name": "dony",
+        "char": "dony_smile",
+        "type": "line",
+        "line": "그렇다면, 오늘 네가 한 똑똑한 소비에 대해 자세히 알아볼 차례겠지?!"
+      },
+      {
+        "name": "todragon",
+        "char": "todragon_worried",
+        "type": "line",
+        "line": "(자연스럽게 수업을 시작하네...)"
+      }
+    ]
+  }
+]

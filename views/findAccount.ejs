@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title><%= mode === 'id' ? '아이디 찾기' : '비밀번호 찾기' %></title>
+  <link rel="stylesheet" href="/stylesheets/find.css">
+</head>
+<body>
+  
+  <div class="forest-bg"></div>
+
+  <a href="/" class="home-button">
+    <img src="/images/home_icon.png" class="home-icon" alt="">
+  </a>
+  <a href="javascript:history.back()" class="close-button">
+    <img src="/images/close_icon.png" class="close-icon" alt="">
+  </a>
+  
+  <div class="find-container">
+    <h1><%= mode === 'id' ? '아이디 찾기' : '비밀번호 찾기' %></h1>
+    <% if (error && error.length > 0) { %>
+    <div class="message error"><%= error[0] %></div>
+    <% } %>
+    <% if (success && success.length > 0) { %>
+    <div class="message success"><%= success[0] %></div>
+    <% } %>
+    <% if (mode === 'id') { %>
+      <form class="find-form" action="/users/find-id" method="POST">
+        <label>등록한 이메일</label>
+        <input type="email" name="email" required>
+        <button type="submit">아이디 찾기</button>
+      </form>
+    <% } else { %>
+      <form class="find-form" action="/users/find-pw" method="POST">
+        <label>아이디</label>
+        <input type="text" name="user_id" required>
+        <label>등록한 이메일</label>
+        <input type="email" name="email" required>
+        <button type="submit">비밀번호 재설정</button>
+      </form>
+    <% } %>
+    <div class="mode-switch">
+      <a href="/users/find?mode=id">아이디 찾기</a> | 
+      <a href="/users/find?mode=password">비밀번호 찾기</a>
+    </div>
+  </div>
+</body>
+</html>

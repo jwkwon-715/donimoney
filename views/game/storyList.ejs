@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/quizSelect.css">
+
+    <!-- Swiper -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+</head>
+<body>
+    <!-- <div class="buttons">
+        <button class="home-button" id="homeButton" onclick="location.href='/game/main'">
+            <img src="/images/home_icon.png" class="home-icon" alt="">
+        </button>
+        <button class="close-button" id="closeButton" onclick="location.href='/game/main'">
+            <img src="/images/close_icon.png" class="close-icon" alt="">
+        </button>
+    </div> -->
+    
+    <h1>스토리 선택</h1>
+    <div class="swiper quiz-swiper">
+        <div class="swiper-wrapper">
+            <% 
+              const storyUnlockMap = storyUnlockItems || {};
+              storyList.forEach(story => { 
+                const isUnlockedByItem = unlockedStories.includes(String(story.story_id));
+                const isPassed = passedBothList.some(p => p.curriculum_id == story.curriculum_id);
+                const requiresItem = storyUnlockMap.hasOwnProperty(String(story.story_id));
+                const isAccessible = (requiresItem ? isUnlockedByItem : true) && isPassed;
+            %>
+            <div class="swiper-slide">
+              <div class="card-text">
+                  <button class="quiz-card" type="submit" <%= isAccessible ? '' : 'disabled' %> 
+                     onclick="<%= isAccessible 
+                      ? `location.href='/stories/${story.story_id}'` 
+                      : `alert('해금 필요')` %>"
+                      <small><%= story.story_title %> <br><br> <%= story.simple_description %></small>
+                      <% if (!isAccessible ) { %>
+                          <!-- <span class="lock-icon">🔒</span> -->
+                          <img class="lock-icon" src="/images/lock_icon.png" alt="">
+                      <% } %>
+                  </button>
+              </div>
+            </div>
+            <% }) %>
+        </div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+
+    <script>
+        const swiper = new Swiper('.quiz-swiper', {
+            slidesPerView: 2.6,
+            spaceBetween: 88,
+            centeredSlides: true,
+              navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+              },
+            breakpoints: {
+                768: {
+                    slidesPerView: 2.5
+                },
+                1024: {
+                    slidesPerView: 3
+                }
+            }
+        });
+    </script>
+</body>
+</html>

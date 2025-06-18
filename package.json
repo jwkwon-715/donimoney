@@ -6,8 +6,11 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "axios": "^1.9.0",
+    "bcrypt": "^6.0.0",
     "connect-flash": "^0.1.1",
     "cookie-parser": "~1.4.4",
+    "crypto": "^1.0.1",
     "debug": "~2.6.9",
     "dotenv": "^16.5.0",
     "ejs": "~2.6.1",
@@ -18,7 +21,22 @@
     "http-status-codes": "^2.3.0",
     "morgan": "~1.9.1",
     "mysql2": "^3.14.1",
+    "nodemailer": "^7.0.3",
+    "passport": "^0.7.0",
+    "passport-local-sequelize": "^0.9.1",
     "sequelize": "^6.37.7",
     "sequelize-cli": "^6.6.2"
-  }
+  },
+  "description": "2025-1 서버 시스템 구축 실습 6조",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jwkwon-715/donimoney.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jwkwon-715/donimoney/issues"
+  },
+  "homepage": "https://github.com/jwkwon-715/donimoney#readme"
 }

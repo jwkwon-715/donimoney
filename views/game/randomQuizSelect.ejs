@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>랜덤 퀴즈 모드</title>
+   <link rel="stylesheet" href="/stylesheets/randomQuiz.css">
+   <link rel="stylesheet" href="/stylesheets/quizSelect.css">
+</head>
+<body>
+  <h1>랜덤 모드 퀴즈 선택</h1>
+
+  <form id="curriculumList" method="post" action="/game/school/quiz/select">
+    <input type="hidden" name="type" value="random">
+  
+
+      <div class="button-group">
+        <% curriculumList.forEach(curriculum => {
+          const isUnlocked = learningProgressList.some(p => p.learning_id === curriculum.curriculum_id);
+        %>
+        <label class="quiz-tag <%= isUnlocked ? '' : 'locked' %>">
+          <input type="checkbox" name="curriculumList"
+                 value="<%= curriculum.curriculum_id %>"
+                 <%= isUnlocked ? '' : 'disabled' %>>
+          <span class="tag-icon">
+            <span class="line vertical"></span>
+            <span class="line horizontal"></span>
+          </span>
+          <span class="tag-text"><%= curriculum.curriculum_title %></span>
+        </label>
+        <% }) %>
+      </div>
+
+    <button class="exit-button" type="submit">랜덤 문제 풀기</button>
+  </form>
+  
+  <p id="error-message" style="color: red;"></p>
+  <script>
+    document.getElementById('curriculumList').addEventListener('submit', function(e) {
+      // 잠긴(비활성화된) 체크박스는 선택되지 않으므로, 그냥 기존 로직 사용
+      const checked = document.querySelectorAll('input[name="curriculumList"]:checked');
+      if (checked.length < 3 || checked.length > 5) {
+        e.preventDefault();
+        document.getElementById('error-message').textContent = '풀고 싶은 퀴즈 주제를 3개 이상 5개 이하로 골라주세요!';
+      }
+    });
+  </script>
+</body>
+</html>

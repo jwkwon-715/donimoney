@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>마이페이지</title>
+  <link rel="stylesheet" href="/stylesheets/inventory.css">
+</head>
+<body>
+  <div class="forest-bg"></div>
+  
+  <a href="/" class="home-button" title="홈으로">
+    <img src="/images/home_icon.png" class="home-icon" alt="">
+  </a>
+  <a href="/myPage" class="close-button" title="마이페이지로">
+    <img src="/images/close_icon.png" class="close-icon" alt="">
+  </a>
+
+  <div class="mypage-main">
+    <div class="character-area">
+      <% if (character) { %>
+        <div class="money-badge">
+          <img src="/images/coin.png" alt="코인" class="coin-icon">
+          <span><%= character.money || 0 %></span>
+        </div>
+        <div class="character-img-wrap">
+          <img src="/images/todragon_normal.png" alt="캐릭터" class="character-img">
+        </div>
+        <div class="character-nickname"><%= character.nickname %></div>
+      <% } %>
+    </div>
+    <div class="learning-area">
+      <div class="real-tabs real-tabs-outside">
+        <a href="/mypage/character" class="real-tab <%= activeTab === 'character' ? 'active' : '' %>">나의 학습</a>
+        <a href="/mypage/inventory" class="real-tab <%= activeTab === 'inventory' ? 'active' : '' %>">아이템</a>
+      </div>
+      <div class="learning-notebook">
+        <div class="bookmark-clip">
+          <img src="/images/bookmark_icon.png" alt="북마크" class="bookmark-img">
+        </div>
+        <div class="notebook-inner">
+          <div class="notebook-title">
+            <span class="character-name"><%= nickname || '토롱이' %></span>
+            <span>아이템</span>
+          </div>
+          <div id="item-detail-area" class="item-detail-area">
+            <div id="item-detail-guide" class="item-detail-guide">
+              아이템을 클릭하면 설명을 볼 수 있어요.
+            </div>
+            <div id="item-detail" class="item-detail" style="display:none;">
+              <div class="detail-img-wrap">
+                <img id="detail-img" src="" alt="" class="item-img">
+                <span id="detail-quantity" class="item-quantity"></span>
+              </div>
+              <div class="detail-name" id="detail-name"></div>
+              <div class="detail-desc" id="detail-desc"></div>
+              <div class="detail-price" id="detail-price"></div>
+            </div>
+          </div>
+
+          <% // ----------- [추가] imageMap 선언 ----------- %>
+          <% const imageMap = {
+            1: "moneyJournal",
+            2: "pencil",
+            3: "milk",
+            4: "eraser",
+            5: "egg",
+            6: "cowboyHat"
+          }; %>
+          <div class="inventory-grid">
+            <% for(let i=0; i<8; i++) { 
+                 const item = inventory[i];
+            %>
+              <div class="item-slot <%= item ? '' : 'empty' %>" 
+                   data-index="<%= i %>"
+                   <% if(item && item.Item) { %>
+                     data-name="<%= item.Item.item_name %>"
+                     data-desc="<%= item.Item.item_description %>"
+                     <% // ----------- [수정] 이미지 매핑 ----------- %>
+                     data-img="/images/object/<%= imageMap[item.Item.item_id] || 'egg' %>.png"
+                     data-quantity="<%= item.quantity %>"
+                     data-price="<%= item.Item.item_price %>"
+                   <% } %>
+              >
+                <div class="item-img-wrap">
+                  <% // ----------- [수정] 이미지 매핑 ----------- %>
+                  <img src="<%= item && item.Item ? ('/images/object/' + (imageMap[item.Item.item_id] || 'egg') + '.png') : '/images/object/egg.png' %>" 
+                       alt="<%= item && item.Item ? item.Item.item_name : '빈 슬롯' %>" class="item-img">
+                </div>
+                <% if(item && item.Item) { %>
+                  <div class="item-quantity">x<%= item.quantity %></div>
+                  <div class="item-name"><%= item.Item.item_name %></div>
+                <% } else { %>
+                  <div class="item-quantity"></div>
+                  <div class="item-name">빈 슬롯</div>
+                <% } %>
+              </div>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="/javascripts/inventory.js"></script>
+</body>
+</html>

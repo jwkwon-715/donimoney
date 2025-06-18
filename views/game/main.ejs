@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>스토리 플레이</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      overflow: hidden;
+    }
+
+    .nav-buttons {
+      position: absolute;
+      width: 100%;
+    }
+
+    .money-badge, .coin-icon {
+      display: none;
+    }
+
+    .root-button {
+      position: absolute;
+      left: 69px;
+      top: 230px;
+      transform: translateY(-50%);
+      background-color: #FFD600;
+      color: #fff;
+      font-family: 'Cafe24Dongdong', 'NanumSquareRound', Arial, sans-serif;
+      font-size: 48px;
+      font-weight: bold;
+      width: 75.33px;
+      height: 73.02px;
+      border: none;
+      border-radius: 23.18px;
+      box-shadow:inset 0 -3.74px 0 0 #F3C83A, 0 3px 0 0 rgba(0,0,0,0.1);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      transition: color 0.2s, box-shadow 0.2s, transform 0.2s;
+      padding: 0;
+    }
+    .root-button:hover, .root-button:active {
+      color: #E4AF00;
+      transform: translateY(-50%) translateY(4px);
+      box-shadow: 0 3px 0 0 rgba(0,0,0,0.1);
+    }
+    .root-icon {
+      width: 40px;
+      height: 40px;
+    }
+  </style>
+</head>
+<body>
+  <button class="root-button" onclick="location.href='/'" title="루트로 이동">
+    <img src="/images/root_icon.png" alt="홈" class="root-icon">
+  </button>
+
+  <div id="game-container"></div>
+
+  <script>
+    window.user = {
+      userId: <%= JSON.stringify(user.user_id) %>,
+      nickname: <%= JSON.stringify(nickname) %>
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3.88.2/dist/phaser.js"></script>
+  <script type="module">
+    import { GameScene } from '/javascripts/gameScene.js';
+    const config = {
+      type: Phaser.AUTO,
+      width: 1920,
+      height: 1080,
+      scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+      },
+      physics: {
+        default: 'arcade',
+        arcade: {
+          debug: false
+        }
+      },
+      scene: [ GameScene, ],
+    };
+    const game = new Phaser.Game(config);
+  </script>
+</body>
+</html>
