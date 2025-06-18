@@ -1,11 +1,9 @@
 const { UserCharacters } = require('../models');
 
-// 캐릭터 생성 페이지 렌더링
 exports.renderCreate = (req, res) => {
   res.render('characterCreate');
 };
 
-// 캐릭터 생성 처리
 exports.createCharacter = async (req, res) => {
   const { characterName } = req.body;
   const userId = req.user.user_id;
@@ -21,10 +19,8 @@ exports.createCharacter = async (req, res) => {
       money: 1000
     });
 
-    // req.user에 user_character_id를 반영
     req.user.user_character_id = newCharacter.user_character_id;
 
-    // 세션 갱신: req.login으로 serializeUser를 다시 실행
     req.login(req.user, (err) => {
       if (err) {
         console.error(err);

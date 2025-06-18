@@ -1,12 +1,8 @@
-/* quizFail, quizSuccess 공통 사용 css*/
+/* 퀴즈 풀고 난 후 성공/실패 보여주는 화면 */
 
-.buttons {
-    z-index: 200;
-}
+.buttons { z-index: 200; }
 
-body {
-    overflow: hidden;
-}
+body { overflow: hidden; }
 
 .wrapper {
     position: relative;
@@ -27,6 +23,7 @@ body {
     z-index: -2;
 }
 
+/* 성공 시 콘페티 화면 */
 .confetti-bg {
     position: absolute;
     object-fit: cover;
@@ -70,7 +67,6 @@ body {
 .post-2 {
     position: absolute;
     top: 21.22px;
-    /* left: calc(50% - 317.21px);; */
     left: calc(100% / 4.3);
     box-shadow: 9px 9px 11.2px rgba(0, 0, 0, 0.1);
     background-color: #ffdb65;
@@ -80,10 +76,9 @@ body {
     transform-origin: 0 0;
 }
 
-.failed {
-    background-color: #929292;
-}
+.failed { background-color: #929292; }
 
+/* 스티커들 */
 .stickers {
     position: absolute;
     top: 0px;
@@ -235,23 +230,26 @@ body {
 
     font-size: 40px;
     color: #333;
-    font-family: 'Cafe24 Dongdong';
+    font-family: 'Cafe24DongDong', 'KCC-DodamdodamR' !important;
 }
 
 .text {
     font-size: 96px;
     z-index: 1;
     margin-top: 36%;
+    font-family: 'Cafe24DongDong', 'KCC-DodamdodamR';
 }
 
 .failed-text {
     margin-top: 28%;
+    font-family: 'Cafe24DongDong', 'KCC-DodamdodamR';
 }
 
 p {
     font-size: 28px;
     text-align: center;
     margin-top: 6%;
+    font-family: 'Cafe24DongDong', 'KCC-DodamdodamR';
 }
 
 .btn {
@@ -268,21 +266,13 @@ p {
     font-size: 32px;
 }
 
-.btn:hover {
-    box-shadow: none;
-}
+.btn:hover { box-shadow: none; }
 
-.successBtn {
-    background-color: #FFE180;
-}
+.successBtn { background-color: #FFE180; }
 
-.failedBtn {
-    background-color: #D2D2D2;
-}
+.failedBtn { background-color: #D2D2D2; }
 
-.nxtBtn {
-    left: 55%;
-}
+.nxtBtn { left: 55%; }
 
 .nxtfailedBtn {
     color: #f5f5f5;

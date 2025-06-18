@@ -3,22 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <title>Document</title> -->
+    <title>도니머니 마트</title>
     <link rel="stylesheet" href="/stylesheets/martItem.css">
     <link rel="stylesheet" href="/stylesheets/afterQuiz.css">
 </head>
 <body>
     <img class="bg" src="/images/background/bg_mart.png" alt="">
-
-    <!-- <div class="buttons">
-        <button class="home-button" id="homeButton" onclick="location.href='/game/main'">
-            <img src="/images/home_icon.png" class="home-icon" alt="">
-        </button>
-        <button class="close-button" id="closeButton" onclick="location.href='/game/main'">
-            <img src="/images/close_icon.png" class="close-icon" alt="">
-        </button>
-    </div> -->
-
     <ul class="item-list">
       <% const imageMap = {
         1: "moneyJournal",
@@ -136,22 +126,3 @@
       <script src="/javascripts/martPurchase.js"></script>
 </body>
 </html>
-
-<!-- <h1>마트 화면</h1>
-<ul>
-    <% items.forEach(item => { %>
-        <li>
-            <%= item.item_name %><br>
-            Description: <%= item.item_description %><br>
-            Price: <%= item.item_price %> coins<br>
-            Type: <%= item.item_type %><br>
-    
-            <button type="button" onclick="decreaseQuantity('<%= item.item_id %>')">-</button>
-            <span id="quantity-<%= item.item_id %>" class="quantity">1</span>
-            <button type="button" onclick="increaseQuantity('<%= item.item_id %>')">+</button><br>
-    
-            <button type="button" onclick="addBuyItem('<%= item.item_id %>', '<%= item.item_price %>')">구매하기</button>
-        </li>
-    <% }); %>
-</ul>
-<button type="button" onclick="confirmePurchase()">마트 나가기</button> -->

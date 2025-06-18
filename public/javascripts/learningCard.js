@@ -5,12 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const learningId = document.getElementById('learningId').value;
   const learningPass = document.getElementById('learningPass')?.value === 'true';
   let current = 0;
-  // const seenPages = new Set(); // 확인한 페이지에 style 적용하도록 - 사용x
 
   const indicatorColors = ['#FF7B7B', '#FFE07B', '#7BBFFF', '#6CD8C9']; //페이지 +1될 때마다 컬러 바뀌도록
 
   function showCard(idx) {
-    // seenPages.add(idx);
     cards.forEach((card, i) => {
       card.classList.toggle('active', i === idx);
       card.style.display = (i === idx) ? 'flex' : 'none';
@@ -22,12 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const dot = document.createElement('span');
       dot.className = 'indicator-dot';
       dot.textContent = i + 1;
-      
-      // 확인한 페이지에 style 적용하도록
-      // if (seenPages.has(i)) {
-      //   dot.style.backgroundColor = indicatorColors[i % indicatorColors.length];
-      //   dot.style.color = '#f5f5f5';
-      // }
 
       if (i === idx) {
         dot.classList.add('active');
