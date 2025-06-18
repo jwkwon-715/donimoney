@@ -1,4 +1,4 @@
-/* quizFail, quizSuccess 공통 사용 css*/
+/* 퀴즈 풀고 난 후 성공/실패 보여주는 화면 */
 
 .buttons { z-index: 200; }
 
@@ -23,6 +23,7 @@ body { overflow: hidden; }
     z-index: -2;
 }
 
+/* 성공 시 콘페티 화면 */
 .confetti-bg {
     position: absolute;
     object-fit: cover;
@@ -66,7 +67,6 @@ body { overflow: hidden; }
 .post-2 {
     position: absolute;
     top: 21.22px;
-    /* left: calc(50% - 317.21px);; */
     left: calc(100% / 4.3);
     box-shadow: 9px 9px 11.2px rgba(0, 0, 0, 0.1);
     background-color: #ffdb65;
@@ -78,6 +78,7 @@ body { overflow: hidden; }
 
 .failed { background-color: #929292; }
 
+/* 스티커들 */
 .stickers {
     position: absolute;
     top: 0px;

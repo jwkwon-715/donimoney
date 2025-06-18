@@ -1,3 +1,5 @@
+/* 학습 진행 화면 */
+
 body {
   background-color: #FFFCF5;
   margin: 0;
@@ -28,6 +30,7 @@ body {
   cursor: pointer;
 }
 
+/* 학습 카드 안 내용 */
 .card-body {
   padding: 60px;
   font-family: 'NanumSquareRound';
@@ -60,6 +63,7 @@ hr { border: none; }
 
 button { background-color: none; }
 
+/* 양 옆 화살표 */
 .arrow {
   border: solid #333;
   border-width: 0 6px 6px 0;
@@ -80,8 +84,10 @@ button { background-color: none; }
   -webkit-transform: rotate(135deg);
 }
 
+/* money-badge 안 보이도록 */
 .money-badge, .coin-icon { display: none; }
 
+/* 대신 인디케이터 보이도록 설정 */
 .indicator {
   display: flex;
   justify-content: center;
@@ -104,6 +110,8 @@ button { background-color: none; }
   transition: all 0.3s ease;
   cursor: pointer;
 }
+
+/* 학습 완료 버튼 */
 #completeBtn {
     width: 200px;
     height: 80px;
@@ -128,82 +136,3 @@ button { background-color: none; }
     color: #E4AF00;
     box-shadow: 0 3px 0 0 rgba(0, 0, 0, 0.1);
 }
-
-/* .card-slider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 40px auto 0 auto;
-  max-width: 700px;
-}
-.card-section {
-  width: 420px;
-  min-height: 220px;
-  background: #fffbe9;
-  border-radius: 18px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-  padding: 32px 36px 28px 36px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-}
-.card {
-  width: 100%;
-  min-height: 160px;
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.card-body {
-  font-size: 1.13rem;
-  color: #444;
-  text-align: center;
-  line-height: 1.7;
-}
-.card.active {
-  display: flex;
-}
-.nav-btn {
-  background: none;
-  border: none;
-  font-size: 2.2rem;
-  cursor: pointer;
-  color: #d1b97c;
-  padding: 0 18px;
-  transition: color 0.2s;
-}
-.nav-btn:hover {
-  color: #a78e4c;
-}
-.indicator {
-  margin: 16px auto 0 auto;
-  text-align: center;
-}
-.indicator-dot {
-  display: inline-block;
-  width: 14px;
-  height: 14px;
-  margin: 0 4px;
-  border-radius: 50%;
-  background: #e4dcc7;
-}
-.indicator-dot.active {
-  background: #d1b97c;
-}
-.complete-btn {
-  background: #d1b97c;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  padding: 8px 18px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  margin-left: 10px;
-  transition: background 0.2s;
-}
-.complete-btn:hover {
-  background: #a78e4c;
-} */

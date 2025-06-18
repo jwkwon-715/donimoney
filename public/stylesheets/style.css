@@ -48,14 +48,9 @@ body {
   align-items: center;
   justify-content: center;
   font-family: 'Cafe24Dongdong', 'KCC-DodamdodamR', 'NanumSquareRound', sans-serif;
-
-  /* no drag */
-  /* -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-use-select: none;
-  user-select: none; */
 }
 
+/* 이미지 드래그 안 되도록 설정 */
 img {
   -webkit-user-drag: none;
   -khtml-user-drag: none;
@@ -63,6 +58,7 @@ img {
   -o-user-drag: none;
 }
 
+/* 홈버튼, 클로즈 버튼 */
 button {
   border: none;
   border-radius: 23.18px;

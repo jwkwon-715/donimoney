@@ -1,4 +1,5 @@
 :root {
+    /* 스와이퍼의 기본 설정 대신 사용되도록 */
     --gray-light: #9A9FA9;
     --gray-dark: #333;
 
@@ -24,7 +25,7 @@ h1 { margin: 3% 0 1% 5% }
     overflow: hidden;
     border: none;
     cursor: pointer;
-    background-color: #ffe3e3;
+    background-color: #ffe3e3; /* disabled한 상태와 비교되도록 연핑크색 */
     box-shadow: 4px 7px 18.9px 4px rgba(0, 0, 0, 0.08);
     display: flex;
     flex-direction: column;
@@ -75,7 +76,6 @@ h1 { margin: 3% 0 1% 5% }
 .lock-icon {
     font-size: 18px;
     color: #888;
-    /* margin-left: 8px; */
 }
 
 /* swiper 속성 */
@@ -88,9 +88,7 @@ h1 { margin: 3% 0 1% 5% }
     justify-content: center;
 }
 
-.swiper-wrapper {
-    display: flex;
-}
+.swiper-wrapper { display: flex; }
 
 .swiper-button-prev, .swiper-button-next {
     width: 64px !important;
@@ -110,14 +108,9 @@ h1 { margin: 3% 0 1% 5% }
   position: static;
 }
 
-.swiper-button-next::after {
-    margin: 10px 0 10px 7px;
-}
+.swiper-button-next::after { margin: 10px 0 10px 7px; }
 
-.swiper-button-prev::after {
-    margin: 10px 5px 10px 0;
-}
+.swiper-button-prev::after { margin: 10px 5px 10px 0; }
 
-::-webkit-scrollbar {
-    display: none;
-}
+/* 스크롤바 안 보이게 설정 */
+::-webkit-scrollbar { display: none; }
