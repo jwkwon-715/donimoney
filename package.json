@@ -38,5 +38,9 @@
   "bugs": {
     "url": "https://github.com/jwkwon-715/donimoney/issues"
   },
-  "homepage": "https://github.com/jwkwon-715/donimoney#readme"
+  "homepage": "https://github.com/jwkwon-715/donimoney#readme",
+  "scripts": {
+      "test": "echo \"No tests yet\" && exit 0",
+      "start": "node app.js"
+    }
 }
