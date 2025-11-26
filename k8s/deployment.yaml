@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: donimoney
+  labels:
+    app: donimoney
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: donimoney
+  template:
+    metadata:
+      labels:
+        app: donimoney
+    spec:
+      containers:
+        - name: app
+          image: docker.io/jinseon901/test:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: SKIP_DB_SYNC
+              value: "false"
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: DB_HOST
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: DB_PORT
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: DB_USER
+            - name: DB_PW
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: DB_PW
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: DB_NAME
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+

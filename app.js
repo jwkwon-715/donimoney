@@ -120,13 +120,17 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
-db.sequelize.sync()
-  .then(() => {
-    console.log('연결 성공');
-  })
-  .catch((err) => {
-    console.error('실패:', err);
-  });
+if (process.env.SKIP_DB_SYNC === 'true') {
+  console.log('!!!SKIP_DB_SYNC=true, DB sync 생략하고 서버만 실행');
+} else {
+  db.sequelize.sync()
+    .then(() => {
+      console.log('연결 성공');
+    })
+    .catch((err) => {
+      console.error('실패:', err);
+    });
+}
 
 // 에러 핸들러
 app.use(function(err, req, res, next) {
