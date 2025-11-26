@@ -27,6 +27,11 @@ spec:
                 secretKeyRef:
                   name: db-secret
                   key: DB_HOST
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: DB_PORT
             - name: DB_USER
               valueFrom:
                 secretKeyRef:
