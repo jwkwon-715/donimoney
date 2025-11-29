@@ -36,7 +36,6 @@
                         <button class="quiz-card" type="submit" <%= isLearned ? '' : 'disabled' %>>
                             <div class="card-title"><%= curriculum.curriculum_title %></div>
                             <% if (!isLearned) { %>
-                                <!-- <span class="lock-icon">🔒</span> -->
                                 <img class="lock-icon" src="/images/lock_icon.png" alt="">
                             <% } %>
                         </button>
@@ -60,10 +59,10 @@
               },
             breakpoints: {
                 768: {
-                    slidesPerView: 2.5
+                    slidesPerView: 2.5,
                 },
                 1024: {
-                    slidesPerView: 3
+                    slidesPerView: 3,
                 }
             }
         });

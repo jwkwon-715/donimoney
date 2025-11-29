@@ -42,6 +42,13 @@ h1 {
     justify-content: center;
 }
 
+.quiz-card, .quiz-card * {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 .quiz-card:disabled {
     background: rgba(202, 210, 226, 0.5) !important;
     color: #9DA8C1 !important;
@@ -54,7 +61,6 @@ h1 {
 }
 
 .quiz-card img {
-    width: 10%;
     height: 20%;
     object-fit: cover;
 }
@@ -79,9 +85,6 @@ h1 {
     color: #505050;
 }
 
-.lock-icon {
-    font-size: 18px;
-    color: #888;
 .card-title {
     font-family: 'NanumSquareRound';
     font-size: 3rem;
