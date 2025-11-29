@@ -1,9 +1,10 @@
 :root {
     /* 스와이퍼의 기본 설정 대신 사용되도록 */
+    font-size: 62.5%;
     --gray-light: #9A9FA9;
     --gray-dark: #333;
 
-    --swiper-navigation-size: 36px !important;
+    --swiper-navigation-size: 3.6rem !important;
     --swiper-navigation-top-offset: 50%;
     --swiper-navigation-sides-offset: 69px;
     --swiper-navigation-color: var(--gray-dark);
@@ -16,21 +17,26 @@ body {
     font-family: 'NanumSquareRound';
 }
 
-h1 { margin: 3% 0 1% 5% }
+h1 { 
+    margin: 3% 0 1% 5%;
+    font-size: 3.2rem;
+}
 
 .quiz-card {
-    width: 572px;
-    height: 451px;
-    border-radius: 20px;
+    width: 100%;
+    max-width: 57rem;
+    height: 45rem;
+    border-radius: 2rem;
     overflow: hidden;
     border: none;
     cursor: pointer;
-    background-color: #ffe3e3; /* disabled한 상태와 비교되도록 연핑크색 */
-    box-shadow: 4px 7px 18.9px 4px rgba(0, 0, 0, 0.08);
+    background-color: #FFDB65; /* disabled한 상태와 비교되도록 */
+    box-shadow: 0.4rem 0.7rem 1.8rem rgba(0, 0, 0, 0.08);
     display: flex;
     flex-direction: column;
-    padding: 0;
-    font-size: 32px;
+    padding: 2rem;
+    font-family: 'NanumSquareRound';
+    font-size: 3.2rem;
     font-weight: 900;
     color: rgba(51, 51, 51, 0.74);
     justify-content: center;
@@ -76,6 +82,20 @@ h1 { margin: 3% 0 1% 5% }
 .lock-icon {
     font-size: 18px;
     color: #888;
+.card-title {
+    font-family: 'NanumSquareRound';
+    font-size: 3rem;
+    font-weight: 900;
+    color: rgba(51, 51, 51, 0.74);
+    margin: 0 0 4px 0;
+}
+
+.card-desc {
+    font-family: 'NanumSquareRound';
+    font-size: 2rem;
+    font-weight: 500;
+    color: rgba(51, 51, 51, 0.55);
+    line-height: 1.3;
 }
 
 /* swiper 속성 */
@@ -114,3 +134,26 @@ h1 { margin: 3% 0 1% 5% }
 
 /* 스크롤바 안 보이게 설정 */
 ::-webkit-scrollbar { display: none; }
+
+@media (max-width: 769px) {
+    .quiz-card {
+        width: 330px;
+        height: 280px;
+        font-size: 20px;
+        padding: 24px;
+    }
+
+    .swiper-button-prev, .swiper-button-next {
+        width: 50px !important;
+        height: 50px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .quiz-card {
+        width: 280px;
+        height: 220px;
+        font-size: 18px;
+        padding: 20px;
+    }    
+}

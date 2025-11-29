@@ -35,8 +35,11 @@
                   <button class="quiz-card" type="submit" <%= isAccessible ? '' : 'disabled' %> 
                      onclick="<%= isAccessible 
                       ? `location.href='/stories/${story.story_id}'` 
-                      : `alert('해금 필요')` %>"
-                      <small><%= story.story_title %> <br><br> <%= story.simple_description %></small>
+                      : `alert('해금 필요')` %>">
+
+                      <div class="card-title"><%= story.story_title %></div>
+                      <div class="card-desc"><%= story.simple_description %></div>
+                      
                       <% if (!isAccessible ) { %>
                           <!-- <span class="lock-icon">🔒</span> -->
                           <img class="lock-icon" src="/images/lock_icon.png" alt="">
@@ -60,11 +63,25 @@
                 prevEl: '.swiper-button-prev',
               },
             breakpoints: {
+                0: {
+                    slidesPerView: 1.1,
+                    spaceBetween: 32,
+                    centeredSlides: false,
+                },
+                480: {
+                    slidesPerView: 1.4,
+                    spaceBetween: 48,
+                    centeredSlides: true,
+                },
                 768: {
-                    slidesPerView: 2.5
+                    slidesPerView: 2,
+                    spaceBetween: 60,
+                    centeredSlides: true,
                 },
                 1024: {
-                    slidesPerView: 3
+                    slidesPerView: 2.6,
+                    spaceBetween: 88,
+                    centeredSlides: true,
                 }
             }
         });
