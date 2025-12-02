@@ -65,7 +65,8 @@ button { background-color: none; }
 
 /* 양 옆 화살표 */
 .arrow {
-  border: solid #333;
+  position: relative;
+  /* border: solid #333; */
   border-width: 0 6px 6px 0;
   display: inline-block;
   padding: 3px;
@@ -74,7 +75,35 @@ button { background-color: none; }
   cursor: pointer;
 }
 
-.right {
+.arrow::before, .arrow::after {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 6px;
+  background-color: #333;
+  border-radius: 6px;
+  top: 50%;
+  left: 50%;
+  transform-origin: 2px center;
+}
+
+/* 왼쪽 화살표 */
+.left::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.left::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* 오른쪽 화살표 */
+.right::before {
+  transform: translate(-50%, -50%) rotate(135deg);
+}
+.right::after {
+  transform: translate(-50%, -50%) rotate(225deg);
+}
+
+/* .right {
   transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
 }
@@ -82,7 +111,7 @@ button { background-color: none; }
 .left {
   transform: rotate(135deg);
   -webkit-transform: rotate(135deg);
-}
+} */
 
 /* money-badge 안 보이도록 */
 .money-badge, .coin-icon { display: none; }
