@@ -9,6 +9,7 @@ const martController = require("../controllers/game/martController");
 const learningController = require("../controllers/game/learningController");
 const quizController = require("../controllers/game/quizController");
 const storyController = require("../controllers/game/storyController");
+const buyTestController = require('../controllers/game/buyTest');  //테스트용 컨트롤러
 
 // 로그인 체크 미들웨어
 function ensureAuthenticated(req, res, next) {
@@ -66,6 +67,8 @@ router.get("/home", mainController.renderHome);
 // 마트
 router.get("/mart/itemList", ensureAuthenticated, mainController.renderMart);
 router.post("/mart/itemList/buy", ensureAuthenticated, martController.buy);
+router.post('/mart/itemList/buy-test', buyTestController.buy); //성능 평가용 테스트 라우트
+router.post('/mart/itemList/buy-test-new', buyTestController.buyNew); //성능 평가용 테스트 라우트
 
 // 학교
 router.get("/school", ensureAuthenticated, mainController.renderSchool);

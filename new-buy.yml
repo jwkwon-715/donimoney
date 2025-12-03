@@ -1,0 +1,14 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+    - duration: 10
+      arrivalRate: 10
+
+scenarios:
+  - flow:
+      - post:
+          url: "/game/mart/itemList/buy-test-new"
+          json:
+            buyItems:
+              - { itemId: 1, quantity: 1 }
+              - { itemId: 2, quantity: 2 }
