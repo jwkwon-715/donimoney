@@ -1,0 +1,22 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+    - duration: 10
+      arrivalRate: 10  # 초당 10명씩
+
+  defaults:
+    headers:
+      Content-Type: "application/json"
+      X-Test-Mode: "true"
+
+  http:
+    followRedirects: false
+
+scenarios:
+  - flow:
+      - post:
+          url: "/game/mart/itemList/buy-test"
+          json: { itemId: 1, quantity: 1, totalCost: 100 }
+      - post:
+          url: "/game/mart/itemList/buy-test"
+          json: { itemId: 2, quantity: 2, totalCost: 200 }
