@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>도니머니 퀴즈 풀기</title>
-    <!-- <%- include('../partials/header') %> -->
 
     <link rel="stylesheet" href="/stylesheets/quizSelect.css">
 
@@ -13,15 +12,6 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </head>
 <body>
-    <!-- <div class="buttons">
-        <button class="home-button" id="homeButton" onclick="location.href='/game/main'">
-            <img src="/images/home_icon.png" class="home-icon" alt="">
-        </button>
-        <button class="close-button" id="closeButton" onclick="location.href='/game/school/quiz/typeList'">
-            <img src="/images/close_icon.png" class="close-icon" alt="">
-        </button>
-    </div> -->
-    
     <h1>일반 모드 퀴즈 선택</h1>
     <div class="swiper quiz-swiper">
         <div class="swiper-wrapper">
@@ -34,9 +24,8 @@
                     <input type="hidden" name="curriculumId" value="<%= curriculum.curriculum_id %>">
                     <div class="card-text">
                         <button class="quiz-card" type="submit" <%= isLearned ? '' : 'disabled' %>>
-                            <%= curriculum.curriculum_title %>
+                            <div class="card-title"><%= curriculum.curriculum_title %></div>
                             <% if (!isLearned) { %>
-                                <!-- <span class="lock-icon">🔒</span> -->
                                 <img class="lock-icon" src="/images/lock_icon.png" alt="">
                             <% } %>
                         </button>
@@ -60,10 +49,10 @@
               },
             breakpoints: {
                 768: {
-                    slidesPerView: 2.5
+                    slidesPerView: 2.6,
                 },
                 1024: {
-                    slidesPerView: 3
+                    slidesPerView: 3,
                 }
             }
         });

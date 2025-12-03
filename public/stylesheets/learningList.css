@@ -1,3 +1,5 @@
+/* 학습 커리큘럼 고르는 화면 */
+
 body {
     background-color: #FFFCF5;
     margin: 0;
@@ -19,6 +21,7 @@ body {
     padding: 0;
 }
 
+/* 스와이퍼 설정 */
 .swiper, .swiper-wrapper, .swiper-slide { overflow: visible !important; }
 
 h1 { margin: 5% 0 2% 5% }

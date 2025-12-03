@@ -1,3 +1,5 @@
+/* 퀴즈 문제 화면 */
+
 body, html {
     width: 100%;
     height: 100%;
@@ -8,10 +10,7 @@ body, html {
     overflow: visible;
 }
 
-.money-badge, .coin-icon {
-    display: none;
-}
-
+/* 문제 박스 */
 .quiz-wrapper {
     display: flex;
     align-items: center;
@@ -33,7 +32,6 @@ body, html {
 
 .quiz-progress {
     text-align: right;
-    /* margin-bottom: 8px; */
     font-size: 22px;
     font-weight: bold;
     color: #2393F6;
@@ -46,6 +44,23 @@ h3 {
     color: #333;
 } 
 
+/* 문제 보기 */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    font-size: 20px;
+    margin-bottom: 14px;
+}
+
+label {
+    font-size: 24px;
+    color: #505050;
+}
+
+/* 퀴즈 해설용 박스 */
 #solution-box {
     background-color: #ffffff;
     border-radius: 24px;
@@ -55,6 +70,7 @@ h3 {
     color: #505050;
 }
 
+/* 정답 버튼 */
 #check-answer-btn {
     width: 200px;
     height: 80px;
@@ -73,6 +89,13 @@ h3 {
     box-shadow:inset 0 -3.74px 0 0 #F3C83A, 0 3px 0 0 rgba(0, 0, 0, 0.1);
 }
 
+#check-answer-btn:hover, #check-answer-btn:active {
+    transform: translateY(4px);
+    color: #E4AF00;
+    box-shadow: 0 3px 0 0 rgba(0, 0, 0, 0.1);
+}
+
+/* 다음으로 버튼 */
 #next-btn {
     width: 200px;
     height: 80px;
@@ -91,33 +114,16 @@ h3 {
     box-shadow:inset 0 -3.74px 0 0 #3B9EF7, 0 3px 0 0 rgba(0, 0, 0, 0.1);
 }
 
-#check-answer-btn:hover, #check-answer-btn:active {
-    transform: translateY(4px);
-    color: #E4AF00;
-    box-shadow: 0 3px 0 0 rgba(0, 0, 0, 0.1);
-}
-
 #next-btn:hover, #next-btn:active {
     transform: translateY(4px);
     color: #3B9EF7;
     box-shadow: 0 3px 0 0 rgba(0, 0, 0, 0.1);
 }
 
-ul {
-    list-style: none;
-    padding: 0;
-}
+/* money-badge, coin-icon 숨김 처리 */
+.money-badge, .coin-icon { display: none; }
 
-li {
-    font-size: 20px;
-    margin-bottom: 14px;
-}
-
-label {
-    font-size: 24px;
-    color: #505050;
-}
-
+/* 슬라이더 */
 .progress-wrapper {
     position: relative;
     width: 781px;
@@ -177,6 +183,5 @@ label {
     opacity: 0;
 }
 
-::-webkit-scrollbar {
-    display: none;
-}
+/* 스크롤바 안 보이도록 설정 */
+::-webkit-scrollbar { display: none; }
