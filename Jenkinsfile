@@ -42,6 +42,7 @@ pipeline {
                 script {
                     app.inside {
                         sh '''
+                            export NODE_ENV=development
                             npm ci
                             npm run lint || echo "[WARN] ESLint issues detected (not failing build for now)"
                         '''
