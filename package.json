@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "test": "echo \"No tests yet\" && exit 0",
-    "start": "node app.js"
+    "start": "node app.js",
+    "lint": "eslint ."
   },
   "dependencies": {
     "axios": "^1.9.0",
@@ -40,5 +41,8 @@
   "bugs": {
     "url": "https://github.com/jwkwon-715/donimoney/issues"
   },
-  "homepage": "https://github.com/jwkwon-715/donimoney#readme"
+  "homepage": "https://github.com/jwkwon-715/donimoney#readme",
+  "devDependencies": {
+    "eslint": "^8.57.1"
+  }
 }
