@@ -37,7 +37,24 @@ pipeline {
             }
         }
 
+        stage('Lint') {
+            steps {
+                script {
+                    app.inside {
+                        sh '''
+                            export NODE_ENV=development
+                            npm ci
+                            npm run lint || echo "[WARN] ESLint issues detected (not failing build for now)"
+                        '''
+                    }
+                }
+            }
+        }
+
         stage('Push image') {
+            when{
+                branch 'main'
+            }
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'jinseon901') {
