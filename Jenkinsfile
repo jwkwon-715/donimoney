@@ -21,6 +21,7 @@ pipeline {
         stage('Build image') {
             steps {
                 script {
+                    sh 'pwd; ls -la; echo "---"; find . -maxdepth 2 -name Dockerfile -o -name dockerfile'
                     app = docker.build("${DOCKER_IMAGE}")
                 }
             }
