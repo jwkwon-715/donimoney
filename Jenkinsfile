@@ -4,8 +4,8 @@ pipeline {
 
     environment {
         PROJECT_ID    = 'resonant-sunset-466808-s8'
-        CLUSTER_NAME  = 'kube'
-        LOCATION      = 'asia-northeast3-a'
+        CLUSTER_NAME  = 'kube-b'
+        LOCATION      = 'asia-northeast3-b'
         CREDENTIALS_ID = 'gke'
         DOCKER_IMAGE  = 'jinseon901/test'
     }
